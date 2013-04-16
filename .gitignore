@@ -1,3 +1,6 @@
 *.pyc
 *.debug
 *.shelve
+
+/dist/
+/src/metrium.egg-info/
