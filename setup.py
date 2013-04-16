@@ -63,7 +63,8 @@ setuptools.setup(
     },
     install_requires = [
         "flask",
-        "pymongo"
+        "pymongo",
+        "redis"
     ],
     classifiers = [
         "Development Status :: 3 - Alpha",
