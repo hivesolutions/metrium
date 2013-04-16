@@ -61,7 +61,7 @@ def about():
         "about.html.tpl",
         link = "about"
     )
-    
+
 @app.route("/signin", methods = ("GET",))
 def signin():
     return flask.render_template(
