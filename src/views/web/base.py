@@ -1,25 +1,25 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# Hive Pingu System
+# Hive Metrium System
 # Copyright (C) 2008-2012 Hive Solutions Lda.
 #
-# This file is part of Hive Pingu System.
+# This file is part of Hive Metrium System.
 #
-# Hive Pingu System is free software: you can redistribute it and/or modify
+# Hive Metrium System is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# Hive Pingu System is distributed in the hope that it will be useful,
+# Hive Metrium System is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with Hive Pingu System. If not, see <http://www.gnu.org/licenses/>.
+# along with Hive Metrium System. If not, see <http://www.gnu.org/licenses/>.
 
-__author__ = "João Magalhães <joamag@hive.pt>"
+__author__ = "João Magalhães joamag@hive.pt>"
 """ The author(s) of the module """
 
 __version__ = "1.0.0"
@@ -36,6 +36,8 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
+
+import models
 
 from metrium import app
 from metrium import flask
@@ -70,27 +72,27 @@ def signin():
 
 @app.route("/signin", methods = ("POST",))
 def login():
-#    username = quorum.get_field("username")
-#    password = quorum.get_field("password")
-#    try: account = models.Account.login(username, password)
-#    except quorum.OperationalError, error:
-#        return flask.render_template(
-#            "signin.html.tpl",
-#            username = username,
-#            error = error.message
-#        )
-#
-#    # updates the current user (name) in session with
-#    # the username that has just be accepted in the login
-#    flask.session["username"] = account.username
-#    flask.session["tokens"] = account.tokens
-#    flask.session["instance_id"] = account.instance_id
-#    flask.session["nav_data"] = None
-#    flask.session["acl"] = quorum.check_login
-#
-#    # makes the current session permanent this will allow
-#    # the session to persist along multiple browser initialization
-#    flask.session.permanent = True
+    username = quorum.get_field("username")
+    password = quorum.get_field("password")
+    try: account = models.Account.login(username, password)
+    except quorum.OperationalError, error:
+        return flask.render_template(
+            "signin.html.tpl",
+            username = username,
+            error = error.message
+        )
+
+    # updates the current user (name) in session with
+    # the username that has just be accepted in the login
+    flask.session["username"] = account.username
+    flask.session["tokens"] = account.tokens
+    flask.session["instance_id"] = account.instance_id
+    flask.session["nav_data"] = None
+    flask.session["acl"] = quorum.check_login
+
+    # makes the current session permanent this will allow
+    # the session to persist along multiple browser initialization
+    flask.session.permanent = True
 
     return flask.redirect(
         flask.url_for("index")
