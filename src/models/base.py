@@ -37,42 +37,26 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import os
-import setuptools
+import time
 
-setuptools.setup(
-    name = "metrium",
-    version = "0.1.0",
-    author = "Hive Solutions Lda.",
-    author_email = "development@hive.pt",
-    description = "Pingu Web Interface",
-    license = "GNU General Public License (GPL), Version 3",
-    keywords = "metrium dashboard metrics television",
-    url = "http://metrium.com",
-    zip_safe = False,
-    packages = [
-        "models",
-        "quorum",
-        "views"
-    ],
-    py_modules = [
-        "metrium"
-    ],
-    package_dir = {
-        "" : os.path.normpath("src")
-    },
-    install_requires = [
-        "flask",
-        "pymongo",
-        "redis"
-    ],
-    classifiers = [
-        "Development Status :: 3 - Alpha",
-        "Topic :: Utilities",
-        "License :: OSI Approved :: GNU General Public License (GPL)",
-        "Operating System :: OS Independent",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 2.6",
-        "Programming Language :: Python :: 2.7"
-    ]
-)
+import quorum
+
+class Base(quorum.Model):
+
+    id = dict(
+        type = int,
+        index = True,
+        increment = True,
+    )
+
+    enabled = dict(
+        type = bool,
+        index = True
+    )
+
+    timestamp = dict(
+        type = float
+    )
+
+    def pre_create(self):
+        self.timestamp = time.time()

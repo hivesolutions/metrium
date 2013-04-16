@@ -37,42 +37,19 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import os
-import setuptools
+import models
 
-setuptools.setup(
-    name = "metrium",
-    version = "0.1.0",
-    author = "Hive Solutions Lda.",
-    author_email = "development@hive.pt",
-    description = "Pingu Web Interface",
-    license = "GNU General Public License (GPL), Version 3",
-    keywords = "metrium dashboard metrics television",
-    url = "http://metrium.com",
-    zip_safe = False,
-    packages = [
-        "models",
-        "quorum",
-        "views"
-    ],
-    py_modules = [
-        "metrium"
-    ],
-    package_dir = {
-        "" : os.path.normpath("src")
-    },
-    install_requires = [
-        "flask",
-        "pymongo",
-        "redis"
-    ],
-    classifiers = [
-        "Development Status :: 3 - Alpha",
-        "Topic :: Utilities",
-        "License :: OSI Approved :: GNU General Public License (GPL)",
-        "Operating System :: OS Independent",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 2.6",
-        "Programming Language :: Python :: 2.7"
-    ]
-)
+from metrium import app
+from metrium import flask
+from metrium import quorum
+
+@app.route("/accounts/<username>", methods = ("GET",))
+@quorum.ensure("accounts.show")
+def show_account(username):
+    account = models.Account.get(username = username)
+    return flask.render_template(
+        "account_show.html.tpl",
+        link = "accounts",
+        sub_link = "info",
+        account = account
+    )

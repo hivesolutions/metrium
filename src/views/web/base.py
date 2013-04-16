@@ -86,8 +86,6 @@ def login():
     # the username that has just be accepted in the login
     flask.session["username"] = account.username
     flask.session["tokens"] = account.tokens
-    flask.session["instance_id"] = account.instance_id
-    flask.session["nav_data"] = None
     flask.session["acl"] = quorum.check_login
 
     # makes the current session permanent this will allow
@@ -96,4 +94,13 @@ def login():
 
     return flask.redirect(
         flask.url_for("index")
+    )
+
+@app.route("/signout", methods = ("GET", "POST"))
+def logout():
+    if "username" in flask.session: del flask.session["username"]
+    if "tokens" in flask.session: del flask.session["tokens"]
+
+    return flask.redirect(
+        flask.url_for("signin")
     )
