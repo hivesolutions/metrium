@@ -6,7 +6,7 @@
         <title>Metrium / {% block title %}{% endblock %}</title>
     {% endblock %}
 </head>
-<body class="ux wait-load">
+<body class="ux fullscreen wait-load">
     <div id="overlay" class="overlay"></div>
     <div id="content">{% block content %}{% endblock %}</div>
 </body>

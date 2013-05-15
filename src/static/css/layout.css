@@ -28,3 +28,12 @@
  __copyright__ = Copyright (c) 2010-2012 Hive Solutions Lda.
  __license__   = GNU General Public License (GPL), Version 3
 */
+
+body.fullscreen {
+	background-color: #000000;
+	color: #ffffff;
+}
+
+.dashboard {
+	font-size: 32px;
+}
