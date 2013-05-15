@@ -23,10 +23,78 @@
 // __copyright__ = Copyright (c) 2010-2012 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
+(function(jQuery) {
+    jQuery.fn.upusher = function(options) {
+        var matchedObject = this;
+        matchedObject.each(function() {
+                    var element = jQuery(this);
+                    var key = element.attr("data-key");
+                    if (!key) {
+                        return;
+                    }
+
+                    var pusher = new Pusher(key);
+                    element.data("pusher", pusher);
+                });
+        return matchedObject;
+    };
+})(jQuery);
+
+(function(jQuery) {
+    jQuery.fn.udashboard = function(options) {
+        var matchedObject = this;
+        var pusher = jQuery(".pusher", matchedObject);
+        var status = jQuery(".status", matchedObject);
+
+        var pusher = pusher.data("pusher");
+        if (!pusher) {
+            return matchedObject;
+        }
+
+        var connection = pusher.connection;
+
+        connection.bind("connecting", function() {
+                    status.html("connecting");
+                    status.removeClass("valid");
+                    status.addClass("invalid");
+                });
+
+        connection.bind("connected", function() {
+                    status.html("connected");
+                    status.removeClass("invalid");
+                    status.addClass("valid");
+                });
+
+        connection.bind("unavailable", function() {
+                    status.html("unavailable");
+                    status.removeClass("valid");
+                    status.addClass("invalid");
+                });
+
+        connection.bind("disconnected", function() {
+                    status.html("disconnected");
+                    status.removeClass("valid");
+                    status.addClass("invalid");
+                });
+
+        connection.bind("error", function(error) {
+                    status.html("error");
+                    status.removeClass("valid");
+                    status.addClass("invalid");
+                });
+
+        var global = pusher.subscribe("global");
+        global.bind("message", function(data) {
+                    alert("An event was triggered with message: "
+                            + data.contents);
+                });
+    };
+})(jQuery);
+
 jQuery(document).ready(function() {
-            var pusher = new Pusher("73ce330c0a4efe4266a2");
-            var global = pusher.subscribe("global");
-            global.bind("message", function(data) {
-                        alert("An event was triggered with message: " + data.contents);
-                    });
+            var pusher = jQuery(".pusher");
+            pusher.upusher();
+
+            var dashboard = jQuery(".dashboard");
+            dashboard.udashboard();
         });
