@@ -104,3 +104,9 @@ def logout():
     return flask.redirect(
         flask.url_for("signin")
     )
+
+@app.route("/dashboard", methods = ("GET",))
+def dashboard():
+    return flask.render_template(
+        "dashboard.html.tpl"
+    )
