@@ -51,43 +51,58 @@
             return matchedObject;
         }
 
-        var connection = pusher.connection;
+        var initialize = function() {
+            _start();
+            _general();
+        };
 
-        connection.bind("connecting", function() {
-                    status.html("connecting");
-                    status.removeClass("valid");
-                    status.addClass("invalid");
-                });
+        var _start = function() {
+            var connection = pusher.connection;
+            var global = pusher.subscribe("global");
+            matchedObject.data("global", global);
 
-        connection.bind("connected", function() {
-                    status.html("connected");
-                    status.removeClass("invalid");
-                    status.addClass("valid");
-                });
+            connection.bind("connecting", function() {
+                        status.html("connecting");
+                        status.removeClass("valid");
+                        status.addClass("invalid");
+                    });
 
-        connection.bind("unavailable", function() {
-                    status.html("unavailable");
-                    status.removeClass("valid");
-                    status.addClass("invalid");
-                });
+            connection.bind("connected", function() {
+                        status.html("connected");
+                        status.removeClass("invalid");
+                        status.addClass("valid");
+                    });
 
-        connection.bind("disconnected", function() {
-                    status.html("disconnected");
-                    status.removeClass("valid");
-                    status.addClass("invalid");
-                });
+            connection.bind("unavailable", function() {
+                        status.html("unavailable");
+                        status.removeClass("valid");
+                        status.addClass("invalid");
+                    });
 
-        connection.bind("error", function(error) {
-                    status.html("error");
-                    status.removeClass("valid");
-                    status.addClass("invalid");
-                });
+            connection.bind("disconnected", function() {
+                        status.html("disconnected");
+                        status.removeClass("valid");
+                        status.addClass("invalid");
+                    });
 
-        var global = pusher.subscribe("global");
-        global.bind("message", function(data) {
-                    alert("An event was triggered with message: "
-                            + data.contents);
-                });
+            connection.bind("error", function(error) {
+                        status.html("error");
+                        status.removeClass("valid");
+                        status.addClass("invalid");
+                    });
+        };
+
+        var _general = function() {
+            var global = matchedObject.data("global");
+            var message = jQuery(".message", matchedObject);
+
+            global.bind("message", function(data) {
+                        message.html(data.contents);
+                    });
+        };
+
+        initialize();
+        return matchedObject;
     };
 })(jQuery);
 

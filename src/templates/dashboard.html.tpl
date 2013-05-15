@@ -8,5 +8,7 @@
         <div>
             This is the dashboard.
         </div>
+        <div class="message">
+        </div>
     </div>
 {% endblock %}
