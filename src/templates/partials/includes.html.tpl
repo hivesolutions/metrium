@@ -8,6 +8,7 @@
 
 <!-- javascript inclusion -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://js.pusher.com/2.0/pusher.min.js"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'libs/uxf/js/ux-min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'libs/layout/js/layout.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/main.js') }}"></script>

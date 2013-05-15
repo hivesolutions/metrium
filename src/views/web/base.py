@@ -105,7 +105,26 @@ def logout():
         flask.url_for("signin")
     )
 
+@app.route("/dummy", methods = ("GET",))
+@quorum.ensure("dummy")
+def dummy():
+    import pusher
+
+    pusher = pusher.Pusher(
+        app_id = '22091',
+        key = '73ce330c0a4efe4266a2',
+        secret = 'bed6e0c75edff6adf50b'
+    )
+    pusher["global"].trigger("message", {
+        "contents": 'hello world'
+    })
+
+    return flask.redirect(
+        flask.url_for("index")
+    )
+
 @app.route("/dashboard", methods = ("GET",))
+@quorum.ensure("dashboard")
 def dashboard():
     return flask.render_template(
         "dashboard.html.tpl"

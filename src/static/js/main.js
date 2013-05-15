@@ -22,3 +22,11 @@
 // __date__      = $LastChangedDate$
 // __copyright__ = Copyright (c) 2010-2012 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
+
+jQuery(document).ready(function() {
+            var pusher = new Pusher("73ce330c0a4efe4266a2");
+            var global = pusher.subscribe("global");
+            global.bind("message", function(data) {
+                        alert("An event was triggered with message: " + data.contents);
+                    });
+        });

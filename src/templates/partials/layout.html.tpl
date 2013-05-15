@@ -17,6 +17,12 @@
                 {% else %}
                     <a href="{{ url_for('index') }}">home</a>
                 {% endif %}
+                //
+                {% if link == "dummy" %}
+                    <a href="{{ url_for('dummy') }}" class="active">dummy</a>
+                {% else %}
+                    <a href="{{ url_for('dummy') }}">dummy</a>
+                {% endif %}
             </div>
         {% endblock %}
     </div>
