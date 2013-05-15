@@ -1,3 +1,6 @@
 {
-    "PORT" : 8080
+    "PORT" : 8080,
+    "PUSHER_APP_ID" : "22091",
+    "PUSHER_KEY" : "73ce330c0a4efe4266a2",
+    "PUSHER_SECRET" : "bed6e0c75edff6adf50b"
 }
