@@ -108,15 +108,9 @@ def logout():
 @app.route("/dummy", methods = ("GET",))
 @quorum.ensure("dummy")
 def dummy():
-    import pusher
-
-    pusher = pusher.Pusher(
-        app_id = '22091',
-        key = '73ce330c0a4efe4266a2',
-        secret = 'bed6e0c75edff6adf50b'
-    )
+    pusher = quorum.get_pusher()
     pusher["global"].trigger("message", {
-        "contents": 'hello world'
+        "contents" : "hello world"
     })
 
     return flask.redirect(
