@@ -15,7 +15,31 @@
             </ul>
         </div>
         <div class="frame">
-            <div class="context"></div>
+            <div class="context">
+                <div class="date">
+                    <div class="week-day">Quinta-feira</div>
+                    <div class="day">16 Maio</div>
+                    <div class="time">14:50</div>
+                </div>
+                <div class="news-item">
+                    <div class="title">
+                        <span class="time">16:32</span>
+                        <span class="message">John Doe</span>
+                    </div>
+                    <div class="message">
+                        Atenção aos prazos de entrega que estão definidos.
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="title">
+                        <span class="time">14:50</span>
+                        <span class="message">João Magalhães</span>
+                    </div>
+                    <div class="message">
+                        Atenção aos prazos de entrega que estão definidos.
+                    </div>
+                </div>
+            </div>
             <div class="board">
                 <div class="line">
                     <div class="box"></div>

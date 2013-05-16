@@ -39,6 +39,7 @@ body.fullscreen {
 
 .dashboard {
     font-size: 32px;
+    text-align: left;
 }
 
 .dashboard .header {
@@ -128,4 +129,58 @@ body.fullscreen {
 
 .dashboard .box:last-child {
     margin-right: 0px;
+}
+
+.dashboard .date {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    font-weight: 300;
+    height: 168px;
+    padding: 0px 12px 0px 12px;
+}
+
+.dashboard .date .week-day {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 52px;
+    line-height: 60px;
+}
+
+.dashboard .date .day {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 40px;
+    line-height: 46px;
+}
+
+.dashboard .date .time {
+    font-size: 40px;
+    line-height: 46px;
+}
+
+.dashboard .news-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    font-weight: 300;
+    padding: 14px 20px 14px 20px;
+}
+
+.dashboard .news-item:last-child {
+    border-bottom: none;
+}
+
+.dashboard .news-item .title {
+    font-size: 22px;
+    margin-bottom: 4px;
+}
+
+.dashboard .news-item > .title .time {
+    color: rgba(255, 255, 255, 0.3);
+    margin-right: 4px;
+}
+
+.dashboard .news-item > .title .message {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.dashboard .news-item > .message {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 16px;
+    font-weight: normal;
 }
