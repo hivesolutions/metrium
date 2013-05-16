@@ -53,6 +53,7 @@
 
         var initialize = function() {
             _start();
+            _layout();
             _general();
         };
 
@@ -90,6 +91,11 @@
                         status.removeClass("valid");
                         status.addClass("invalid");
                     });
+        };
+
+        var _layout = function() {
+            var _html = jQuery("html");
+            _html.css("overflow-y", "auto");
         };
 
         var _general = function() {
