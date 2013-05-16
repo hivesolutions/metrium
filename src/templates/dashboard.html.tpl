@@ -17,6 +17,14 @@
         <div class="frame">
             <div class="context"></div>
             <div class="board">
+                <div class="line">
+                    <div class="box"></div>
+                    <div class="box double"></div>
+                </div>
+                <div class="line">
+                    <div class="box triple"></div>
+                </div>
+
                 <div class="status"></div>
                 <div class="message"></div>
             </div>
