@@ -30,10 +30,55 @@
 */
 
 body.fullscreen {
-	background-color: #000000;
-	color: #ffffff;
+    background: #000000 url(../images/background.png) no-repeat;
+    color: #ffffff;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    width: 100%;
 }
 
 .dashboard {
-	font-size: 32px;
+    font-size: 32px;
+}
+
+.dashboard .header {
+    background: transparent url(../images/transparent-black.png) repeat;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    height: 150px;
+}
+
+.dashboard .header .logo {
+    background: transparent url(../images/dummy_logo.png) repeat;
+    border-right: 1px solid rgba(255, 255, 255, 0.4);
+    float: left;
+    height: 150px;
+    width: 370px;
+}
+
+.dashboard .header .sections {
+    float: left;
+}
+
+.dashboard ul.sections {
+    height: 150px;
+    margin: 0px 0px 0px 0px;
+    padding-left: 82px;
+}
+
+.dashboard ul.sections li {
+    color: rgba(255, 255, 255, 0.4);
+    display: inline;
+    font-weight: 300;
+    line-height: 150px;
+    margin: 0px 0px 0px 0px;
+    margin-right: 98px;
+}
+
+.dashboard ul.sections li.active {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.dashboard ul.sections li:hover {
+    background-color: transparent;
 }
