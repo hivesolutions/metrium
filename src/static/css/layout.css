@@ -184,3 +184,52 @@ body.fullscreen {
     font-size: 16px;
     font-weight: normal;
 }
+
+.dashboard .box-contents.table {
+    padding: 20px 38px 20px 38px;
+}
+
+.dashboard .box h1 {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 38px;
+    line-height: 46px;
+    margin: 0px 0px 0px 0px;
+    text-transform: lowercase;
+}
+
+.dashboard .box h2 {
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 38px;
+    margin: 0px 0px 0px 0px;
+    text-transform: lowercase;
+}
+
+.dashboard .box table {
+    width: 384px;
+}
+
+.dashboard .box table th {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 26px;
+    font-weight: 300;
+    padding: 6px 0px 12px 0px;
+}
+
+.dashboard .box table td {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 300;
+    padding: 6px 0px 6px 0px;
+}
+
+.dashboard .box table th.value {
+    text-align: right;
+}
+
+.dashboard .box table td.value {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: right;
+}

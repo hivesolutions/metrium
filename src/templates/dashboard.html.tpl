@@ -42,13 +42,48 @@
             </div>
             <div class="board">
                 <div class="line">
-                    <div class="box"></div>
-                    <div class="box double"></div>
-                </div>
-                <div class="line">
                     <div class="box triple"></div>
                 </div>
-
+                <div class="line">
+                    <div class="box">
+                        <div class="box-contents table">
+                            <h1>vendas</h1>
+                            <h2>lojas</h2>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Loja</th>
+                                        <th class="value">ontem</th>
+                                        <th class="value">hoje</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Dolce Vita</td>
+                                        <td class="value">3623,34</td>
+                                        <td class="value">36,23</td>
+                                    </tr>
+                                    <tr>
+                                        <td>31 Janeiro</td>
+                                        <td class="value">50,23</td>
+                                        <td class="value">252,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Joia do Tempo</td>
+                                        <td class="value">7890,23</td>
+                                        <td class="value">2320,42</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Galeria da Jóia</td>
+                                        <td class="value">523,22</td>
+                                        <td class="value">223,22</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="box double"></div>
+                </div>
                 <div class="status"></div>
                 <div class="message"></div>
             </div>
