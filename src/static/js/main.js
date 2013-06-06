@@ -148,7 +148,10 @@
 
             var centerX = canvas.width / 2;
             var centerY = canvas.height / 2;
-            var radius = 154;
+            var lower = canvas.width > canvas.height
+                    ? canvas.height
+                    : canvas.width;
+            var radius = (lower / 2) - 18;
 
             context.translate(centerX, centerY);
             context.rotate(Math.PI / 2 * -1);
