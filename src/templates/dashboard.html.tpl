@@ -46,7 +46,7 @@
                 <div class="line">
                     <div class="box">
                         <div class="box-contents overview">
-                            <canvas class="progress" width="384" height="343"></canvas>
+                            <canvas class="progress" data-value="25" data-target="50"></canvas>
                             <div class="overview-contents">
                                 <div class="title">produtos</div>
                                 <div class="value">300K</div>

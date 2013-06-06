@@ -125,6 +125,22 @@
                 return;
             }
 
+            var width = matchedObject.width();
+            var height = matchedObject.height();
+
+            matchedObject.attr("width", width);
+            matchedObject.attr("height", height);
+
+            var value = matchedObject.attr("data-value");
+            var target = matchedObject.attr("data-target");
+
+            value = parseInt(value);
+            target = target ? parseInt(target) : null;
+
+            var valueP = value * 2.0 / 100.0;
+            var targetP = target ? (target - value) * 2.0 / 100.0 : 0.0;
+            var remainingP = 2.0 - targetP - valueP;
+
             var canvas = matchedObject[0];
 
             var context = canvas.getContext("2d");
@@ -138,25 +154,27 @@
             context.rotate(Math.PI / 2 * -1);
 
             context.beginPath();
-            context.arc(0, 0, radius, 0, 0.4 * Math.PI, false);
+            context.arc(0, 0, radius, 0, valueP * Math.PI, false);
             context.fillStyle = "transparent";
             context.fill();
             context.lineWidth = 12;
             context.strokeStyle = "#d6de23";
             context.stroke();
-            context.rotate(0.4 * Math.PI);
+            context.rotate(valueP * Math.PI);
+
+            if (target) {
+                context.beginPath();
+                context.arc(0, 0, radius, 0, targetP * Math.PI, false);
+                context.fillStyle = "transparent";
+                context.fill();
+                context.lineWidth = 12;
+                context.strokeStyle = "#ee4036";
+                context.stroke();
+                context.rotate(targetP * Math.PI);
+            }
 
             context.beginPath();
-            context.arc(0, 0, radius, 0, 0.2 * Math.PI, false);
-            context.fillStyle = "transparent";
-            context.fill();
-            context.lineWidth = 12;
-            context.strokeStyle = "#ee4036";
-            context.stroke();
-            context.rotate(0.2 * Math.PI);
-
-            context.beginPath();
-            context.arc(0, 0, radius, 0, 1.4 * Math.PI, false);
+            context.arc(0, 0, radius, 0, remainingP * Math.PI, false);
             context.fillStyle = "transparent";
             context.fill();
             context.lineWidth = 12;
