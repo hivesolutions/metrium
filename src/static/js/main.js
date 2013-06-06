@@ -144,7 +144,6 @@
             var canvas = matchedObject[0];
 
             var context = canvas.getContext("2d");
-            context.mozImageSmoothingEnabled = false;
 
             var centerX = canvas.width / 2;
             var centerY = canvas.height / 2;
