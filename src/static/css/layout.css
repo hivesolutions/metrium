@@ -158,7 +158,7 @@ body.fullscreen {
 .dashboard .news-item {
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     font-weight: 300;
-    padding: 14px 20px 14px 20px;
+    padding: 14px 12px 14px 20px;
 }
 
 .dashboard .news-item:last-child {
@@ -179,13 +179,39 @@ body.fullscreen {
     color: rgba(255, 255, 255, 0.6);
 }
 
+.dashboard .news-item > .title .marker {
+    background: transparent url(../images/markers.png) no-repeat 0px 0px;
+    display: block;
+    float: right;
+    height: 16px;
+    margin-top: 8px;
+    width: 16px;
+}
+
+.dashboard .news-item > .title .marker.red {
+    background-position: 0px 0px;
+}
+
+.dashboard .news-item > .title .marker.green {
+    background-position: 0px -16px;
+}
+
+.dashboard .news-item > .title .marker.blue {
+    background-position: 0px -32px;
+}
+
+.dashboard .news-item > .title .marker.orange {
+    background-position: 0px -48px;
+}
+
 .dashboard .news-item > .message {
     color: rgba(255, 255, 255, 0.6);
     font-size: 16px;
     font-weight: normal;
+    line-height: 26px;
 }
 
-.dashboard .box-contents.table {
+.dashboard .box-contents {
     padding: 20px 38px 20px 38px;
 }
 
@@ -217,6 +243,12 @@ body.fullscreen {
     padding: 6px 0px 12px 0px;
 }
 
+.dashboard .box table th.marker {
+    max-width: 32px;
+    min-width: 32px;
+    width: 32px;
+}
+
 .dashboard .box table td {
     color: #ffffff;
     font-size: 24px;
@@ -232,4 +264,66 @@ body.fullscreen {
     font-size: 22px;
     font-weight: bold;
     text-align: right;
+}
+
+.dashboard .box table td.marker {
+    max-width: 32px;
+    min-width: 32px;
+    text-align: right;
+    width: 32px;
+}
+
+.dashboard .box table td.marker > div {
+    background: transparent url(../images/arrows.png) no-repeat 0px 0px;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+}
+
+.dashboard .box table td.marker > div.down {
+    background-position: 0px 0px;
+}
+
+.dashboard .box table td.marker > div.up {
+    background-position: 0px -16px;
+}
+
+.dashboard .box table td.marker > div.down.color {
+    background-position: 0px -32px;
+}
+
+.dashboard .box table td.marker > div.up.color {
+    background-position: 0px -48px;
+}
+
+.dashboard .box table td.marker > div.equals {
+    background-position: 0px -64px;
+}
+
+.dashboard .box .top-contents {
+    display: inline-block;
+    margin-bottom: 8px;
+    text-align: center;
+    width: 384px;
+}
+
+.dashboard .box .top-contents.double {
+    width: 188px;
+}
+
+.dashboard .box .top-contents .value {
+    background: transparent url(../images/circle_medium.png) no-repeat;
+    color: rgba(255, 255, 255, 1);
+    display: inline-block;
+    font-weight: 400;
+    height: 70px;
+    margin-bottom: 6px;
+    padding-top: 20px;
+    text-align: center;
+    width: 90px;
+}
+
+.dashboard .box .top-contents .title {
+    font-size: 20px;
+    font-weight: 300;
 }
