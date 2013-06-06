@@ -375,7 +375,44 @@ body.fullscreen {
 
 .dashboard .box .top-contents .details .amount {
     color: rgba(255, 255, 255, 0.8);
-    display: inline;    ;
+    display: inline;
     font-size: 24px;
     font-weight: 300;
+}
+
+.dashboard .box .overview-contents {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.dashboard .box .overview-contents .title {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 28px;
+    font-weight: 300;
+}
+
+.dashboard .box .overview-contents .value {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 76px;
+    font-weight: 300;
+    line-height: 86px;
+}
+
+.dashboard .box .overview-contents .line {
+    background-color: rgba(255, 255, 255, 0.4);
+    height: 1px;
+    line-height: 1px;
+    margin: 8px auto 8px auto;
+    width: 226px;
+}
+
+.dashboard .box .overview-contents .sub-value {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 32px;
+}
+
+.dashboard .box .progress {
+    height: 343px;
+    position: absolute;
+    width: 384px;
 }

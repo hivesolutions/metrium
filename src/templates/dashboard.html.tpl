@@ -44,7 +44,18 @@
             </div>
             <div class="board">
                 <div class="line">
-                    <div class="box triple"></div>
+                    <div class="box">
+                        <div class="box-contents overview">
+                            <canvas class="progress" width="384" height="343"></canvas>
+                            <div class="overview-contents">
+                                <div class="title">produtos</div>
+                                <div class="value">300K</div>
+                                <div class="line"></div>
+                                <div class="sub-value">1050</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box double"></div>
                 </div>
                 <div class="line">
                     <div class="box">
@@ -98,7 +109,7 @@
                         </div>
                     </div>
                     <div class="box">
-                        <div class="box-contents">
+                        <div class="box-contents bubble">
                             <h1>top</h1>
                             <h2>lojas</h2>
                             <div class="bubble-contents">
@@ -116,7 +127,7 @@
                         </div>
                     </div>
                     <div class="box">
-                        <div class="box-contents">
+                        <div class="box-contents top">
                             <h1>top</h1>
                             <h2>vendedores</h2>
                             <div class="top-contents">

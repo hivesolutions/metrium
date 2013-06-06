@@ -112,10 +112,70 @@
     };
 })(jQuery);
 
+(function(jQuery) {
+    jQuery.fn.uprogress = function(options) {
+        var matchedObject = this;
+
+        var initialize = function() {
+            _start();
+        };
+
+        var _start = function() {
+            if (matchedObject.length == 0) {
+                return;
+            }
+
+            var canvas = matchedObject[0];
+
+            var context = canvas.getContext("2d");
+            context.mozImageSmoothingEnabled = false;
+
+            var centerX = canvas.width / 2;
+            var centerY = canvas.height / 2;
+            var radius = 154;
+
+            context.translate(centerX, centerY);
+            context.rotate(Math.PI / 2 * -1);
+
+            context.beginPath();
+            context.arc(0, 0, radius, 0, 0.4 * Math.PI, false);
+            context.fillStyle = "transparent";
+            context.fill();
+            context.lineWidth = 12;
+            context.strokeStyle = "#d6de23";
+            context.stroke();
+            context.rotate(0.4 * Math.PI);
+
+            context.beginPath();
+            context.arc(0, 0, radius, 0, 0.2 * Math.PI, false);
+            context.fillStyle = "transparent";
+            context.fill();
+            context.lineWidth = 12;
+            context.strokeStyle = "#ee4036";
+            context.stroke();
+            context.rotate(0.2 * Math.PI);
+
+            context.beginPath();
+            context.arc(0, 0, radius, 0, 1.4 * Math.PI, false);
+            context.fillStyle = "transparent";
+            context.fill();
+            context.lineWidth = 12;
+            context.strokeStyle = "rgba(255, 255, 255, 0.6)";
+            context.stroke();
+        };
+
+        initialize();
+        return matchedObject;
+    };
+})(jQuery);
+
 jQuery(document).ready(function() {
             var pusher = jQuery(".pusher");
             pusher.upusher();
 
             var dashboard = jQuery(".dashboard");
             dashboard.udashboard();
+
+            var progress = jQuery(".progress");
+            progress.uprogress();
         });
