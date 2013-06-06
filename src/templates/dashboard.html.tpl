@@ -101,21 +101,59 @@
                         <div class="box-contents">
                             <h1>top</h1>
                             <h2>lojas</h2>
-                            <div class="top-contents">
+                            <div class="bubble-contents">
                                 <div class="value">254</div>
                                 <div class="title">Galeria da Jóia</div>
                             </div>
-                            <div class="top-contents double">
+                            <div class="bubble-contents double">
                                 <div class="value">254</div>
                                 <div class="title">Dolce Vita</div>
                             </div>
-                            <div class="top-contents double">
+                            <div class="bubble-contents double">
                                 <div class="value">254</div>
                                 <div class="title">31 de Janeiro</div>
                             </div>
                         </div>
                     </div>
-                    <div class="box"></div>
+                    <div class="box">
+                        <div class="box-contents">
+                            <h1>top</h1>
+                            <h2>vendedores</h2>
+                            <div class="top-contents">
+                                <div class="rank">1</div>
+                                <div class="picture">
+                                    <img src="/static/images/dummies/dummy_picture_1.png" />
+                                </div>
+                                <div class="details">
+                                    <div class="name">John Doe</div>
+                                    <div class="value">362</div>
+                                    <div class="amount">1.000,45€</div>
+                                </div>
+                            </div>
+                            <div class="top-contents">
+                                <div class="rank">2</div>
+                                <div class="picture">
+                                    <img src="/static/images/dummies/dummy_picture_2.png" />
+                                </div>
+                                <div class="details">
+                                    <div class="name">Mary Jane</div>
+                                    <div class="value">290</div>
+                                    <div class="amount">950,00€</div>
+                                </div>
+                            </div>
+                            <div class="top-contents">
+                                <div class="rank">3</div>
+                                <div class="picture">
+                                    <img src="/static/images/dummies/dummy_picture_3.png" />
+                                </div>
+                                <div class="details">
+                                    <div class="name">Christopher Elliot</div>
+                                    <div class="value">203</div>
+                                    <div class="amount">745,20€</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="status"></div>
                 <div class="message"></div>

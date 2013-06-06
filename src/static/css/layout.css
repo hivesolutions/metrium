@@ -300,18 +300,18 @@ body.fullscreen {
     background-position: 0px -64px;
 }
 
-.dashboard .box .top-contents {
+.dashboard .box .bubble-contents {
     display: inline-block;
     margin-bottom: 8px;
     text-align: center;
     width: 384px;
 }
 
-.dashboard .box .top-contents.double {
+.dashboard .box .bubble-contents.double {
     width: 188px;
 }
 
-.dashboard .box .top-contents .value {
+.dashboard .box .bubble-contents .value {
     background: transparent url(../images/circle_medium.png) no-repeat;
     color: rgba(255, 255, 255, 1);
     display: inline-block;
@@ -323,7 +323,59 @@ body.fullscreen {
     width: 90px;
 }
 
-.dashboard .box .top-contents .title {
+.dashboard .box .bubble-contents .title {
     font-size: 20px;
+    font-weight: 300;
+}
+
+
+.dashboard .box .top-contents {
+    margin: 10px 0px 10px 0px;
+}
+
+.dashboard .box .top-contents .rank {
+    color: rgba(255, 255, 255, 0.6);
+    display: inline-block;
+    font-size: 56px;
+    font-weight: 300;
+    vertical-align: top;
+    width: 44px;
+}
+
+.dashboard .box .top-contents .picture {
+    background: transparent url(../images/circle_small.png) no-repeat;
+    display: inline-block;
+    height: 64px;
+    padding: 5px 5px 5px 5px;
+    vertical-align: top;
+    width: 64px;
+}
+
+.dashboard .box .top-contents .picture > img {
+    border-radius: 32px 32px 32px 32px;
+}
+
+.dashboard .box .top-contents .details {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: top;
+}
+
+.dashboard .box .top-contents .details .name {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.dashboard .box .top-contents .details .value {
+    color: rgba(255, 255, 255, 0.8);
+    display: inline;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.dashboard .box .top-contents .details .amount {
+    color: rgba(255, 255, 255, 0.8);
+    display: inline;    ;
+    font-size: 24px;
     font-weight: 300;
 }
