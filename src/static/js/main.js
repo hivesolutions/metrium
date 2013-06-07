@@ -55,6 +55,7 @@
             _start();
             _layout();
             _general();
+            _modules();
         };
 
         var _start = function() {
@@ -105,6 +106,41 @@
             global.bind("message", function(data) {
                         message.html(data.contents);
                     });
+        };
+
+        var _modules = function() {
+            matchedObject.ulog();
+        };
+
+        initialize();
+        return matchedObject;
+    };
+})(jQuery);
+
+(function(jQuery) {
+    jQuery.fn.ulog = function(options) {
+        var matchedObject = this;
+
+        var initialize = function() {
+            _start();
+        };
+
+        var _start = function() {
+            var global = matchedObject.data("global");
+            global.bind("log.message", function(data) {
+                        _new(data.contents);
+                    });
+        };
+
+        var _new = function(contents) {
+            var context = jQuery(".context", matchedObject);
+            var item = "<div class=\"news-item\">" + "<div class=\"title\">"
+                    + "<span class=\"time\">" + "16:32" + "</span>"
+                    + "<span class=\"message\">" + contents.owner + "</span>"
+                    + "<span class=\"marker " + contents.type + "\"></span>"
+                    + "</div>" + "<div class=\"message\">" + contents.message
+                    + "</div>" + "</div>";
+            context.append(item);
         };
 
         initialize();

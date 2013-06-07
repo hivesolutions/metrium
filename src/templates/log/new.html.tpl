@@ -20,7 +20,7 @@
                 <input type="radio" name="type" id="info" value="info" />
             {% endif %}
             <label class="radio-label" for="info">Information</label>
-            {% if log.type == '' %}
+            {% if log.type == 'warning' %}
                 <input type="radio" name="type" id="warning" value="warning" checked="1" />
             {% else %}
                 <input type="radio" name="type" id="warning" value="warning" />
