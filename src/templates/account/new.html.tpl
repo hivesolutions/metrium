@@ -42,32 +42,11 @@
             {% endif %}
             <label class="radio-label" for="user">User</label>
             {% if account.type == 2 %}
-                <input type="radio" name="type" id="super_user" value="2" checked="1" />
+                <input type="radio" name="type" id="admin" value="2" checked="1" />
             {% else %}
-                <input type="radio" name="type" id="super_user" value="2" />
-            {% endif %}
-            <label class="radio-label" for="super_user">Super User</label>
-            {% if account.type == 3 %}
-                <input type="radio" name="type" id="admin" value="3" checked="1" />
-            {% else %}
-                <input type="radio" name="type" id="admin" value="3" />
+                <input type="radio" name="type" id="admin" value="2" />
             {% endif %}
             <label class="radio-label" for="admin">Admin</label>
-        </div>
-        <div class="label">
-            <label>Cameras</label>
-        </div>
-        <div class="input">
-            <div name="cameras" class="tag-field" data-display_attribute="camera_id"
-                 data-value_attribute="camera_id" data-error="{{ errors.cameras }}">
-                <input name="cameras" type="hidden" class="tag-empty-field" />
-                <ul class="tags">
-                    {% for camera in account.cameras.objects %}
-                        <li>{{ camera.camera_id }}</li>
-                    {% endfor %}
-                </ul>
-                <ul class="data-source" data-url="{{ url_for('list_cameras_json') }}" data-type="json"></ul>
-            </div>
         </div>
         <div class="quote">
             By clicking Submit Sccount, you agree to our Service Agreement and that you have

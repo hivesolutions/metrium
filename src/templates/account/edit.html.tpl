@@ -31,6 +31,23 @@
             <input class="text-field" name="email" placeholder="eg: johndoe@example.com" value="{{ account.email }}"
                    data-error="{{ errors.email }}" />
         </div>
+        <div class="label">
+            <label>Type</label>
+        </div>
+        <div class="input left">
+            {% if account.type == 1 or not account.type %}
+                <input type="radio" name="type" id="user" value="1" checked="1" />
+            {% else %}
+                <input type="radio" name="type" id="user" value="1" />
+            {% endif %}
+            <label class="radio-label" for="user">User</label>
+            {% if account.type == 2 %}
+                <input type="radio" name="type" id="admin" value="2" checked="1" />
+            {% else %}
+                <input type="radio" name="type" id="admin" value="2" />
+            {% endif %}
+            <label class="radio-label" for="admin">Admin</label>
+        </div>
         <span class="button" data-link="{{ url_for('show_account', username = account.username) }}">Cancel</span>
         //
         <span class="button" data-submit="true">Update</span>
