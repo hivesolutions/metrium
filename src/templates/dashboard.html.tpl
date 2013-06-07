@@ -55,7 +55,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="box double"></div>
+                    <div class="box double">
+                        <div class="box-contents chart">
+                            <h1>últimos 7 dias</h1>
+                            <h2>vendas</h2>
+                            <canvas class="line-chart"></canvas>
+                        </div>
+                    </div>
                 </div>
                 <div class="line">
                     <div class="box">

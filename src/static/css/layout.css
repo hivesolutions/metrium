@@ -416,3 +416,10 @@ body.fullscreen {
     position: absolute;
     width: 384px;
 }
+
+.dashboard .box .line-chart {
+    height: 279px;
+    margin-left: -43px;
+    position: absolute;
+    width: 934px;
+}
