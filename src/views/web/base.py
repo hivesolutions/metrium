@@ -108,20 +108,6 @@ def logout():
         flask.url_for("signin")
     )
 
-@app.route("/dummy", methods = ("GET",))
-@quorum.ensure("dummy")
-def dummy():
-    message = flask.request.args.get("message", "hello world")
-
-    pusher = quorum.get_pusher()
-    pusher["global"].trigger("message", {
-        "contents" : message
-    })
-
-    return flask.redirect(
-        flask.url_for("index")
-    )
-
 @app.route("/dashboard", methods = ("GET",))
 @quorum.ensure("dashboard")
 def dashboard():
