@@ -72,6 +72,9 @@ def signin():
 
 @app.route("/signin", methods = ("POST",))
 def login():
+    # retrieves the username and the password fields
+    # and uses them to run the login logic raising an
+    # error in case an invalid authentication occurs
     username = quorum.get_field("username")
     password = quorum.get_field("password")
     try: account = models.Account.login(username, password)
