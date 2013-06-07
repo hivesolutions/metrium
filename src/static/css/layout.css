@@ -54,9 +54,7 @@ body.fullscreen {
 }
 
 .sound {
-    height: 0px;
-    visibility: hidden;
-    width: 0px;
+    display: none;
 }
 
 .dashboard {
