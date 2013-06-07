@@ -237,11 +237,10 @@
         };
 
         var _new = function(contents) {
-            var date = new Date();
+            var date = new Date(contents.timestamp * 1000);
             var hours = date.getHours();
             var minutes = date.getMinutes();
-            var timeLine = contents.time || _toString(hours) + ":"
-                    + _toString(minutes);
+            var timeLine = _toString(hours) + ":" + _toString(minutes);
 
             var context = jQuery(".context", matchedObject);
             var news = jQuery(".news", context);
@@ -255,6 +254,8 @@
 
             var newsElement = news[0];
 
+            _playSound("/static/sounds/horse.mp3");
+
             while (true) {
                 var overflows = newsElement.scrollHeight > newsElement.clientHeight;
                 if (!overflows) {
@@ -264,6 +265,18 @@
                 var lastChild = jQuery("> :last-child", news);
                 lastChild.remove();
             }
+        };
+
+        var _playSound = function(path) {
+            var isVisible = matchedObject.css("visibility") == "visible";
+            if (!isVisible) {
+                return;
+            }
+
+            var sound = jQuery(".sound", matchedObject);
+            var soundElement = sound[0];
+            sound.attr("src", path);
+            soundElement.play();
         };
 
         var _toString = function(value, length) {
