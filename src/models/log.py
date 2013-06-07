@@ -87,7 +87,9 @@ class Log(base.Base):
         return {
             "message" : self.message,
             "type" : self.type,
-            "owner" : self.owner.username
+            "owner" : self.owner.username,
+            "timestamp" : self.timestamp,
+            "time_s" : self.time_s()
         }
 
     def pre_create(self):
