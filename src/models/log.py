@@ -72,6 +72,24 @@ class Log(base.Base):
             quorum.not_empty("type")
         ]
 
+    @classmethod
+    def get_state(cls):
+        events = []
+        logs = cls.find(sort = [("timestamp", -1)], limit = 10)
+
+        for log in logs:
+            event = log.get_event()
+            events.append(event)
+
+        return {"log.message" : events}
+
+    def get_event(self):
+        return {
+            "message" : self.message,
+            "type" : self.type,
+            "owner" : self.owner.username
+        }
+
     def pre_create(self):
         base.Base.pre_create(self)
 
@@ -83,9 +101,5 @@ class Log(base.Base):
 
         pusher = quorum.get_pusher()
         pusher["global"].trigger("log.message", {
-            "contents" : {
-                "message" : self.message,
-                "type" : self.type,
-                "owner" : self.owner.username
-            }
+            "contents" : self.get_event()
         })

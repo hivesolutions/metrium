@@ -108,6 +108,16 @@ def logout():
         flask.url_for("signin")
     )
 
+@app.route("/state", methods = ("GET",), json = True)
+@quorum.ensure("state", json = True)
+def state():
+    log_state = models.Log.get_state()
+
+    state = dict(
+        log = log_state
+    )
+    return state
+
 @app.route("/dashboard", methods = ("GET",))
 @quorum.ensure("dashboard")
 def dashboard():
