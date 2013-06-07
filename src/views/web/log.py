@@ -47,7 +47,7 @@ from metrium import quorum
 @quorum.ensure("logs.list")
 def list_logs():
     return flask.render_template(
-        "logs_list.html.tpl",
+        "log/list.html.tpl",
         link = "logs",
         sub_link = "list"
     )
@@ -60,9 +60,10 @@ def list_logs_json():
     return logs
 
 @app.route("/logs/new", methods = ("GET",))
+@quorum.ensure("logs.new")
 def new_log():
     return flask.render_template(
-        "log_new.html.tpl",
+        "log/new.html.tpl",
         link = "logs",
         sub_link = "create",
         log = {},
@@ -70,6 +71,7 @@ def new_log():
     )
 
 @app.route("/logs", methods = ("POST",))
+@quorum.ensure("logs.new")
 def create_log():
     # creates the new log, using the provided arguments and
     # then saves it into the data source, all the validations
@@ -78,7 +80,7 @@ def create_log():
     try: log.save()
     except quorum.ValidationError, error:
         return flask.render_template(
-            "log_new.html.tpl",
+            "log/new.html.tpl",
             link = "logs",
             sub_link = "create",
             log = error.model,
