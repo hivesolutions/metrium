@@ -3,6 +3,7 @@
 {% block name %}Dashboard{% endblock %}
 {% block content %}
     <div class="dashboard">
+        <audio class="sound"></audio>
         <div class="pusher" data-key="73ce330c0a4efe4266a2"></div>
         <div class="header">
             <div class="logo"></div>
@@ -21,28 +22,7 @@
                     <div class="day"></div>
                     <div class="time"></div>
                 </div>
-                <div class="news">
-                    <div class="news-item">
-                        <div class="title">
-                            <span class="time">16:32</span>
-                            <span class="message">John Doe</span>
-                            <span class="marker red"></span>
-                        </div>
-                        <div class="message">
-                            Atenção aos prazos de entrega que estão definidos.
-                        </div>
-                    </div>
-                    <div class="news-item">
-                        <div class="title">
-                            <span class="time">14:50</span>
-                            <span class="message">João Magalhães</span>
-                            <span class="marker green"></span>
-                        </div>
-                        <div class="message">
-                            Atenção aos prazos de entrega que estão definidos.
-                        </div>
-                    </div>
-                </div>
+                <div class="news"></div>
             </div>
             <div class="board">
                 <div class="line">
