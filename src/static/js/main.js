@@ -100,15 +100,10 @@
         };
 
         var _general = function() {
-            var global = matchedObject.data("global");
-            var message = jQuery(".message", matchedObject);
-
-            global.bind("message", function(data) {
-                        message.html(data.contents);
-                    });
         };
 
         var _modules = function() {
+            matchedObject.udate();
             matchedObject.ulog();
         };
 
@@ -134,13 +129,42 @@
 
         var _new = function(contents) {
             var context = jQuery(".context", matchedObject);
+            var news = jQuery(".news", context);
             var item = "<div class=\"news-item\">" + "<div class=\"title\">"
                     + "<span class=\"time\">" + "16:32" + "</span>"
                     + "<span class=\"message\">" + contents.owner + "</span>"
                     + "<span class=\"marker " + contents.type + "\"></span>"
                     + "</div>" + "<div class=\"message\">" + contents.message
                     + "</div>" + "</div>";
-            context.append(item);
+            news.prepend(item);
+
+            var newsElement = news[0];
+
+            while (true) {
+                var overflows = newsElement.scrollHeight > newsElement.clientHeight;
+                if (!overflows) {
+                    break;
+                }
+
+                var lastChild = jQuery("> :last-child", news);
+                lastChild.remove();
+            }
+        };
+
+        initialize();
+        return matchedObject;
+    };
+})(jQuery);
+
+(function(jQuery) {
+    jQuery.fn.udate = function(options) {
+        var matchedObject = this;
+
+        var initialize = function() {
+            _start();
+        };
+
+        var _start = function() {
         };
 
         initialize();
