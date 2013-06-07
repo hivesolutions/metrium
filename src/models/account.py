@@ -121,11 +121,11 @@ class Account(base.Base):
             quorum.string_lt("username", 64),
             quorum.not_duplicate("username", cls._name()),
 
-            quorum.validation.not_null("password"),
-            quorum.validation.not_empty("password"),
+            quorum.not_null("password"),
+            quorum.not_empty("password"),
 
-            quorum.validation.not_null("password_confirm"),
-            quorum.validation.not_empty("password_confirm"),
+            quorum.not_null("password_confirm"),
+            quorum.not_empty("password_confirm"),
 
             quorum.equals("password_confirm", "password")
         ]
