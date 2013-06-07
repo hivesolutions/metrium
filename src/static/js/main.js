@@ -153,18 +153,28 @@
             var dayString = DAYS_PT[dayIndex];
 
             var dayMonth = _date.getDate();
-            var dayMonthS = String(dayMonth);
+            var dayMonthS = _toString(dayMonth);
             var month = _date.getMonth();
             var monthS = MONTHS_PT[month];
             var dayLine = dayMonthS + " " + monthS;
 
             var hours = _date.getHours();
             var minutes = _date.getMinutes();
-            var timeLine = hours + ":" + minutes;
+            var timeLine = _toString(hours) + ":" + _toString(minutes);
 
             weekDay.html(dayString);
             day.html(dayLine);
             time.html(timeLine);
+        };
+
+        var _toString = function(value, length) {
+            length = length || 2;
+            value = String(value);
+
+            for (var index = value.length; index < length; index++) {
+                value = "0" + value;
+            }
+            return value;
         };
 
         initialize();
