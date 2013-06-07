@@ -37,6 +37,22 @@ body.fullscreen {
     width: 1920px;
 }
 
+.info {
+	color: #3668c6;
+}
+
+.success {
+	color: #3668c6;
+}
+
+.warning {
+	color: #bf9631;
+}
+
+.error {
+	color: #c31f30;
+}
+
 .dashboard {
     font-size: 32px;
     text-align: left;
@@ -193,19 +209,23 @@ body.fullscreen {
     width: 16px;
 }
 
-.dashboard .news-item > .title .marker.red {
+.dashboard .news-item > .title .marker.red,
+.dashboard .news-item > .title .marker.error {
     background-position: 0px 0px;
 }
 
-.dashboard .news-item > .title .marker.green {
+.dashboard .news-item > .title .marker.green,
+.dashboard .news-item > .title .marker.success {
     background-position: 0px -16px;
 }
 
-.dashboard .news-item > .title .marker.blue {
+.dashboard .news-item > .title .marker.blue,
+.dashboard .news-item > .title .marker.info {
     background-position: 0px -32px;
 }
 
-.dashboard .news-item > .title .marker.orange {
+.dashboard .news-item > .title .marker.orange,
+.dashboard .news-item > .title .marker.warning {
     background-position: 0px -48px;
 }
 

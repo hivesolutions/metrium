@@ -20,12 +20,24 @@
                 <input type="radio" name="type" id="info" value="info" />
             {% endif %}
             <label class="radio-label" for="info">Information</label>
+			{% if log.type == 'success' %}
+                <input type="radio" name="type" id="success" value="info" checked="1" />
+            {% else %}
+                <input type="radio" name="type" id="success" value="info" />
+            {% endif %}
+            <label class="radio-label" for="success">Success</label>
             {% if log.type == 'warning' %}
                 <input type="radio" name="type" id="warning" value="warning" checked="1" />
             {% else %}
                 <input type="radio" name="type" id="warning" value="warning" />
             {% endif %}
             <label class="radio-label" for="warning">Warning</label>
+            {% if log.type == 'error' %}
+                <input type="radio" name="type" id="error" value="error" checked="1" />
+            {% else %}
+                <input type="radio" name="type" id="error" value="error" />
+            {% endif %}
+            <label class="radio-label" for="error">Error</label>
         </div>
         <div class="quote">
             By clicking Submit Message, you agree to our Service Agreement and that you have
