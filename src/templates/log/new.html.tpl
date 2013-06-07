@@ -21,9 +21,9 @@
             {% endif %}
             <label class="radio-label" for="info">Information</label>
             {% if log.type == 'success' %}
-                <input type="radio" name="type" id="success" value="info" checked="1" />
+                <input type="radio" name="type" id="success" value="success" checked="1" />
             {% else %}
-                <input type="radio" name="type" id="success" value="info" />
+                <input type="radio" name="type" id="success" value="success" />
             {% endif %}
             <label class="radio-label" for="success">Success</label>
             {% if log.type == 'warning' %}
