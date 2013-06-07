@@ -24,6 +24,12 @@
                     <a href="{{ url_for('list_accounts') }}">accounts</a>
                 {% endif %}
                 //
+                {% if link == "logs" %}
+                    <a href="{{ url_for('list_logs') }}" class="active">log</a>
+                {% else %}
+                    <a href="{{ url_for('list_logs') }}">log</a>
+                {% endif %}
+                //
                 {% if link == "dummy" %}
                     <a href="{{ url_for('dummy') }}" class="active">dummy</a>
                 {% else %}
