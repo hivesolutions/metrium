@@ -17,9 +17,9 @@
         <div class="frame">
             <div class="context">
                 <div class="date">
-                    <div class="week-day">Quinta-feira</div>
-                    <div class="day">16 Maio</div>
-                    <div class="time">14:50</div>
+                    <div class="week-day"></div>
+                    <div class="day"></div>
+                    <div class="time"></div>
                 </div>
                 <div class="news">
                     <div class="news-item">

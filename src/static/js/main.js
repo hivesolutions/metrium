@@ -158,6 +158,21 @@
 
 (function(jQuery) {
     jQuery.fn.udate = function(options) {
+
+        var TIMEOUT = 10000;
+
+        var DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+                "Friday", "Starturday"];
+        var DAYS_PT = ["Domnigo", "Segunda-feira", "Terça-Feira",
+                "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
+
+        var MONTHS = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November",
+                "December"];
+        var MONTHS_PT = ["Janeiro", "Febreiro", "Março", "Abril", "Maio",
+                "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro",
+                "Dezembro"];
+
         var matchedObject = this;
 
         var initialize = function() {
@@ -165,6 +180,35 @@
         };
 
         var _start = function() {
+            _update();
+            setInterval(function() {
+                        _update();
+                    }, TIMEOUT);
+        };
+
+        var _update = function() {
+            var date = jQuery(".date", matchedObject);
+            var weekDay = jQuery(".week-day", date);
+            var day = jQuery(".day", date);
+            var time = jQuery(".time", date);
+
+            var _date = new Date();
+            var dayIndex = _date.getDay();
+            var dayString = DAYS_PT[dayIndex];
+
+            var dayMonth = _date.getDate();
+            var dayMonthS = String(dayMonth);
+            var month = _date.getMonth();
+            var monthS = MONTHS_PT[month];
+            var dayLine = dayMonthS + " " + monthS;
+
+            var hours = _date.getHours();
+            var minutes = _date.getMinutes();
+            var timeLine = hours + ":" + minutes;
+
+            weekDay.html(dayString);
+            day.html(dayLine);
+            time.html(timeLine);
         };
 
         initialize();
