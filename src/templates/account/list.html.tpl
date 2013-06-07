@@ -9,8 +9,8 @@
                  <a href="{{ url_for('show_account', username = '') }}%[username]">%[username]</a>
             </div>
             <div class="date text-left" data-width="160">%[last_login_l]</div>
-            <div class="latency text-left" data-width="80">%[email]</div>
-            <div class="latency text-right" data-width="130">%[login_count] times</div>
+            <div class="email text-left" data-width="80">%[email]</div>
+            <div class="login-count text-right" data-width="130">%[login_count] times</div>
             <div class="table-clear"></div>
         </li>
         <div class="filter-no-results quote">
