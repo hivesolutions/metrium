@@ -56,7 +56,7 @@ def list_logs():
 @quorum.ensure("logs.list", json = True)
 def list_logs_json():
     object = quorum.get_object(alias = True, find = True)
-    logs = models.Log.find(map = True, **object)
+    logs = models.Log.find(map = True, sort = [("timestamp", -1)], **object)
     return logs
 
 @app.route("/logs/new", methods = ("GET",))
