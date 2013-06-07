@@ -37,9 +37,12 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
+import flask
+
 import quorum
 
 import base
+import account
 
 class Log(base.Base):
 
@@ -49,6 +52,13 @@ class Log(base.Base):
 
     type = dict(
         index = True
+    )
+
+    owner = dict(
+        type = quorum.reference(
+            account.Account,
+            name = "username"
+        )
     )
 
     @classmethod
@@ -61,3 +71,21 @@ class Log(base.Base):
             quorum.not_null("type"),
             quorum.not_empty("type")
         ]
+
+    def pre_create(self):
+        base.Base.pre_create(self)
+
+        username = flask.session["username"]
+        self.owner = username
+
+    def post_create(self):
+        base.Base.post_create(self)
+
+        pusher = quorum.get_pusher()
+        pusher["global"].trigger("log.message", {
+            "contents" : {
+                "message" : self.message,
+                "type" : self.type,
+                "owner" : self.owner.username
+            }
+        })

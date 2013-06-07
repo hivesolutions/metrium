@@ -5,8 +5,9 @@
     <ul class="filter" data-no_input="1">
         <div class="data-source" data-url="{{ url_for('list_logs_json') }}" data-type="json" data-timeout="0"></div>
         <li class="template table-row">
-            <div class="type text-left %[type]" data-width="100">%[type]</div>
-            <div class="message text-left" data-width="480">%[message]</div>
+            <div class="owner text-left" data-width="140">%[owner]</div>
+            <div class="message text-left" data-width="360">%[message]</div>
+            <div class="type text-right %[type]" data-width="80">%[type]</div>
             <div class="table-clear"></div>
         </li>
         <div class="filter-no-results quote">
