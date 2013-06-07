@@ -54,9 +54,16 @@ USER_TYPE = 1
 """ The identifier (integer) to be used to represent an user
 for the metrium sub-system usage """
 
-ADMIN_TYPE = 3
+ADMIN_TYPE = 2
 """ The identifier (integer) to be used to represent an admin
 for the metrium sub-system usage """
+
+TYPE_NAMES = {
+    USER_TYPE : "user",
+    ADMIN_TYPE : "admin"
+}
+""" The map associating the various values for the user types
+with the appropriate string values that represent them """
 
 USER_ACL = {
     USER_TYPE : (
@@ -78,6 +85,10 @@ class Account(base.Base):
 
     password = dict(
         private = True
+    )
+
+    email = dict(
+        index = True
     )
 
     login_count = dict(
@@ -110,7 +121,7 @@ class Account(base.Base):
 
         # creates the various accounts that are going to be used for
         # the default initial access to the data source
-        cls.create_account_d("root", "root", ADMIN_TYPE)
+        cls.create_account_d("root", "root", "root@metrium.com", ADMIN_TYPE)
 
     @classmethod
     def validate_new(cls):
@@ -123,6 +134,11 @@ class Account(base.Base):
 
             quorum.not_null("password"),
             quorum.not_empty("password"),
+
+            quorum.not_null("email"),
+            quorum.not_empty("email"),
+            quorum.is_email("email"),
+            quorum.not_duplicate("email", cls._name()),
 
             quorum.not_null("password_confirm"),
             quorum.not_empty("password_confirm"),
@@ -176,7 +192,7 @@ class Account(base.Base):
         return account
 
     @classmethod
-    def create_account_d(cls, username, password, type):
+    def create_account_d(cls, username, password, email, type):
         # encodes the provided password into an sha1 hash appending
         # the salt value to it before the encoding
         password = hashlib.sha1(password + PASSWORD_SALT).hexdigest()
@@ -187,6 +203,7 @@ class Account(base.Base):
             "enabled" : True,
             "username" : username,
             "password" : password,
+            "email" : email,
             "login_count" : 0,
             "last_login" : None,
             "type" : type,
@@ -275,3 +292,6 @@ class Account(base.Base):
                 "account" : account
             }
         )
+
+    def type_s(self):
+        return TYPE_NAMES.get(self.type, None)
