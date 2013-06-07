@@ -96,6 +96,11 @@ body.fullscreen {
     width: 370px;
 }
 
+.dashboard .frame .context .news {
+    height: 601px;
+    overflow: hidden;
+}
+
 .dashboard .frame .board {
     float: left;
     height: 770px;
