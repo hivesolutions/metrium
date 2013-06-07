@@ -42,7 +42,7 @@ body.fullscreen {
 }
 
 .success {
-    color: #3668c6;
+    color: #32951b;
 }
 
 .warning {
@@ -51,6 +51,12 @@ body.fullscreen {
 
 .error {
     color: #c31f30;
+}
+
+.sound {
+    height: 0px;
+    visibility: hidden;
+    width: 0px;
 }
 
 .dashboard {
