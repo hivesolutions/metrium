@@ -38,6 +38,7 @@ __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
 import time
+import datetime
 
 import quorum
 
@@ -60,3 +61,8 @@ class Base(quorum.Model):
 
     def pre_create(self):
         self.timestamp = time.time()
+
+    def time_s(self):
+        date_time = datetime.datetime.utcfromtimestamp(self.timestamp)
+        time_s = date_time.strftime("%H:%M")
+        return time_s
