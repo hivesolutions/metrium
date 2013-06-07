@@ -100,6 +100,30 @@
         };
 
         var _general = function() {
+            jQuery.ajax({
+                        url : "/state",
+                        success : function(data) {
+                            _onState(data);
+                        }
+                    });
+        };
+
+        var _onState = function(state) {
+            var global = matchedObject.data("global");
+            for (var module in state) {
+                var events = state[module];
+
+                for (var name in events) {
+                    var event = events[name];
+                    for (var index = 0; index < event.length; index++) {
+                        var instance = event[index];
+                        var _event = {
+                            contents : instance
+                        };
+                        global.emit(name, _event);
+                    }
+                }
+            }
         };
 
         var _modules = function() {
