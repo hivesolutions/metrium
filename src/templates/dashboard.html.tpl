@@ -21,24 +21,26 @@
                     <div class="day">16 Maio</div>
                     <div class="time">14:50</div>
                 </div>
-                <div class="news-item">
-                    <div class="title">
-                        <span class="time">16:32</span>
-                        <span class="message">John Doe</span>
-                        <span class="marker red"></span>
+                <div class="news">
+                    <div class="news-item">
+                        <div class="title">
+                            <span class="time">16:32</span>
+                            <span class="message">John Doe</span>
+                            <span class="marker red"></span>
+                        </div>
+                        <div class="message">
+                            Atenção aos prazos de entrega que estão definidos.
+                        </div>
                     </div>
-                    <div class="message">
-                        Atenção aos prazos de entrega que estão definidos.
-                    </div>
-                </div>
-                <div class="news-item">
-                    <div class="title">
-                        <span class="time">14:50</span>
-                        <span class="message">João Magalhães</span>
-                        <span class="marker green"></span>
-                    </div>
-                    <div class="message">
-                        Atenção aos prazos de entrega que estão definidos.
+                    <div class="news-item">
+                        <div class="title">
+                            <span class="time">14:50</span>
+                            <span class="message">João Magalhães</span>
+                            <span class="marker green"></span>
+                        </div>
+                        <div class="message">
+                            Atenção aos prazos de entrega que estão definidos.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -173,7 +175,6 @@
                     </div>
                 </div>
                 <div class="status"></div>
-                <div class="message"></div>
             </div>
         </div>
     </div>
