@@ -102,10 +102,25 @@
         var _general = function() {
             jQuery.ajax({
                         url : "/state",
+                        beforeSend : function() {
+                            _hide();
+                        },
                         success : function(data) {
                             _onState(data);
+                            _show();
+                        },
+                        error : function() {
+                            _show();
                         }
                     });
+        };
+
+        var _hide = function() {
+            matchedObject.css("visibility", "hidden");
+        };
+
+        var _show = function() {
+            matchedObject.css("visibility", "visible");
         };
 
         var _onState = function(state) {
