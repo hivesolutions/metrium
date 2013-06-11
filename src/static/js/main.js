@@ -69,7 +69,7 @@
             matchedObject.bind("message",
                     function(event, type, owner, message) {
                         _showMessage(type, owner, message);
-                        _playSound("/static/sounds/horse.mp3");
+                        _playSound("/static/sounds/" + type + ".mp3");
                     });
 
             connection.bind("connecting", function() {
