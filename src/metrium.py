@@ -63,6 +63,8 @@ app = quorum.load(
 from views import * #@UnusedWildImport
 
 if __name__ == "__main__":
-    bot = bots.OmniBot()
-    bot.start()
+    omni_bot = bots.OmniBot()
+    imap_bot = bots.ImapBot()
+    omni_bot.start()
+    imap_bot.start()
     quorum.run(server = "waitress")

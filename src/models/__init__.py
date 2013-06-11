@@ -37,7 +37,9 @@ __license__ = "GNU General Public License (GPL), Version 3"
 import account
 import base
 import log
+import mail
 
 from account import *
 from base import *
 from log import *
+from mail import *
