@@ -154,7 +154,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="status"></div>
             </div>
         </div>
     </div>
