@@ -37,6 +37,47 @@ body.fullscreen {
     width: 1920px;
 }
 
+body.fullscreen .window {
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    color: #4d4d4d;
+}
+
+body.fullscreen #overlay {
+    background-color: #1d1d1d;
+    opacity: 0.95;
+}
+
+.error-panel {
+    display: none;
+    height: 300px;
+    position: absolute;
+    text-align: center;
+    width: 420px;
+    z-index: 30;
+}
+
+.error-panel > .logo {
+    background: transparent url(../images/logo.png) no-repeat center center;
+    height: 120px;
+}
+
+.error-panel > h1 {
+    color: #ffffff;
+    font-size: 52px;
+    font-weight: 300;
+    line-height: 58px;
+    margin: 8px 0px 8px 0px;
+}
+
+.error-panel > h2 {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 34px;
+    font-weight: 300;
+    margin: 8px 0px 8px 0px;
+}
+
 .info {
     color: #3668c6;
 }
