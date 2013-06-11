@@ -63,6 +63,12 @@
             var global = pusher.subscribe("global");
             matchedObject.data("global", global);
 
+            matchedObject.bind("message",
+                    function(event, type, owner, message) {
+                        _showMessage(type, owner, message);
+                        _playSound("/static/sounds/horse.mp3");
+                    });
+
             connection.bind("connecting", function() {
                     });
 
@@ -133,6 +139,49 @@
         var _modules = function() {
             matchedObject.udate();
             matchedObject.ulog();
+        };
+
+        var _showMessage = function(type, author, contents) {
+            var isVisible = matchedObject.css("visibility") == "visible";
+            if (!isVisible) {
+                return;
+            }
+
+            var _message = jQuery("> .message", matchedObject);
+            var _author = jQuery("> .author", _message);
+            var _contents = jQuery("> .contents", _message);
+            _author.html(author);
+            _contents.html(contents);
+
+            _message.removeClass("info");
+            _message.removeClass("success");
+            _message.removeClass("warning");
+            _message.removeClass("error");
+
+            _message.addClass(type);
+            _message.fadeIn(200);
+
+            var previous = matchedObject.data("current");
+            if (previous) {
+                clearTimeout(previous);
+            }
+
+            var current = setTimeout(function() {
+                        _message.fadeOut(150);
+                    }, 7500);
+            matchedObject.data("current", current);
+        };
+
+        var _playSound = function(path) {
+            var isVisible = matchedObject.css("visibility") == "visible";
+            if (!isVisible) {
+                return;
+            }
+
+            var sound = jQuery(".sound", matchedObject);
+            var soundElement = sound[0];
+            sound.attr("src", path);
+            soundElement.play();
         };
 
         var _showError = function() {
@@ -258,7 +307,8 @@
 
             var newsElement = news[0];
 
-            _playSound("/static/sounds/horse.mp3");
+            matchedObject.trigger("message", [contents.type, contents.owner,
+                            contents.message]);
 
             while (true) {
                 var overflows = newsElement.scrollHeight > newsElement.clientHeight;
@@ -269,18 +319,6 @@
                 var lastChild = jQuery("> :last-child", news);
                 lastChild.remove();
             }
-        };
-
-        var _playSound = function(path) {
-            var isVisible = matchedObject.css("visibility") == "visible";
-            if (!isVisible) {
-                return;
-            }
-
-            var sound = jQuery(".sound", matchedObject);
-            var soundElement = sound[0];
-            sound.attr("src", path);
-            soundElement.play();
         };
 
         var _toString = function(value, length) {

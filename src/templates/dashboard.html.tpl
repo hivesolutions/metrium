@@ -15,6 +15,11 @@
                 <li>gravações</li>
             </ul>
         </div>
+        <div class="message success">
+            <span class="author"></span>
+            <span class="separator"> - </span>
+            <span class="contents"></span>
+        </div>
         <div class="frame">
             <div class="context">
                 <div class="date">

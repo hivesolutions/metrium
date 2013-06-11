@@ -103,6 +103,40 @@ body.fullscreen #overlay {
     text-align: left;
 }
 
+.dashboard > .message {
+    color: #ffffff;
+    display: none;
+    font-size: 30px;
+    font-weight: 300;
+    height: 51px;
+    margin-top: 11px;
+    padding-top: 6px;
+    position: absolute;
+    text-align: center;
+    width: 1920px;
+}
+
+.dashboard > .message.info {
+    background-color: #3283a4;
+}
+
+.dashboard > .message.success {
+    background-color: #6ca22c;
+}
+
+.dashboard > .message.warning {
+    background-color: #b89232;
+}
+
+.dashboard > .message.error {
+    background-color: #a6403d;
+}
+
+.dashboard > .message > .author,
+.dashboard > .message > .separator {
+    font-weight: normal;
+}
+
 .dashboard .header {
     background: transparent url(../images/transparent-black.png) repeat;
     border-bottom: 1px solid rgba(255, 255, 255, 0.4);
