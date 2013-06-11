@@ -56,5 +56,7 @@ def mail_config():
     return flask.render_template(
         "config/mail.html.tpl",
         link = "config",
-        sub_link = "mail"
+        sub_link = "mail",
+        config = {},
+        errors = {}
     )
