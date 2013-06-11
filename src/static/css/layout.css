@@ -119,19 +119,19 @@ body.fullscreen #overlay {
 }
 
 .dashboard > .message.info {
-    background-color: #3283a4;
+    background-color: rgba(50, 131, 164, 0.8);
 }
 
 .dashboard > .message.success {
-    background-color: #6ca22c;
+    background-color: rgba(108, 162, 44, 0.8);
 }
 
 .dashboard > .message.warning {
-    background-color: #b89232;
+    background-color: rgba(184, 146, 50, 0.8);
 }
 
 .dashboard > .message.error {
-    background-color: #a6403d;
+    background-color: rgba(166, 64, 61, 0.8);
 }
 
 .dashboard > .message > .author,
