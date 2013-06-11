@@ -456,12 +456,6 @@
     };
 })(jQuery);
 
-var tobias = function() {
-    jQuery(".overlay").fadeIn(200);
-    jQuery(".error-panel").fadeIn(200);
-    jQuery(".error-panel").uxcenter(0, 0, false, false, false, true);
-};
-
 jQuery(document).ready(function() {
             var pusher = jQuery(".pusher");
             pusher.upusher();
@@ -474,5 +468,4 @@ jQuery(document).ready(function() {
 
             var lineChart = jQuery(".line-chart");
             lineChart.ulinechart();
-
         });
