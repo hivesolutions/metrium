@@ -108,12 +108,14 @@ body.fullscreen #overlay {
     display: none;
     font-size: 30px;
     font-weight: 300;
-    height: 51px;
-    margin-top: 11px;
-    padding-top: 6px;
+    height: 49px;
+    line-height: 49px;
+    margin-top: 9px;
+    overflow: hidden;
+    padding: 6px 32px 6px 32px;
     position: absolute;
     text-align: center;
-    width: 1920px;
+    width: 1856px;
 }
 
 .dashboard > .message.info {

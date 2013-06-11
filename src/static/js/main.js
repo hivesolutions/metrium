@@ -42,6 +42,9 @@
 
 (function(jQuery) {
     jQuery.fn.udashboard = function(options) {
+        var MESSAGE_TIMEOUT = 15000;
+        var LINE_HEIGHT = 49;
+
         var matchedObject = this;
         var pusher = jQuery(".pusher", matchedObject);
         var status = jQuery(".status", matchedObject);
@@ -147,9 +150,23 @@
                 return;
             }
 
+            var timeoutP = matchedObject.data("timeout");
+            var intervalP = matchedObject.data("interval");
+            if (timeoutP) {
+                clearTimeout(timeoutP);
+            }
+            if (intervalP) {
+                clearInterval(intervalP);
+            }
+
             var _message = jQuery("> .message", matchedObject);
             var _author = jQuery("> .author", _message);
             var _contents = jQuery("> .contents", _message);
+
+            _message.show();
+            _message.scrollTop(0);
+            _message.hide();
+
             _author.html(author);
             _contents.html(contents);
 
@@ -161,15 +178,23 @@
             _message.addClass(type);
             _message.fadeIn(200);
 
-            var previous = matchedObject.data("current");
-            if (previous) {
-                clearTimeout(previous);
-            }
+            var paddingVertical = _message.outerHeight() - _message.height();
+            var lines = ((_message[0].scrollHeight - paddingVertical) / LINE_HEIGHT);
+            var timing = MESSAGE_TIMEOUT / lines;
 
-            var current = setTimeout(function() {
+            var interval = setInterval(function() {
+                        _message.animate({
+                                    scrollTop : "+=" + LINE_HEIGHT + "px"
+                                }, 300);
+                    }, timing);
+
+            var timeout = setTimeout(function() {
+                        clearInterval(interval);
                         _message.fadeOut(150);
-                    }, 7500);
-            matchedObject.data("current", current);
+                    }, MESSAGE_TIMEOUT);
+
+            matchedObject.data("timeout", timeout);
+            matchedObject.data("interval", interval);
         };
 
         var _playSound = function(path) {
