@@ -65,6 +65,7 @@
             var connection = pusher.connection;
             var global = pusher.subscribe("global");
             matchedObject.data("global", global);
+            var video = jQuery(".video", matchedObject);
 
             matchedObject.bind("message",
                     function(event, type, owner, message) {
@@ -89,6 +90,19 @@
 
             connection.bind("error", function(error) {
                         _showError();
+                    });
+
+            global.bind("video.open", function(data) {
+                        var url = data.url;
+                        _showVideo(url);
+                    });
+
+            video.bind("ended", function() {
+                        var element = jQuery(this);
+                        var overlay = jQuery(".overlay");
+
+                        overlay.fadeOut(250);
+                        element.fadeOut(250);
                     });
         };
 
@@ -142,6 +156,23 @@
         var _modules = function() {
             matchedObject.udate();
             matchedObject.ulog();
+        };
+
+        var _showVideo = function(link) {
+            var isVisible = matchedObject.css("visibility") == "visible";
+            if (!isVisible) {
+                return;
+            }
+
+            var overlay = jQuery(".overlay");
+            var video = jQuery(".video", matchedObject);
+
+            video.html(link);
+            video.uxvideo();
+
+            overlay.fadeIn(350);
+            video.fadeIn(350);
+            video.uxcenter(0, 0, false, false, false, true);
         };
 
         var _showMessage = function(type, author, contents) {

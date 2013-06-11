@@ -124,3 +124,17 @@ def dashboard():
     return flask.render_template(
         "dashboard.html.tpl"
     )
+
+@app.route("/video", methods = ("GET",))
+@quorum.ensure("video")
+def video():
+    url = quorum.get_field("url")
+
+    pusher = quorum.get_pusher()
+    pusher["global"].trigger("video.open", {
+        "url" : url
+    })
+
+    return flask.redirect(
+        flask.url_for("index")
+    )

@@ -103,6 +103,11 @@ body.fullscreen #overlay {
     text-align: left;
 }
 
+.dashboard >.video {
+    position: absolute;
+    z-index: 30;
+}
+
 .dashboard > .message {
     color: #ffffff;
     display: none;
