@@ -103,7 +103,9 @@ body.fullscreen #overlay {
     text-align: left;
 }
 
-.dashboard >.video {
+.dashboard > .video {
+    background-color: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.4);
     position: absolute;
     z-index: 30;
 }
