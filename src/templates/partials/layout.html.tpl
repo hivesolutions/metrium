@@ -29,6 +29,12 @@
                 {% else %}
                     <a href="{{ url_for('list_logs') }}">log</a>
                 {% endif %}
+                //
+                {% if link == "config" %}
+                    <a href="{{ url_for('base_config') }}" class="active">config</a>
+                {% else %}
+                    <a href="{{ url_for('base_config') }}">config</a>
+                {% endif %}
             </div>
         {% endblock %}
     </div>

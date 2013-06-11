@@ -19,6 +19,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Hive Metrium System. If not, see <http://www.gnu.org/licenses/>.
 
+__author__ = "João Magalhães joamag@hive.pt>"
+""" The author(s) of the module """
+
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -34,12 +37,24 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import account
-import base
-import config
-import log
+from metrium import app
+from metrium import flask
+from metrium import quorum
 
-from account import *
-from base import *
-from config import *
-from log import *
+@app.route("/config", methods = ("GET",))
+@quorum.ensure("config.base")
+def base_config():
+    return flask.render_template(
+        "config/base.html.tpl",
+        link = "config",
+        sub_link = "base"
+    )
+
+@app.route("/config/mail", methods = ("GET",))
+@quorum.ensure("config.mail")
+def mail_config():
+    return flask.render_template(
+        "config/mail.html.tpl",
+        link = "config",
+        sub_link = "mail"
+    )

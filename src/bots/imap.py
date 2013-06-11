@@ -62,7 +62,6 @@ class ImapBot(base.Bot):
         imap = self.get_imap()
 
         try:
-            print imap.list()
             self.update_folder(imap, folder = "inbox")
             self.update_folder(imap, folder = "Pessoal")
         finally:
