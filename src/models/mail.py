@@ -43,6 +43,14 @@ import base
 
 class Mail(base.Base):
 
+    message_id = dict(
+        index = True
+    )
+
+    folder = dict(
+        index = True
+    )
+
     date = dict(
         type = float,
         index = True
@@ -55,6 +63,12 @@ class Mail(base.Base):
     @classmethod
     def validate_new(cls):
         return super(Mail, cls).validate_new() + [
+            quorum.not_null("message_id"),
+            quorum.not_empty("message_id"),
+
+            quorum.not_null("folder"),
+            quorum.not_empty("folder"),
+
             quorum.not_null("date"),
 
             quorum.not_null("subject"),

@@ -47,7 +47,7 @@ import models
 
 import base
 
-SLEEP_TIME = 60.0
+SLEEP_TIME = 120.0
 """ The default sleep time to be used by the bots
 in case no sleep time is defined in the constructor,
 this bot uses a large value as its tick operation is
@@ -59,31 +59,64 @@ class ImapBot(base.Bot):
         base.Bot.__init__(self, sleep_time, *args, **kwargs)
 
     def tick(self):
+        imap = self.get_imap()
+
+        try:
+            print imap.list()
+            self.update_folder(imap, folder = "inbox")
+            self.update_folder(imap, folder = "Pessoal")
+        finally:
+            imap.logout()
+
+    def get_imap(self):
         imap = imaplib.IMAP4_SSL("imap.gmail.com")
         imap.login("joamag@gmail.com", "ek42Xuyw")
-        imap.select("inbox")
-        _result, data = imap.search(None, "ALL")
+        return imap
 
-        ids = data[0]
-        id_list = ids.split()
-        id_list.reverse()
+    def update_folder(self, imap, folder = "inbox", limit = 30):
+        mails = models.Mail.find(folder = folder)
+        for mail in mails: mail.delete()
 
-        for email_id in id_list:
-            _result, data = imap.fetch(email_id, "(rfc822.size body[header.fields (date)])")
-            date = data[0][1].lstrip("Date: ").strip() + " "
-            date, charset = email.header.decode_header(date)[0]
-            date = charset and date.decode(charset) or date
-            date_tuple = email.utils.parsedate(date)
-            timestamp = time.mktime(date_tuple)
+        result, data = imap.select(folder, readonly = True)
+        if not result == "OK": return
 
-            _result, data = imap.fetch(email_id, "(rfc822.size body[header.fields (subject)])")
-            subject = data[0][1].lstrip("Subject: ").strip() + " "
-            subject, charset = email.header.decode_header(subject)[0]
-            subject = charset and subject.decode(charset) or subject
+        try:
+            result, data = imap.search(None, "ALL")
+            if not result == "OK": return
 
-            mail = models.Mail()
-            mail.date = timestamp
-            mail.subject = subject
-            mail.save()
+            ids = data[0]
+            id_list = ids.split()
+            id_list.reverse()
 
-        imap.logout()
+            for mail_id in id_list[:30]:
+                self.save_mail(imap, mail_id, folder)
+        finally:
+            imap.close()
+
+    def save_mail(self, imap, mail_id, folder):
+        _result, data = imap.fetch(mail_id, "(rfc822.size body[header.fields (message-id)])")
+        message_id = data[0][1].lstrip("Message-ID: ").strip() + " "
+        message_id, charset = email.header.decode_header(message_id)[0]
+        message_id = charset and message_id.decode(charset) or message_id
+
+        mail = models.Mail.find(message_id = message_id)
+        if mail: return
+
+        _result, data = imap.fetch(mail_id, "(rfc822.size body[header.fields (date)])")
+        date = data[0][1].lstrip("Date: ").strip() + " "
+        date, charset = email.header.decode_header(date)[0]
+        date = charset and date.decode(charset) or date
+        date_tuple = email.utils.parsedate(date)
+        timestamp = time.mktime(date_tuple)
+
+        _result, data = imap.fetch(mail_id, "(rfc822.size body[header.fields (subject)])")
+        subject = data[0][1].lstrip("Subject: ").strip() + " "
+        subject, charset = email.header.decode_header(subject)[0]
+        subject = charset and subject.decode(charset) or subject
+
+        mail = models.Mail()
+        mail.message_id = message_id
+        mail.folder = folder
+        mail.date = timestamp
+        mail.subject = subject
+        mail.save()
