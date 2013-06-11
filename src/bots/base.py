@@ -37,5 +37,25 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-class Bot(object):
-    pass
+import time
+import threading
+
+SLEEP_TIME = 1.0
+""" The default sleep time to be used by the bots
+in case no sleep time is defined in the constructor """
+
+class Bot(threading.Thread):
+
+    def __init__(self, sleep_time = SLEEP_TIME, *args, **kwargs):
+        threading.Thread.__init__(self, *args, **kwargs)
+        self.sleep_time = sleep_time
+
+    def run(self):
+        self.active = True
+
+        while self.active:
+            self.tick()
+            time.sleep(self.sleep_time)
+
+    def stop(self):
+        self.active = False

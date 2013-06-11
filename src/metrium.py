@@ -39,6 +39,7 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import flask #@UnusedImport
 
+import bots
 import models
 import quorum
 
@@ -62,4 +63,6 @@ app = quorum.load(
 from views import * #@UnusedWildImport
 
 if __name__ == "__main__":
+    bot = bots.OmniBot()
+    bot.start()
     quorum.run(server = "waitress")

@@ -36,6 +36,8 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import base
 import omni
+import twitter
 
 from base import *
 from omni import *
+from twitter import *
