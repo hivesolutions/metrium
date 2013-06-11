@@ -64,33 +64,22 @@
             matchedObject.data("global", global);
 
             connection.bind("connecting", function() {
-                        status.html("connecting");
-                        status.removeClass("valid");
-                        status.addClass("invalid");
                     });
 
             connection.bind("connected", function() {
-                        status.html("connected");
-                        status.removeClass("invalid");
-                        status.addClass("valid");
+                        _hideError();
                     });
 
             connection.bind("unavailable", function() {
-                        status.html("unavailable");
-                        status.removeClass("valid");
-                        status.addClass("invalid");
+                        _showError();
                     });
 
             connection.bind("disconnected", function() {
-                        status.html("disconnected");
-                        status.removeClass("valid");
-                        status.addClass("invalid");
+                        _showError();
                     });
 
             connection.bind("error", function(error) {
-                        status.html("error");
-                        status.removeClass("valid");
-                        status.addClass("invalid");
+                        _showError();
                     });
         };
 
@@ -144,6 +133,21 @@
         var _modules = function() {
             matchedObject.udate();
             matchedObject.ulog();
+        };
+
+        var _showError = function() {
+            var overlay = jQuery(".overlay");
+            var errorPanel = jQuery(".error-panel");
+            overlay.fadeIn(350);
+            errorPanel.fadeIn(350);
+            errorPanel.uxcenter(0, 0, false, false, false, true);
+        };
+
+        var _hideError = function() {
+            var overlay = jQuery(".overlay");
+            var errorPanel = jQuery(".error-panel");
+            overlay.fadeOut(200);
+            errorPanel.fadeOut(200);
         };
 
         initialize();
@@ -452,6 +456,12 @@
     };
 })(jQuery);
 
+var tobias = function() {
+    jQuery(".overlay").fadeIn(200);
+    jQuery(".error-panel").fadeIn(200);
+    jQuery(".error-panel").uxcenter(0, 0, false, false, false, true);
+};
+
 jQuery(document).ready(function() {
             var pusher = jQuery(".pusher");
             pusher.upusher();
@@ -464,4 +474,5 @@ jQuery(document).ready(function() {
 
             var lineChart = jQuery(".line-chart");
             lineChart.ulinechart();
+
         });
