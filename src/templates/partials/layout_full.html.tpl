@@ -7,6 +7,7 @@
     {% endblock %}
 </head>
 <body class="ux fullscreen wait-load">
+    {% include "partials/error.html.tpl" %}
     <div id="overlay" class="overlay"></div>
     <div id="content">{% block content %}{% endblock %}</div>
 </body>
