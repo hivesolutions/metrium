@@ -7,8 +7,8 @@
             <label>Message</label>
         </div>
         <div class="input">
-            <input class="text-field focus" name="message" placeholder="eg: hello everyone" value="{{ log.message }}"
-                   data-error="{{ errors.message }}" />
+            <textarea class="text-area focus" name="message" placeholder="eg: hello everyone"
+                   data-error="{{ errors.message }}">{{ log.message }}</textarea>
         </div>
         <div class="label">
             <label>Type</label>
