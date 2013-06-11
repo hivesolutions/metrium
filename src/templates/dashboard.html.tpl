@@ -4,6 +4,8 @@
 {% block content %}
     <div class="dashboard">
         <audio class="sound"></audio>
+        <div class="video" data-width="1280" data-height="780" data-hd="1"
+             data-chromeless="1" data-auto_play="1"></div>
         <div class="pusher" data-key="73ce330c0a4efe4266a2"></div>
         <div class="header">
             <div class="logo"></div>
