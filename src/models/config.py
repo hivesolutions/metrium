@@ -19,6 +19,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Hive Metrium System. If not, see <http://www.gnu.org/licenses/>.
 
+__author__ = "João Magalhães joamag@hive.pt>"
+""" The author(s) of the module """
+
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -34,14 +37,24 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import account
-import base
-import config
-import log
-import mail
+import quorum
 
-from account import *
-from base import *
-from config import *
-from log import *
-from mail import *
+import base
+
+class Config(base.Base):
+
+    name = dict(
+        index = True
+    )
+
+    config = dict(
+        type = dict
+    )
+
+    @classmethod
+    def validate_new(cls):
+        return super(Config, cls).validate_new() + [
+            quorum.not_null("name"),
+            quorum.not_empty("name"),
+            quorum.string_gt("name", 4)
+        ]
