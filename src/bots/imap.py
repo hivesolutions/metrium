@@ -93,28 +93,32 @@ class ImapBot(base.Bot):
             imap.close()
 
     def save_mail(self, imap, mail_id, folder):
-        _result, data = imap.fetch(mail_id, "(rfc822.size body[header.fields (message-id)])")
-        message_id = data[0][1].lstrip("Message-ID: ").strip() + " "
+        _result, data = imap.fetch(mail_id, "(rfc822)")
+        contents = data[0][1]
+        message = email.message_from_string(contents)
+
+        message_id = message.get("message-id", None)
         message_id, charset = email.header.decode_header(message_id)[0]
         message_id = charset and message_id.decode(charset) or message_id
 
-        mail = models.Mail.find(message_id = message_id)
-        if mail: return
+        _from = message.get("from", None)
+        _from, charset = email.header.decode_header(_from)[0]
+        _from = charset and _from.decode(charset) or _from
+        _name, sender = email.utils.parseaddr(_from)
 
-        _result, data = imap.fetch(mail_id, "(rfc822.size body[header.fields (date)])")
-        date = data[0][1].lstrip("Date: ").strip() + " "
+        date = message.get("date", None)
         date, charset = email.header.decode_header(date)[0]
         date = charset and date.decode(charset) or date
         date_tuple = email.utils.parsedate(date)
         timestamp = time.mktime(date_tuple)
 
-        _result, data = imap.fetch(mail_id, "(rfc822.size body[header.fields (subject)])")
-        subject = data[0][1].lstrip("Subject: ").strip() + " "
+        subject = message.get("subject", None)
         subject, charset = email.header.decode_header(subject)[0]
         subject = charset and subject.decode(charset) or subject
 
         mail = models.Mail()
         mail.message_id = message_id
+        mail.sender = sender
         mail.folder = folder
         mail.date = timestamp
         mail.subject = subject
