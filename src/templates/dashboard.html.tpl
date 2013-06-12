@@ -11,7 +11,7 @@
             <div class="logo"></div>
             <ul class="sections">
                 <li class="active">home</li>
-                <li>arranjos</li>
+                <li>pendentes</li>
                 <li>encomendas</li>
                 <li>vendas</li>
                 <li>gravações</li>
@@ -32,6 +32,67 @@
                 <div class="news"></div>
             </div>
             <div class="board">
+                <div class="box full">
+                    <ul class="pending">
+                        <!--<li class="urgent">
+                            <span class="pre">29/05/2013</span>
+                            <span class="description">There's nothing to be done</span>
+                            <span class="author">joamag@gmail.com</span>
+                        </li>-->
+                        <li class="urgent">
+                            <span class="pre">29/05</span>
+                            <span class="description">Limpeza e polimento de aliança</span>
+                            <span class="author">John Doe</span>
+                        </li>
+                        <li class="urgent">
+                            <span class="pre">03/05</span>
+                            <span class="description">Limpeza e polimento de aliança</span>
+                            <span class="author">John Doe</span>
+                        </li>
+                        <li class="urgent">
+                            <span class="pre">HS345</span>
+                            <span class="description">Limpeza e polimento de aliança</span>
+                            <span class="author">John Doe</span>
+                        </li>
+                        <li class="urgent">
+                            <span class="pre">HS345</span>
+                            <span class="description">Limpeza e polimento de aliança</span>
+                            <span class="author">John Doe</span>
+                        </li>
+                        <li class="urgent">
+                            <span class="pre">HS345</span>
+                            <span class="description">Limpeza e polimento de aliança</span>
+                            <span class="author">John Doe</span>
+                        </li>
+                        <li class="urgent">
+                            <span class="pre">HS345</span>
+                            <span class="description">Limpeza e polimento de aliança</span>
+                            <span class="author">John Doe</span>
+                        </li>
+                        <li class="urgent">
+                            <span class="pre">HS345</span>
+                            <span class="description">Limpeza e polimento de aliança</span>
+                            <span class="author">John Doe</span>
+                        </li>
+                        <li class="urgent">
+                            <span class="pre">HS345</span>
+                            <span class="description">Limpeza e polimento de aliança</span>
+                            <span class="author">John Doe</span>
+                        </li>
+                        <li class="urgent">
+                            <span class="pre">HS345</span>
+                            <span class="description">Limpeza e polimento de aliança</span>
+                            <span class="author">John Doe</span>
+                        </li>
+                        <li class="urgent">
+                            <span class="pre">HS345</span>
+                            <span class="description">Limpeza e polimento de aliança</span>
+                            <span class="author">John Doe</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--<div class="board">
                 <div class="line">
                     <div class="box">
                         <div class="box-contents overview">
@@ -161,7 +222,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 {% endblock %}
