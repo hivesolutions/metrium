@@ -45,6 +45,8 @@ SLEEP_TIME = 1.0
 in case no sleep time is defined in the constructor """
 
 class Bot(threading.Thread):
+    
+    GLOBAL_LOCK = threading.RLock()
 
     def __init__(self, sleep_time = SLEEP_TIME, *args, **kwargs):
         threading.Thread.__init__(self, *args, **kwargs)
@@ -54,7 +56,9 @@ class Bot(threading.Thread):
         self.active = True
 
         while self.active:
-            self.tick()
+            Bot.GLOBAL_LOCK.acquire()
+            try: self.tick()
+            finally: Bot.GLOBAL_LOCK.release()
             time.sleep(self.sleep_time)
 
     def stop(self):
