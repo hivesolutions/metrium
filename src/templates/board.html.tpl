@@ -10,7 +10,7 @@
         <div class="header">
             <div class="logo"></div>
             <ul class="sections">
-                <li class="active">home</li>
+                <li class="active">dashboard</li>
                 <li>pendentes</li>
                 <li>encomendas</li>
                 <li>vendas</li>
@@ -32,7 +32,7 @@
                 <div class="news"></div>
             </div>
             <div class="boards">
-                {% include "boards/main.html.tpl" %}
+                {% include "boards/dashboard.html.tpl" %}
                 {% include "boards/pending.html.tpl" %}
             </div>
         </div>
