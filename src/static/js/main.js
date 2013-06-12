@@ -43,6 +43,7 @@
 (function(jQuery) {
     jQuery.fn.udashboard = function(options) {
         var MESSAGE_TIMEOUT = 15000;
+        var BOARD_TIMEOUT = 30000;
         var LINE_HEIGHT = 49;
 
         var matchedObject = this;
@@ -57,8 +58,14 @@
         var initialize = function() {
             _start();
             _layout();
+            _boards();
             _general();
             _modules();
+
+        };
+
+        var _tobias = function() {
+
         };
 
         var _start = function() {
@@ -127,6 +134,22 @@
                     });
         };
 
+        var _boards = function() {
+            var boards = jQuery(".boards > .board", matchedObject);
+            boards.hide();
+
+            var first = jQuery(boards[0]);
+            first.show();
+
+            matchedObject.data("index", 0);
+
+            setInterval(function() {
+                        var index = matchedObject.data("index");
+                        index = index + 1 >= boards.length ? 0 : index + 1;
+                        _showBoard(index);
+                    }, BOARD_TIMEOUT);
+        };
+
         var _hide = function() {
             matchedObject.css("visibility", "hidden");
         };
@@ -156,6 +179,24 @@
         var _modules = function() {
             matchedObject.udate();
             matchedObject.ulog();
+        };
+
+        var _showBoard = function(index) {
+            var boards = jQuery(".boards > .board:visible", matchedObject);
+            var sections = jQuery("ul.sections > li.active", matchedObject);
+
+            boards.fadeOut(350, function() {
+                        var board = jQuery(".boards > .board:nth-child("
+                                        + (index + 1) + ")", matchedObject);
+                        var section = jQuery("ul.sections > li:nth-child("
+                                        + (index + 1) + ")", matchedObject);
+
+                        sections.removeClass("active");
+                        section.addClass("active");
+                        board.fadeIn(350);
+
+                        matchedObject.data("index", index);
+                    });
         };
 
         var _showVideo = function(link) {
