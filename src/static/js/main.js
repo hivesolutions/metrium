@@ -451,13 +451,12 @@
 
         var _update = function(pendings) {
             var _pending = jQuery(".pending", matchedObject);
-            
+
             var items = _pending.children();
             items.remove()
 
             for (var index = 0; index < pendings.length; index++) {
                 var item = pendings[index];
-
                 _pending.append("<li class=\"" + item.severity + "\">"
                         + "<span class=\"pre\">" + item.pre + "</span>"
                         + "<span class=\"description\">" + item.description

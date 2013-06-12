@@ -67,8 +67,8 @@ class PendingBot(base.Bot):
 
         for folder in folders:
             remaining = count - len(pendings)
-            mails = models.Mail.find(limit = remaining, sort = [("date", 1)], folder = folder)
-            
+            mails = models.Mail.find(limit = remaining, sort = [("date", -1)], folder = folder)
+
             for mail in mails:
                 date = datetime.datetime.utcfromtimestamp(mail.date)
                 date_s = date.strftime("%d/%m")
