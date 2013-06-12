@@ -47,7 +47,7 @@ import models
 
 import base
 
-SLEEP_TIME = 120.0
+SLEEP_TIME = 30.0
 """ The default sleep time to be used by the bots
 in case no sleep time is defined in the constructor,
 this bot uses a large value as its tick operation is
@@ -72,7 +72,7 @@ class ImapBot(base.Bot):
         imap.login("joamag@gmail.com", "ek42Xuyw")
         return imap
 
-    def update_folder(self, imap, folder = "inbox", limit = 30):
+    def update_folder(self, imap, folder = "inbox", limit = -1):
         result, data = imap.select(folder, readonly = True)
         if not result == "OK": return
 
