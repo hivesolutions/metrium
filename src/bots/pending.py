@@ -67,17 +67,18 @@ class PendingBot(base.Bot):
 
         for folder in folders:
             remaining = count - len(pendings)
-            mails = models.Mail.find(limit = remaining, sort = [("date", -1)], folder = folder)
+            conversations = models.Conversation.find(limit = remaining, sort = [("date", -1)], folder = folder)
 
-            for mail in mails:
-                date = datetime.datetime.utcfromtimestamp(mail.date)
+            for conversation in conversations:
+                date = datetime.datetime.utcfromtimestamp(conversation.date)
                 date_s = date.strftime("%d/%m")
+                sender = conversation.sender_extra or conversation.sender
 
                 pendings.append(dict(
                     severity = "urgent",   #@todo: this is hardcoded
                     pre = date_s,
-                    description = mail.subject,
-                    author = "unknown" #@todo: this is hardcoded
+                    description = conversation.subject,
+                    author = sender
                 ))
 
         return pendings

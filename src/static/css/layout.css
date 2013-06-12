@@ -574,11 +574,13 @@ body.fullscreen #overlay {
     display: inline-block;
     font-size: 26px;
     font-weight: 300;
-    width: 1136px;
+    width: 970px;
 }
 
 .dashboard .box ul.pending li .author {
     display: inline-block;
-    font-size: 20px;
-    font-weight: 300;
+    font-size: 18px;
+    margin: 0px 12px 0px 12px;
+    text-align: right;
+    width: 288px;
 }

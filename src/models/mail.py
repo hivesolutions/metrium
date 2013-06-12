@@ -106,12 +106,12 @@ class Mail(base.Base):
 
     def get_subject_f(self):
         subject = self.subject.strip()
-        subject = subject.strip("re: ")
-        subject = subject.strip("Re: ")
-        subject = subject.strip("RE: ")
-        subject = subject.strip("fw: ")
-        subject = subject.strip("Fw: ")
-        subject = subject.strip("FW: ")
+        subject = self._string_without(subject, "re: ")
+        subject = self._string_without(subject, "Re: ")
+        subject = self._string_without(subject, "RE: ")
+        subject = self._string_without(subject, "fw: ")
+        subject = self._string_without(subject, "Fw: ")
+        subject = self._string_without(subject, "FW: ")
         subject = subject.strip()
         return subject
 
@@ -129,3 +129,8 @@ class Mail(base.Base):
         base.Base.pre_delete(self)
 
         conversation.Conversation.try_delete(self)
+
+    def _string_without(self, value, token):
+        if not value.startswith(token): return value
+        token_l = len(token)
+        return value[token_l:]

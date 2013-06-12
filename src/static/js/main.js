@@ -142,6 +142,9 @@
             first.show();
 
             matchedObject.data("index", 0);
+            if (boards.length <= 1) {
+                return;
+            }
 
             setInterval(function() {
                         var index = matchedObject.data("index");
