@@ -40,6 +40,7 @@ __license__ = "GNU General Public License (GPL), Version 3"
 import quorum
 
 import base
+import conversation
 
 class Mail(base.Base):
 
@@ -117,7 +118,6 @@ class Mail(base.Base):
     def post_create(self):
         base.Base.post_create(self)
 
-        import conversation
         conversation.Conversation.try_create(self)
 
         pusher = quorum.get_pusher()
@@ -128,5 +128,4 @@ class Mail(base.Base):
     def pre_delete(self):
         base.Base.pre_delete(self)
 
-        import conversation
         conversation.Conversation.try_delete(self)
