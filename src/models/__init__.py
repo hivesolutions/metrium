@@ -37,11 +37,13 @@ __license__ = "GNU General Public License (GPL), Version 3"
 import account
 import base
 import config
+import conversation
 import log
 import mail
 
 from account import *
 from base import *
 from config import *
+from conversation import *
 from log import *
 from mail import *
