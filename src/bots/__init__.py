@@ -37,9 +37,11 @@ __license__ = "GNU General Public License (GPL), Version 3"
 import base
 import imap
 import omni
+import pending
 import twitter
 
 from base import *
 from imap import *
 from omni import *
+from pending import *
 from twitter import *
