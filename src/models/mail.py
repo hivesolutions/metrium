@@ -47,6 +47,14 @@ class Mail(base.Base):
         index = True
     )
 
+    sender_name = dict(
+        index = True
+    )
+
+    sender_email = dict(
+        index = True
+    )
+
     folder = dict(
         index = True
     )

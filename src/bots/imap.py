@@ -104,7 +104,7 @@ class ImapBot(base.Bot):
         _from = message.get("from", None)
         _from, charset = email.header.decode_header(_from)[0]
         _from = charset and _from.decode(charset) or _from
-        _name, sender = email.utils.parseaddr(_from)
+        sender_name, sender_email = email.utils.parseaddr(_from)
 
         date = message.get("date", None)
         date, charset = email.header.decode_header(date)[0]
@@ -118,7 +118,8 @@ class ImapBot(base.Bot):
 
         mail = models.Mail()
         mail.message_id = message_id
-        mail.sender = sender
+        mail.sender_name = sender_name
+        mail.sender_email = sender_email
         mail.folder = folder
         mail.date = timestamp
         mail.subject = subject
