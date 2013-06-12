@@ -445,21 +445,25 @@
         var _start = function() {
             var global = matchedObject.data("global");
             global.bind("pending.update", function(data) {
-                        _update(data.contents);
+                        _update(data.pendings);
                     });
         };
 
-        var _update = function(contents) {
-        };
+        var _update = function(pendings) {
+            var _pending = jQuery(".pending", matchedObject);
+            
+            var items = _pending.children();
+            items.remove()
 
-        var _toString = function(value, length) {
-            length = length || 2;
-            value = String(value);
+            for (var index = 0; index < pendings.length; index++) {
+                var item = pendings[index];
 
-            for (var index = value.length; index < length; index++) {
-                value = "0" + value;
+                _pending.append("<li class=\"" + item.severity + "\">"
+                        + "<span class=\"pre\">" + item.pre + "</span>"
+                        + "<span class=\"description\">" + item.description
+                        + "</span>" + "<span class=\"author\">" + item.author
+                        + "</span>" + "</li>");
             }
-            return value;
         };
 
         initialize();
