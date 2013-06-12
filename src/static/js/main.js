@@ -179,6 +179,7 @@
         var _modules = function() {
             matchedObject.udate();
             matchedObject.ulog();
+            matchedObject.upending();
         };
 
         var _showBoard = function(index) {
@@ -416,6 +417,39 @@
                 var lastChild = jQuery("> :last-child", news);
                 lastChild.remove();
             }
+        };
+
+        var _toString = function(value, length) {
+            length = length || 2;
+            value = String(value);
+
+            for (var index = value.length; index < length; index++) {
+                value = "0" + value;
+            }
+            return value;
+        };
+
+        initialize();
+        return matchedObject;
+    };
+})(jQuery);
+
+(function(jQuery) {
+    jQuery.fn.upending = function(options) {
+        var matchedObject = this;
+
+        var initialize = function() {
+            _start();
+        };
+
+        var _start = function() {
+            var global = matchedObject.data("global");
+            global.bind("pending.update", function(data) {
+                        _update(data.contents);
+                    });
+        };
+
+        var _update = function(contents) {
         };
 
         var _toString = function(value, length) {
