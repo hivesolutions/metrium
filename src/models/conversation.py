@@ -40,16 +40,9 @@ __license__ = "GNU General Public License (GPL), Version 3"
 import quorum
 
 import base
+import mail
 
-class Mail(base.Base):
-
-    uid = dict(
-        index = True
-    )
-
-    message_id = dict(
-        index = True
-    )
+class Conversation(base.Base):
 
     sender = dict(
         index = True
@@ -72,15 +65,16 @@ class Mail(base.Base):
         index = True
     )
 
+    mails = dict(
+        type = quorum.references(
+            mail.Mail,
+            name = "message_id"
+        )
+    )
+
     @classmethod
     def validate_new(cls):
-        return super(Mail, cls).validate_new() + [
-            quorum.not_null("uid"),
-            quorum.not_empty("uid"),
-
-            quorum.not_null("message_id"),
-            quorum.not_empty("message_id"),
-
+        return super(Conversation, cls).validate_new() + [
             quorum.not_null("sender"),
             quorum.not_empty("sender"),
 
@@ -93,9 +87,48 @@ class Mail(base.Base):
             quorum.not_empty("subject")
         ]
 
+    @classmethod
+    def from_mail(cls, mail):
+        instance = cls()
+        instance.sender = mail.sender
+        instance.sender_extra = mail.sender_extra
+        instance.folder = mail.folder
+        instance.date = mail.date
+        instance.subject = mail.get_subject_f()
+        instance.mails = []
+        return instance
+
+    @classmethod
+    def try_create(cls, mail):
+        subject = mail.get_subject_f()
+        conversation = cls.get(
+            subject = subject,
+            raise_e = False
+        )
+
+        if not conversation:
+            conversation = cls.from_mail(mail)
+
+        conversation.mails.append(mail.message_id)
+        conversation.save()
+
+    @classmethod
+    def try_delete(cls, mail):
+        subject = mail.get_subject_f()
+        conversation = cls.get(
+            subject = subject,
+            raise_e = False
+        )
+
+        if not conversation: return
+
+        conversation.mails.remove(mail.message_id)
+        is_empty = conversation.mails.is_empty()
+        if is_empty: conversation.delete()
+        else: conversation.save()
+
     def get_event(self):
         return {
-            "message_id" : self.message_id,
             "sender" : self.sender,
             "sender_extra" : self.sender_extra,
             "folder" : self.folder,
@@ -103,30 +136,10 @@ class Mail(base.Base):
             "subject" : self.subject
         }
 
-    def get_subject_f(self):
-        subject = self.subject.strip()
-        subject = subject.strip("re: ")
-        subject = subject.strip("Re: ")
-        subject = subject.strip("RE: ")
-        subject = subject.strip("fw: ")
-        subject = subject.strip("Fw: ")
-        subject = subject.strip("FW: ")
-        subject = subject.strip()
-        return subject
-
     def post_create(self):
         base.Base.post_create(self)
 
-        import conversation
-        conversation.Conversation.try_create(self)
-
         pusher = quorum.get_pusher()
-        pusher["global"].trigger("mail.new", {
+        pusher["global"].trigger("conversation.new", {
             "contents" : self.get_event()
         })
-
-    def pre_delete(self):
-        base.Base.pre_delete(self)
-
-        import conversation
-        conversation.Conversation.try_delete(self)
