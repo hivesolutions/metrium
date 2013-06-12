@@ -65,6 +65,8 @@ from views import * #@UnusedWildImport
 if __name__ == "__main__":
     omni_bot = bots.OmniBot()
     imap_bot = bots.ImapBot()
+    pending_bot = bots.PendingBot()
     omni_bot.start()
     imap_bot.start()
+    pending_bot.start()
     quorum.run(server = "waitress")
