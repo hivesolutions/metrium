@@ -73,27 +73,37 @@ class ImapBot(base.Bot):
         return imap
 
     def update_folder(self, imap, folder = "inbox", limit = 30):
-        mails = models.Mail.find(folder = folder)
-        for mail in mails: mail.delete()
-
         result, data = imap.select(folder, readonly = True)
         if not result == "OK": return
 
         try:
-            result, data = imap.search(None, "ALL")
+            result, data = imap.uid("SEARCH", "1:*")
             if not result == "OK": return
 
             ids = data[0]
             id_list = ids.split()
             id_list.reverse()
 
-            for mail_id in id_list[:30]:
-                self.save_mail(imap, mail_id, folder)
+            if not limit == -1: id_list = id_list[:limit]
+            self.sync_folder(imap, id_list, folder)
         finally:
             imap.close()
 
+    def sync_folder(self, imap, id_list, folder):
+        mails = models.Mail.find(folder = folder)
+
+        for mail in mails:
+            if mail.uid in id_list: continue
+            mail.delete()
+
+        for mail_id in id_list:
+            self.save_mail(imap, mail_id, folder)
+
     def save_mail(self, imap, mail_id, folder):
-        _result, data = imap.fetch(mail_id, "(rfc822)")
+        mail = models.Mail.find(uid = mail_id)
+        if mail: return
+
+        _result, data = imap.uid("FETCH", mail_id, "(rfc822)")
         contents = data[0][1]
         message = email.message_from_string(contents)
 
@@ -104,7 +114,7 @@ class ImapBot(base.Bot):
         _from = message.get("from", None)
         _from, charset = email.header.decode_header(_from)[0]
         _from = charset and _from.decode(charset) or _from
-        sender_name, sender_email = email.utils.parseaddr(_from)
+        sender_extra, sender = email.utils.parseaddr(_from)
 
         date = message.get("date", None)
         date, charset = email.header.decode_header(date)[0]
@@ -116,10 +126,14 @@ class ImapBot(base.Bot):
         subject, charset = email.header.decode_header(subject)[0]
         subject = charset and subject.decode(charset) or subject
 
+        mail = models.Mail.find(message_id = message_id)
+        if mail: return
+
         mail = models.Mail()
+        mail.uid = mail_id
         mail.message_id = message_id
-        mail.sender_name = sender_name
-        mail.sender_email = sender_email
+        mail.sender = sender
+        mail.sender_extra = sender_extra
         mail.folder = folder
         mail.date = timestamp
         mail.subject = subject

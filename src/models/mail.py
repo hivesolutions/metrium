@@ -43,15 +43,19 @@ import base
 
 class Mail(base.Base):
 
+    uid = dict(
+        index = True
+    )
+
     message_id = dict(
         index = True
     )
 
-    sender_name = dict(
+    sender = dict(
         index = True
     )
 
-    sender_email = dict(
+    sender_extra = dict(
         index = True
     )
 
@@ -71,8 +75,14 @@ class Mail(base.Base):
     @classmethod
     def validate_new(cls):
         return super(Mail, cls).validate_new() + [
+            quorum.not_null("uid"),
+            quorum.not_empty("uid"),
+
             quorum.not_null("message_id"),
             quorum.not_empty("message_id"),
+
+            quorum.not_null("sender"),
+            quorum.not_empty("sender"),
 
             quorum.not_null("folder"),
             quorum.not_empty("folder"),
@@ -82,3 +92,21 @@ class Mail(base.Base):
             quorum.not_null("subject"),
             quorum.not_empty("subject")
         ]
+
+    def get_event(self):
+        return {
+            "message_id" : self.message_id,
+            "sender" : self.sender,
+            "sender_extra" : self.sender_extra,
+            "folder" : self.folder,
+            "date" : self.date,
+            "subject" : self.subject
+        }
+
+    def post_create(self):
+        base.Base.post_create(self)
+
+        pusher = quorum.get_pusher()
+        pusher["global"].trigger("mail.new", {
+            "contents" : self.get_event()
+        })
