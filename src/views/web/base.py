@@ -118,11 +118,11 @@ def state():
     )
     return state
 
-@app.route("/dashboard", methods = ("GET",))
-@quorum.ensure("dashboard")
-def dashboard():
+@app.route("/board", methods = ("GET",))
+@quorum.ensure("board")
+def board():
     return flask.render_template(
-        "dashboard.html.tpl"
+        "board.html.tpl"
     )
 
 @app.route("/video", methods = ("GET",))
