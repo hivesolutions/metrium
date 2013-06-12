@@ -41,7 +41,7 @@ import base
 
 from metrium import quorum
 
-SLEEP_TIME = 30.0
+SLEEP_TIME = 60.0
 """ The default sleep time to be used by the bots
 in case no sleep time is defined in the constructor,
 this bot uses a large value as its tick operation is
