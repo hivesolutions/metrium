@@ -19,6 +19,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Hive Metrium System. If not, see <http://www.gnu.org/licenses/>.
 
+__author__ = "João Magalhães joamag@hive.pt>"
+""" The author(s) of the module """
+
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -34,14 +37,34 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import account
-import base
-import config
-import debug
-import log
+import models
 
-from account import *
-from base import *
-from config import *
-from debug import *
-from log import *
+from metrium import app
+from metrium import flask
+from metrium import quorum
+
+@app.route("/debug", methods = ("GET",))
+@quorum.ensure("debug.list")
+def list_debug():
+    return flask.render_template(
+        "debug/list.html.tpl",
+        link = "debug"
+    )
+
+@app.route("/debug.json", methods = ("GET",), json = True)
+@quorum.ensure("debug.list", json = True)
+def list_debug_json():
+    object = quorum.get_object(alias = True, find = True)
+    accounts = models.Debug.find(map = True, sort = [("timestamp", -1)], **object)
+    return accounts
+
+@app.route("/debug/<int:id>", methods = ("GET",))
+@quorum.ensure("debug.show")
+def show_debug(id):
+    debug = models.Debug.get(id = id)
+    return flask.render_template(
+        "debug/show.html.tpl",
+        link = "debug",
+        sub_link = "show",
+        debug = debug
+    )

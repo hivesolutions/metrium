@@ -108,20 +108,6 @@ def logout():
         flask.url_for("signin")
     )
 
-@app.route("/debug", methods = ("GET",))
-@quorum.ensure("debug")
-def debug():
-    return flask.render_template(
-        "debug.html.tpl",
-        link = "debug"
-    )
-
-@app.route("/debug.json", methods = ("GET",), json = True)
-@quorum.ensure("debug", json = True)
-def debug_json():
-    object = quorum.get_object(alias = True, find = True)
-    accounts = models.Debug.find(map = True, sort = [("timestamp", -1)], **object)
-    return accounts
 
 @app.route("/state", methods = ("GET",), json = True)
 @quorum.ensure("state", json = True)
