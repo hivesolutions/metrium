@@ -63,8 +63,8 @@ class ImapBot(base.Bot):
 
         try:
             folders = self.get_folders()
-            for folder in folders:
-                self.update_folder(imap, folder = folder)
+            self.outdate_folders(folders)
+            for folder in folders: self.update_folder(imap, folder = folder)
         finally:
             imap.logout()
 
@@ -78,6 +78,10 @@ class ImapBot(base.Bot):
         imap = imaplib.IMAP4_SSL(config.host)
         imap.login(config.username, config.password)
         return imap
+
+    def outdate_folders(self, folders):
+        outdated = models.Mail.find(folder = {"$nin" : folders})
+        for mail in outdated: mail.delete()
 
     def update_folder(self, imap, folder = "inbox", limit = -1):
         result, data = imap.select(folder, readonly = True)
