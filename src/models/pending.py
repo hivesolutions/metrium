@@ -114,7 +114,8 @@ class Pending(base.Base):
         pendings = cls.find(sort = [("priority", 1)], limit = count)
         for pending in pendings:
             buffer = pending.get_buffer()
-            signature.update(buffer)
+            buffer_s = buffer.encode("utf-8")
+            signature.update(buffer_s)
         return signature.hexdigest()
 
     def get_event(self):
