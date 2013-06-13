@@ -553,6 +553,7 @@ body.fullscreen #overlay {
     line-height: 76px;
     margin: 0px 0px 0px 0px;
     padding: 0px 0px 0px 0px;
+    overflow: hidden;
 }
 
 .dashboard .box ul.pending li:last-child {
@@ -569,6 +570,7 @@ body.fullscreen #overlay {
     font-weight: bold;
     margin: 0px 12px 0px 12px;
     width: 80px;
+    height: 52px;
 }
 
 .dashboard .box ul.pending li .description {
@@ -576,6 +578,7 @@ body.fullscreen #overlay {
     font-size: 26px;
     font-weight: 300;
     width: 936px;
+    height: 52px;
 }
 
 .dashboard .box ul.pending li .author {
@@ -584,6 +587,7 @@ body.fullscreen #overlay {
     margin: 0px 12px 0px 12px;
     text-align: right;
     width: 288px;
+    height: 52px;
 }
 
 .dashboard .box ul.pending li .marker {
