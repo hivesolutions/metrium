@@ -59,14 +59,18 @@ app = quorum.load(
     models = models
 )
 
-from bots import * #@UnusedWildImport
 from views import * #@UnusedWildImport
 
-if __name__ == "__main__":
-    omni_bot = OmniBot()
-    imap_bot = ImapBot()
-    pending_bot = PendingBot()
+@quorum.onrun
+def onrun():
+    import bots
+
+    omni_bot = bots.OmniBot()
+    imap_bot = bots.ImapBot()
+    pending_bot = bots.PendingBot()
     omni_bot.start()
     imap_bot.start()
     pending_bot.start()
+
+if __name__ == "__main__":
     quorum.run(server = "waitress")

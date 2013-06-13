@@ -5,7 +5,8 @@
     <ul class="filter" data-no_input="1">
         <div class="data-source" data-url="{{ url_for('debug_json') }}" data-type="json" data-timeout="0"></div>
         <li class="template table-row">
-            <div class="status text-left" data-width="580">%[message]</div>
+            <div class="date text-left" data-width="160">%[timestamp_l]</div>
+            <div class="status text-left" data-width="420">%[message]</div>
             <div class="table-clear"></div>
         </li>
         <div class="filter-no-results quote">

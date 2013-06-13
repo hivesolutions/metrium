@@ -37,6 +37,8 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
+import datetime
+
 import base
 
 class Debug(base.Base):
@@ -48,3 +50,11 @@ class Debug(base.Base):
         debug = cls()
         debug.message = message
         debug.save()
+
+    @classmethod
+    def _build(cls, model, map):
+        base.Base._build(model, map)
+        timestamp = model.get("timestamp", None)
+        timestamp_date = timestamp and datetime.datetime.utcfromtimestamp(timestamp)
+        timestamp_string = timestamp_date and timestamp_date.strftime("%d/%m/%Y %H:%M:%S")
+        model["timestamp_l"] = timestamp_string

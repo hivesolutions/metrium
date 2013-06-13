@@ -107,7 +107,7 @@ def logout():
     return flask.redirect(
         flask.url_for("signin")
     )
-    
+
 @app.route("/debug", methods = ("GET",))
 @quorum.ensure("debug")
 def debug():
