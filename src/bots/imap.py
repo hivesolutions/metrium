@@ -62,10 +62,16 @@ class ImapBot(base.Bot):
         imap = self.get_imap()
 
         try:
-            self.update_folder(imap, folder = "inbox")
-            self.update_folder(imap, folder = "Pessoal")
+            folders = self.get_folders()
+            for folder in folders:
+                self.update_folder(imap, folder = folder)
         finally:
             imap.logout()
+
+    def get_folders(self):
+        config = models.PendingConfig.get()
+        folders = config.folders
+        return folders
 
     def get_imap(self):
         config = models.MailConfig.get()
