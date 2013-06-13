@@ -2,7 +2,7 @@
 {% block title %}Config{% endblock %}
 {% block name %}Config :: Mail{% endblock %}
 {% block content %}
-    <form action="" method="post" class="form">
+    <form action="{{ url_for('do_mail_config') }}" method="post" class="form">
         <div class="label">
             <label>IMAP Host</label>
         </div>
