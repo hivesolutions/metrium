@@ -50,27 +50,25 @@ class Bot(threading.Thread):
 
     GLOBAL_LOCK = threading.RLock()
 
-    def __init__(self, sleep_time = SLEEP_TIME, *args, **kwargs):
+    def __init__(self, sleep_time = SLEEP_TIME, name = None, *args, **kwargs):
         threading.Thread.__init__(self, *args, **kwargs)
         self.sleep_time = sleep_time
+        self.name = name or self.__class__.__name__
 
     def run(self):
-        name = self.get_name()
         self.active = True
 
         while self.active:
-            models.Debug.log("Tick operation started in %s...", name)
             Bot.GLOBAL_LOCK.acquire()
+            models.Debug.log("Tick operation started in %s..." % self.name)
             try: self.tick()
+            except BaseException, exception:
+                models.Debug.log("Failed tick due to %s in %s" % (str(exception), self.name))
+                raise
             finally: Bot.GLOBAL_LOCK.release()
-            models.Debug.log("Tick operation ended in %s...", name)
+            models.Debug.log("Tick operation ended in %s" % self.name)
+            models.Debug.log("Sleeping for %d seconds in %s..." % (self.sleep_time, self.name))
             time.sleep(self.sleep_time)
-            models.Debug.log("Sleeping for %d seconds in %s...", (self.sleep_time, name))
 
     def stop(self):
         self.active = False
-
-    def get_name(self):
-        has_name = hasattr(self, "name")
-        name = self.name if has_name else self.__class__.__name__
-        return name
