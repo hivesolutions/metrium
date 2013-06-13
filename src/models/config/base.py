@@ -37,8 +37,6 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import quorum
-
 import models.base
 
 class Config(models.base.Base):
@@ -50,11 +48,3 @@ class Config(models.base.Base):
     config = dict(
         type = dict
     )
-
-    @classmethod
-    def validate_new(cls):
-        return super(Config, cls).validate_new() + [
-            quorum.not_null("name"),
-            quorum.not_empty("name"),
-            quorum.string_gt("name", 4)
-        ]
