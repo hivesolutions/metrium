@@ -62,7 +62,7 @@ class Bot(threading.Thread):
         while self.active:
             Bot.GLOBAL_LOCK.acquire()
             models.Debug.log(
-                "Tick operation started in %s..." % self.name
+                "Tick operation started in %s" % self.name
             )
             try: self.tick()
             except BaseException, exception:
