@@ -117,7 +117,7 @@ class ImapBot(base.Bot):
             self.save_mail(imap, mail_id, folder)
 
     def save_mail(self, imap, mail_id, folder):
-        mail = models.Mail.find(uid = mail_id)
+        mail = models.Mail.find(uid = mail_id, folder = folder)
         if mail: return
 
         _result, data = imap.uid("FETCH", mail_id, "(rfc822)")
