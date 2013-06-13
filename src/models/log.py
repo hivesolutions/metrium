@@ -81,7 +81,9 @@ class Log(base.Base):
             event = log.get_event()
             events.append(event)
 
-        return {"log.message" : events}
+        return {
+            "log.message" : events
+        }
 
     def get_event(self):
         return {
