@@ -41,6 +41,11 @@ import datetime
 
 import base
 
+MAXIMUM_MESSAGES = 1000
+""" The maximum allowed number of messages, messages after
+this offset value will be deleted when the garbage collection
+trigger value is enabled """
+
 class Debug(base.Base):
 
     message = dict()
@@ -50,6 +55,11 @@ class Debug(base.Base):
         debug = cls()
         debug.message = message
         debug.save()
+
+        if not debug.id % MAXIMUM_MESSAGES == 0: return
+
+        outdated = cls.find(skip = MAXIMUM_MESSAGES, sort = [("timestamp", -1)])
+        for item in outdated: item.delete()
 
     @classmethod
     def _build(cls, model, map):
