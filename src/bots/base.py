@@ -60,14 +60,25 @@ class Bot(threading.Thread):
 
         while self.active:
             Bot.GLOBAL_LOCK.acquire()
-            models.Debug.log("Tick operation started in %s..." % self.name)
+            models.Debug.log(
+                "Tick operation started in %s..." % self.name
+            )
             try: self.tick()
             except BaseException, exception:
-                models.Debug.log("Failed tick due to %s in %s" % (str(exception), self.name))
-                raise
+                models.Debug.log(
+                    "Failed tick due to %s (%s) in %s" %\
+                    (
+                         str(exception),
+                         exception.__class__.__name__,
+                         self.name
+                    )
+                )
             finally: Bot.GLOBAL_LOCK.release()
             models.Debug.log("Tick operation ended in %s" % self.name)
-            models.Debug.log("Sleeping for %d seconds in %s..." % (self.sleep_time, self.name))
+            models.Debug.log(
+                "Sleeping for %d seconds in %s" %\
+                (self.sleep_time, self.name)
+            )
             time.sleep(self.sleep_time)
 
     def stop(self):
