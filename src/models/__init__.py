@@ -40,6 +40,7 @@ import config
 import conversation
 import log
 import mail
+import pending
 
 from account import *
 from base import *
@@ -47,3 +48,4 @@ from config import *
 from conversation import *
 from log import *
 from mail import *
+from pending import *
