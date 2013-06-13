@@ -6,7 +6,7 @@
         <div class="data-source" data-url="{{ url_for('list_debug_json') }}" data-type="json" data-timeout="0"></div>
         <li class="template table-row">
             <div class="date text-left" data-width="160">%[timestamp_l]</div>
-            <div class="status text-left" data-width="420">
+            <div class="message text-left" data-width="420">
             	<a href="{{ url_for('show_debug', id = 0) }}%[id]">%[message]</a>
             </div>
             <div class="table-clear"></div>
