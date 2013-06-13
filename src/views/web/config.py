@@ -67,13 +67,45 @@ def mail_config():
 @app.route("/config/mail", methods = ("POST",))
 @quorum.ensure("config.mail")
 def do_mail_config():
-    account = models.MailConfig.singleton()
-    try: account.save()
+    config = models.MailConfig.singleton()
+    try: config.save()
     except quorum.ValidationError, error:
         return flask.render_template(
             "config/mail.html.tpl",
             link = "config",
             sub_link = "mail",
+            config = error.model,
+            errors = error.errors
+        )
+
+    # redirects the user to the overall configuration
+    # selection, as this is the default behavior
+    return flask.redirect(
+        flask.url_for("base_config")
+    )
+
+@app.route("/config/pending", methods = ("GET",))
+@quorum.ensure("config.pending")
+def pending_config():
+    config = models.PendingConfig.get(raise_e = False) or {}
+    return flask.render_template(
+        "config/pending.html.tpl",
+        link = "config",
+        sub_link = "pending",
+        config = config,
+        errors = {}
+    )
+
+@app.route("/config/pending", methods = ("POST",))
+@quorum.ensure("config.pending")
+def do_pending_config():
+    config = models.PendingConfig.singleton()
+    try: config.save()
+    except quorum.ValidationError, error:
+        return flask.render_template(
+            "config/pending.html.tpl",
+            link = "config",
+            sub_link = "pending",
             config = error.model,
             errors = error.errors
         )
