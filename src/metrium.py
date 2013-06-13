@@ -50,17 +50,6 @@ MONGO_DATABASE = "metrium"
 """ The default database to be used for the connection with
 the mongo database """
 
-app = quorum.load(
-    name = __name__,
-    secret_key = SECRET_KEY,
-    redis_session = True,
-    mongo_database = MONGO_DATABASE,
-    logger = "metrium.debug",
-    models = models
-)
-
-from views import * #@UnusedWildImport
-
 @quorum.onrun
 def onrun():
     import bots
@@ -71,6 +60,17 @@ def onrun():
     omni_bot.start()
     imap_bot.start()
     pending_bot.start()
+
+app = quorum.load(
+    name = __name__,
+    secret_key = SECRET_KEY,
+    redis_session = True,
+    mongo_database = MONGO_DATABASE,
+    logger = "metrium.debug",
+    models = models
+)
+
+from views import * #@UnusedWildImport
 
 if __name__ == "__main__":
     quorum.run(server = "waitress")
