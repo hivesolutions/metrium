@@ -37,6 +37,8 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
+import models
+
 from metrium import app
 from metrium import flask
 from metrium import quorum
@@ -53,15 +55,31 @@ def base_config():
 @app.route("/config/mail", methods = ("GET",))
 @quorum.ensure("config.mail")
 def mail_config():
+    config = models.MailConfig.get(raise_e = False) or {}
     return flask.render_template(
         "config/mail.html.tpl",
         link = "config",
         sub_link = "mail",
-        config = {},
+        config = config,
         errors = {}
     )
 
 @app.route("/config/mail", methods = ("POST",))
 @quorum.ensure("config.mail")
 def do_mail_config():
-    pass
+    account = models.MailConfig.singleton()
+    try: account.save()
+    except quorum.ValidationError, error:
+        return flask.render_template(
+            "config/mail.html.tpl",
+            link = "config",
+            sub_link = "mail",
+            config = error.model,
+            errors = error.errors
+        )
+
+    # redirects the user to the overall configuration
+    # selection, as this is the default behavior
+    return flask.redirect(
+        flask.url_for("base_config")
+    )
