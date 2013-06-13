@@ -464,7 +464,7 @@
                         + "<span class=\"pre\">" + item.pre + "</span>"
                         + "<span class=\"description\">" + item.description
                         + "</span>" + "<span class=\"author\">" + item.author
-                        + "</span>" + "</li>");
+                        + "</span>" + "<span class=\"marker\"></div>" + "</li>");
             }
         };
 

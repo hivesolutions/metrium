@@ -75,7 +75,7 @@ class PendingBot(base.Bot):
                 sender = conversation.sender_extra or conversation.sender
 
                 pendings.append(dict(
-                    severity = "urgent",   #@todo: this is hardcoded
+                    severity = folder == "Pessoal" and "critical" or "major",   #@todo: this is hardcoded
                     pre = date_s,
                     description = conversation.subject,
                     author = sender

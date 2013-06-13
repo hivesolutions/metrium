@@ -574,7 +574,7 @@ body.fullscreen #overlay {
     display: inline-block;
     font-size: 26px;
     font-weight: 300;
-    width: 970px;
+    width: 936px;
 }
 
 .dashboard .box ul.pending li .author {
@@ -583,4 +583,29 @@ body.fullscreen #overlay {
     margin: 0px 12px 0px 12px;
     text-align: right;
     width: 288px;
+}
+
+.dashboard .box ul.pending li .marker {
+    background: transparent url(../images/markers_large.png) no-repeat 0px 0px;
+    display: inline-block;
+    height: 24px;
+    margin-right: 12px;
+    vertical-align: middle;
+    width: 24px;
+}
+
+.dashboard .box ul.pending li.critical .marker {
+    background-position: 0px 0px;
+}
+
+.dashboard .box ul.pending li.trivial .marker {
+    background-position: 0px -24px;
+}
+
+.dashboard .box ul.pending li.minor .marker {
+    background-position: 0px -48px;
+}
+
+.dashboard .box ul.pending li.major .marker {
+    background-position: 0px -72px;
 }
