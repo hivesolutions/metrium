@@ -64,13 +64,13 @@ class PendingBot(base.Bot):
         })
 
     def get_pendings(self, count = 10):
-        folders = ["Pessoal", "inbox"] #@todo this is hardcoded, need configuration
+        folders = [("Pessoal", "critical"), ("inbox", "major")] #@todo this is hardcoded, need configuration
 
         signature = models.Pending.get_signature(count = 10)
 
         priority = 1
 
-        for folder in folders:
+        for folder, severity in folders:
             conversations = models.Conversation.find(sort = [("date", -1)], folder = folder)
 
             for conversation in conversations:
@@ -81,22 +81,25 @@ class PendingBot(base.Bot):
                 pending = models.Pending.get(conversation = conversation.id, raise_e = False)
 
                 if pending:
+                    pending_changed = not pending.priority == priority or\
+                        not pending.severity == severity
                     pending.priority = priority
+                    pending.severity = severity
+                    pending_changed and pending.save()
                 else:
                     pending = models.Pending()
                     pending.priority = priority
-                    pending.severity = folder == "Pessoal" and "critical" or "major" #@todo: this is hardcoded
+                    pending.severity = severity
                     pending.pre = date_s
                     pending.description = conversation.subject
                     pending.author = sender
                     pending.conversation = conversation.id
-
-                pending.save()
+                    pending.save()
 
                 priority += 1
 
-        _signature = models.Pending.get_signature(count = 10)
-        has_changed = not signature == _signature
+        new_signature = models.Pending.get_signature(count = 10)
+        has_changed = not signature == new_signature
 
         pendings = has_changed and models.Pending.get_events(count = count) or []
         return pendings
