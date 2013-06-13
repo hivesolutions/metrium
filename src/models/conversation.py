@@ -146,7 +146,7 @@ class Conversation(base.Base):
 
     def pre_delete(self):
         base.Base.pre_delete(self)
-        
+
         import pending
         pendings = pending.Pending.find(conversation = self.id)
         for pending in pendings: pending.delete()

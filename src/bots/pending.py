@@ -56,6 +56,8 @@ class PendingBot(base.Bot):
 
     def tick(self):
         pendings = self.get_pendings()
+        if not pendings: return
+
         pusher = quorum.get_pusher()
         pusher["global"].trigger("pending.update", {
             "pendings" : pendings
@@ -63,22 +65,38 @@ class PendingBot(base.Bot):
 
     def get_pendings(self, count = 10):
         folders = ["Pessoal", "inbox"] #@todo this is hardcoded, need configuration
-        pendings = []
+
+        signature = models.Pending.get_signature(count = 10)
+
+        priority = 1
 
         for folder in folders:
-            remaining = count - len(pendings)
-            conversations = models.Conversation.find(limit = remaining, sort = [("date", -1)], folder = folder)
+            conversations = models.Conversation.find(sort = [("date", -1)], folder = folder)
 
             for conversation in conversations:
                 date = datetime.datetime.utcfromtimestamp(conversation.date)
                 date_s = date.strftime("%d/%m")
                 sender = conversation.sender_extra or conversation.sender
 
-                pendings.append(dict(
-                    severity = folder == "Pessoal" and "critical" or "major",   #@todo: this is hardcoded
-                    pre = date_s,
-                    description = conversation.subject,
-                    author = sender
-                ))
+                pending = models.Pending.get(conversation = conversation.id, raise_e = False)
 
+                if pending:
+                    pending.priority = priority
+                else:
+                    pending = models.Pending()
+                    pending.priority = priority
+                    pending.severity = folder == "Pessoal" and "critical" or "major" #@todo: this is hardcoded
+                    pending.pre = date_s
+                    pending.description = conversation.subject
+                    pending.author = sender
+                    pending.conversation = conversation.id
+
+                pending.save()
+
+                priority += 1
+
+        _signature = models.Pending.get_signature(count = 10)
+        has_changed = not signature == _signature
+
+        pendings = has_changed and models.Pending.get_events(count = count) or []
         return pendings
