@@ -27,7 +27,7 @@
                         </div>
                     </td>
                 </tr>
-                {% for folder, severity in config.items_f() %}
+                {% for folder, severity in config and config.items_f() or [] %}
                     <tr>
                         <td>
                             <input type="text" name="folders" class="text-field" value="{{ folder }}" />
