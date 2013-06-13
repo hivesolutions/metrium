@@ -60,3 +60,8 @@ def mail_config():
         config = {},
         errors = {}
     )
+
+@app.route("/config/mail", methods = ("POST",))
+@quorum.ensure("config.mail")
+def do_mail_config():
+    pass
