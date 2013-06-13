@@ -124,24 +124,20 @@ class ImapBot(base.Bot):
         contents = data[0][1]
         message = email.message_from_string(contents)
 
-        message_id = message.get("message-id", None)
-        message_id, charset = email.header.decode_header(message_id)[0]
-        message_id = charset and message_id.decode(charset) or message_id
+        message_id = message.get("message-id", None).strip()
+        message_id = self.decode_header(message_id)
 
-        _from = message.get("from", None)
-        _from, charset = email.header.decode_header(_from)[0]
-        _from = charset and _from.decode(charset) or _from
+        _from = message.get("from", None).strip()
         sender_extra, sender = email.utils.parseaddr(_from)
+        sender_extra = self.decode_header(sender_extra)
 
-        date = message.get("date", None)
-        date, charset = email.header.decode_header(date)[0]
-        date = charset and date.decode(charset) or date
+        date = message.get("date", None).strip()
+        date = self.decode_header(date)
         date_tuple = email.utils.parsedate(date)
         timestamp = time.mktime(date_tuple)
 
-        subject = message.get("subject", None)
-        subject, charset = email.header.decode_header(subject)[0]
-        subject = charset and subject.decode(charset) or subject
+        subject = message.get("subject", None).strip()
+        subject = self.decode_header(subject)
 
         mail = models.Mail.find(message_id = message_id)
         if mail: return
@@ -155,6 +151,12 @@ class ImapBot(base.Bot):
         mail.date = timestamp
         mail.subject = subject
         mail.save()
+
+    def decode_header(self, value):
+        dec = lambda base, charset: base.decode(charset) if charset else base
+        partials = email.header.decode_header(value)
+        value_d = " ".join([dec(base, charset) for base, charset in partials])
+        return value_d
 
     def _encode_folder(self, name):
         name = name.encode("utf-7")

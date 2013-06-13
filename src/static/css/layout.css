@@ -556,8 +556,8 @@ body.fullscreen #overlay {
     height: 76px;
     line-height: 76px;
     margin: 0px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
     overflow: hidden;
+    padding: 0px 0px 0px 0px;
 }
 
 .dashboard .box ul.pending li:last-child {
@@ -572,26 +572,35 @@ body.fullscreen #overlay {
     display: inline-block;
     font-size: 26px;
     font-weight: bold;
+    height: 76px;
+    line-height: 76px;
     margin: 0px 12px 0px 12px;
+    overflow: hidden;
+    vertical-align: top;
     width: 80px;
-    height: 52px;
 }
 
 .dashboard .box ul.pending li .description {
     display: inline-block;
     font-size: 26px;
     font-weight: 300;
+    height: 76px;
+    line-height: 76px;
+    overflow: hidden;
+    vertical-align: top;
     width: 936px;
-    height: 52px;
 }
 
 .dashboard .box ul.pending li .author {
     display: inline-block;
     font-size: 18px;
+    height: 76px;
+    line-height: 76px;
     margin: 0px 12px 0px 12px;
+    overflow: hidden;
     text-align: right;
+    vertical-align: top;
     width: 288px;
-    height: 52px;
 }
 
 .dashboard .box ul.pending li .marker {
@@ -599,7 +608,6 @@ body.fullscreen #overlay {
     display: inline-block;
     height: 24px;
     margin-right: 12px;
-    vertical-align: middle;
     width: 24px;
 }
 
