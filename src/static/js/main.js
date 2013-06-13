@@ -169,10 +169,7 @@
                 for (var name in events) {
                     var event = events[name];
                     for (var index = event.length - 1; index >= 0; index--) {
-                        var instance = event[index];
-                        var _event = {
-                            contents : instance
-                        };
+                        var _event = event[index];
                         global.emit(name, _event);
                     }
                 }

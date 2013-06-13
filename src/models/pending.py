@@ -98,7 +98,9 @@ class Pending(base.Base):
     def get_state(cls):
         events = cls.get_events()
         return {
-            "pending.update" : events
+            "pending.update" : [{
+                "pendings" : events
+            }]
         }
 
     @classmethod

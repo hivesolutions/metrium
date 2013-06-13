@@ -79,7 +79,9 @@ class Log(base.Base):
 
         for log in logs:
             event = log.get_event()
-            events.append(event)
+            events.append({
+                "contents" : event
+            })
 
         return {
             "log.message" : events
