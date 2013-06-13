@@ -53,6 +53,11 @@ in case no sleep time is defined in the constructor,
 this bot uses a large value as its tick operation is
 a lot expensive and should be used with care """
 
+ATOM_SPECIALS = "(){ %*\""
+""" String sequence containing the complete set of
+characters considered to be special in the imap protocol,
+this characters need to be escaped """
+
 class ImapBot(base.Bot):
 
     def __init__(self, sleep_time = SLEEP_TIME, *args, **kwargs):
@@ -84,7 +89,8 @@ class ImapBot(base.Bot):
         for mail in outdated: mail.delete()
 
     def update_folder(self, imap, folder = "inbox", limit = -1):
-        result, data = imap.select(folder, readonly = True)
+        folder_e = self._encode_folder(folder)
+        result, data = imap.select(folder_e, readonly = True)
         if not result == "OK": return
 
         try:
@@ -149,3 +155,18 @@ class ImapBot(base.Bot):
         mail.date = timestamp
         mail.subject = subject
         mail.save()
+
+    def _encode_folder(self, name):
+        name = name.encode("utf-7")
+        if self._needs_quote(name): return self._quote(name)
+        return name
+
+    def _needs_quote(self, s):
+        if s == "": return 1
+        for c in s:
+            if c < "\x20" or c > "\x7f": return 1
+            if c in ATOM_SPECIALS: return 1
+        return 0
+
+    def _quote(self, s):
+        return "\"%s\"" % (s.replace("\\", "\\\\").replace("\"", "\\\""),)
