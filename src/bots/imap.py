@@ -68,8 +68,9 @@ class ImapBot(base.Bot):
             imap.logout()
 
     def get_imap(self):
-        imap = imaplib.IMAP4_SSL("imap.gmail.com")
-        imap.login("joamag@gmail.com", "ek42Xuyw")
+        config = models.MailConfig.get()
+        imap = imaplib.IMAP4_SSL(config.host)
+        imap.login(config.username, config.password)
         return imap
 
     def update_folder(self, imap, folder = "inbox", limit = -1):
