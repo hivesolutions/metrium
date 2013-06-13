@@ -95,6 +95,13 @@ class Pending(base.Base):
         for pending in pendings: pending.delete()
 
     @classmethod
+    def get_state(cls):
+        events = cls.get_events()
+        return {
+            "pending.update" : events
+        }
+
+    @classmethod
     def get_events(cls, count = 10):
         pendings = cls.find(sort = [("priority", 1)], limit = count)
         return [pending.get_event() for pending in pendings]
