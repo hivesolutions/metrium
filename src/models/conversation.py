@@ -122,6 +122,9 @@ class Conversation(base.Base):
 
         if not conversation: return
 
+        exists = conversation.mails.contains(mail.id)
+        if not exists: return
+
         conversation.mails.remove(mail.id)
         is_empty = conversation.mails.is_empty()
         if is_empty: conversation.delete()

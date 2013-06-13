@@ -5,6 +5,6 @@
     <div class="quote">{{ debug.message }}</div>
     <div class="separator-horizontal"></div>
     {% if debug.lines %}
-    	<pre>{% for line in debug.lines %}{{ line }}{% endfor %}</pre>
+        <pre>{% for line in debug.lines %}{{ line }}{% endfor %}</pre>
     {% endif %}
 {% endblock %}

@@ -7,7 +7,7 @@
         <li class="template table-row">
             <div class="date text-left" data-width="160">%[timestamp_l]</div>
             <div class="message text-left" data-width="420">
-            	<a href="{{ url_for('show_debug', id = 0) }}%[id]">%[message]</a>
+                <a href="{{ url_for('show_debug', id = 0) }}%[id]">%[message]</a>
             </div>
             <div class="table-clear"></div>
         </li>
