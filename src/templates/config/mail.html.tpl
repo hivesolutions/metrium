@@ -14,8 +14,8 @@
             <label>Email</label>
         </div>
         <div class="input">
-            <input class="text-field" name="email" placeholder="eg: johndoe@host.com" value="{{ config.email }}"
-                   data-error="{{ errors.email }}" />
+            <input class="text-field" name="username" placeholder="eg: johndoe@host.com" value="{{ config.username }}"
+                   data-error="{{ errors.username }}" />
         </div>
         <div class="label">
             <label>Password</label>
