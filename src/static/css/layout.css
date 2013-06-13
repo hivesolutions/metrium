@@ -142,9 +142,13 @@ body.fullscreen #overlay {
     background-color: rgba(166, 64, 61, 0.6);
 }
 
-.dashboard > .message > .author,
+.dashboard > .message > .author {
+    font-weight: normal;
+}
+
 .dashboard > .message > .separator {
     font-weight: normal;
+    margin: 0px 12px 0px 12px;
 }
 
 .dashboard .header {
