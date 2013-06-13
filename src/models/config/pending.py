@@ -19,6 +19,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Hive Metrium System. If not, see <http://www.gnu.org/licenses/>.
 
+__author__ = "João Magalhães joamag@hive.pt>"
+""" The author(s) of the module """
+
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -35,9 +38,21 @@ __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
 import base
-import mail
-import pending
 
-from base import *
-from mail import *
-from pending import *
+class PendingConfig(base.Config):
+
+    folders = dict(
+        type = list
+    )
+
+    severities = dict(
+        type = list
+    )
+
+    def pre_create(self):
+        base.Config.pre_create(self)
+
+        self.name = "pending"
+
+    def items_f(self):
+        return zip(self.folders, self.severities)
