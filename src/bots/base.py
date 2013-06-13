@@ -39,6 +39,7 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import time
 import threading
+import traceback
 
 import models
 
@@ -65,13 +66,15 @@ class Bot(threading.Thread):
             )
             try: self.tick()
             except BaseException, exception:
+                lines = traceback.format_exc().splitlines()
                 models.Debug.log(
                     "Failed tick due to %s (%s) in %s" %\
                     (
                          str(exception),
                          exception.__class__.__name__,
                          self.name
-                    )
+                    ),
+                    lines = lines
                 )
             finally: Bot.GLOBAL_LOCK.release()
             models.Debug.log("Tick operation ended in %s" % self.name)

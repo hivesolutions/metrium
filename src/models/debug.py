@@ -50,10 +50,15 @@ class Debug(base.Base):
 
     message = dict()
 
+    lines = dict(
+        type = list
+    )
+
     @classmethod
-    def log(cls, message):
+    def log(cls, message, lines = []):
         debug = cls()
         debug.message = message
+        debug.lines = lines
         debug.save()
 
         if not debug.id % MAXIMUM_MESSAGES == 0: return
