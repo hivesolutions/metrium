@@ -68,7 +68,7 @@ class Conversation(base.Base):
     mails = dict(
         type = quorum.references(
             mail.Mail,
-            name = "message_id"
+            name = "id"
         )
     )
 
@@ -109,7 +109,7 @@ class Conversation(base.Base):
         if not conversation:
             conversation = cls.from_mail(mail)
 
-        conversation.mails.append(mail.message_id)
+        conversation.mails.append(mail.id)
         conversation.save()
 
     @classmethod
@@ -122,7 +122,7 @@ class Conversation(base.Base):
 
         if not conversation: return
 
-        conversation.mails.remove(mail.message_id)
+        conversation.mails.remove(mail.id)
         is_empty = conversation.mails.is_empty()
         if is_empty: conversation.delete()
         else: conversation.save()
@@ -143,3 +143,10 @@ class Conversation(base.Base):
         pusher["global"].trigger("conversation.new", {
             "contents" : self.get_event()
         })
+
+    def pre_delete(self):
+        base.Base.pre_delete(self)
+        
+        import pending
+        pendings = pending.Pending.find(conversation = self.id)
+        for pending in pendings: pending.delete()
