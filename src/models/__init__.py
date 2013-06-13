@@ -38,6 +38,7 @@ import config
 import account
 import base
 import conversation
+import debug
 import log
 import mail
 import pending
@@ -47,6 +48,7 @@ from account import *
 from base import *
 from config import *
 from conversation import *
+from debug import *
 from log import *
 from mail import *
 from pending import *

@@ -37,40 +37,14 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import time
-import threading
+import base
 
-import models
+class Debug(base.Base):
 
-SLEEP_TIME = 1.0
-""" The default sleep time to be used by the bots
-in case no sleep time is defined in the constructor """
+    message = dict()
 
-class Bot(threading.Thread):
-
-    GLOBAL_LOCK = threading.RLock()
-
-    def __init__(self, sleep_time = SLEEP_TIME, *args, **kwargs):
-        threading.Thread.__init__(self, *args, **kwargs)
-        self.sleep_time = sleep_time
-
-    def run(self):
-        name = self.get_name()
-        self.active = True
-
-        while self.active:
-            models.Debug.log("Tick operation started in %s...", name)
-            Bot.GLOBAL_LOCK.acquire()
-            try: self.tick()
-            finally: Bot.GLOBAL_LOCK.release()
-            models.Debug.log("Tick operation ended in %s...", name)
-            time.sleep(self.sleep_time)
-            models.Debug.log("Sleeping for %d seconds in %s...", (self.sleep_time, name))
-
-    def stop(self):
-        self.active = False
-
-    def get_name(self):
-        has_name = hasattr(self, "name")
-        name = self.name if has_name else self.__class__.__name__
-        return name
+    @classmethod
+    def log(cls, message):
+        debug = cls()
+        debug.message = message
+        debug.save()
