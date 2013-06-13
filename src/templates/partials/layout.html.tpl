@@ -37,9 +37,9 @@
                 {% endif %}
                 //
                 {% if link == "debug" %}
-                    <a href="{{ url_for('debug') }}" class="active">debug</a>
+                    <a href="{{ url_for('list_debug') }}" class="active">debug</a>
                 {% else %}
-                    <a href="{{ url_for('debug') }}">debug</a>
+                    <a href="{{ url_for('list_debug') }}">debug</a>
                 {% endif %}
             </div>
         {% endblock %}
