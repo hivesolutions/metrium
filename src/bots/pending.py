@@ -64,8 +64,8 @@ class PendingBot(base.Bot):
         })
 
     def get_pendings(self, count = 10):
-        folders = [("Pessoal", "critical"), ("inbox", "major")] #@todo this is hardcoded, need configuration
-
+        config = models.PendingConfig.get()
+        folders = config.items_f()
         signature = models.Pending.get_signature(count = 10)
 
         priority = 1
