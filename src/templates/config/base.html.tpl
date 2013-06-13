@@ -9,5 +9,11 @@
             </div>
             <div class="description">IMAP client configuration</div>
         </li>
+        <li>
+            <div class="name">
+                <a href="{{ url_for('pending_config') }}">Pending</a>
+            </div>
+            <div class="description">Settings for the list of pending things</div>
+        </li>
     </ul>
 {% endblock %}

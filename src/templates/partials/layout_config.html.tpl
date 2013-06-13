@@ -17,5 +17,13 @@
                 <a href="{{ url_for('mail_config') }}">mail</a>
             {% endif %}
         {% endif %}
+        {% if acl("config.pending") %}
+            //
+            {% if sub_link == "pending" %}
+                <a href="{{ url_for('pending_config') }}" class="active">pending</a>
+            {% else %}
+                <a href="{{ url_for('pending_config') }}">pending</a>
+            {% endif %}
+        {% endif %}
     </div>
 {% endblock %}
