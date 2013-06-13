@@ -6,3 +6,4 @@ Werkzeug==0.8.3
 distribute==0.6.27
 pymongo==2.3
 redis==2.4.13
+pusher==0.7
