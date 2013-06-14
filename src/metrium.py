@@ -53,7 +53,6 @@ the mongo database """
 @quorum.onrun
 def onrun():
     import bots
-
     omni_bot = bots.OmniBot()
     imap_bot = bots.ImapBot()
     pending_bot = bots.PendingBot()
