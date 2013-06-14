@@ -67,6 +67,10 @@ class Pending(base.Base):
         index = True
     )
 
+    folder = dict(
+        index = True
+    )
+
     conversation = dict(
         type = quorum.reference(
             conversation.Conversation,
@@ -86,7 +90,10 @@ class Pending(base.Base):
             quorum.not_empty("pre"),
 
             quorum.not_null("description"),
-            quorum.not_empty("description")
+            quorum.not_empty("description"),
+
+            quorum.not_null("folder"),
+            quorum.not_empty("folder")
         ]
 
     @classmethod

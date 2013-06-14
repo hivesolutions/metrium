@@ -65,7 +65,9 @@ class PendingBot(base.Bot):
 
     def get_pendings(self, count = 10):
         config = models.PendingConfig.get()
-        folders = config.items_f()
+        folders = config.folders
+        items_f = config.items_f()
+
         signature = models.Pending.get_signature(count = 10)
 
         outdated = models.Pending.find(folder = {"$nin" : folders})
@@ -73,7 +75,7 @@ class PendingBot(base.Bot):
 
         priority = 1
 
-        for folder, severity in folders:
+        for folder, severity in items_f:
             conversations = models.Conversation.find(sort = [("date", -1)], folder = folder)
 
             for conversation in conversations:
@@ -96,6 +98,7 @@ class PendingBot(base.Bot):
                     pending.pre = date_s
                     pending.description = conversation.subject
                     pending.author = sender
+                    pending.folder = folder
                     pending.conversation = conversation.id
                     pending.save()
 
