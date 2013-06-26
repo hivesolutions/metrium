@@ -43,10 +43,6 @@ from metrium import app
 from metrium import flask
 from metrium import quorum
 
-@app.context_processor
-def utility_processor():
-    return dict(acl = quorum.check_login)
-
 @app.route("/", methods = ("GET",))
 @app.route("/index", methods = ("GET",))
 @quorum.ensure("index")
