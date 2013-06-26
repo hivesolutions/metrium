@@ -121,8 +121,7 @@ def state():
 @quorum.ensure("board")
 def board():
     return flask.render_template(
-        "board.html.tpl",
-        pusher_key = quorum.conf("PUSHER_KEY", None)
+        "board.html.tpl"
     )
 
 @app.route("/video", methods = ("GET",))

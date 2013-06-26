@@ -64,10 +64,6 @@
 
         };
 
-        var _tobias = function() {
-
-        };
-
         var _start = function() {
             var connection = pusher.connection;
             var global = pusher.subscribe("global");

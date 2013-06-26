@@ -6,7 +6,7 @@
         <audio class="sound"></audio>
         <div class="video" data-width="1280" data-height="780" data-hd="1"
              data-chromeless="1" data-auto_play="1"></div>
-        <div class="pusher" data-key="{{ pusher_key }}"></div>
+        <div class="pusher" data-key="{{ conf('PUSHER_KEY') }}"></div>
         <div class="header">
             <div class="logo"></div>
             <ul class="sections">
