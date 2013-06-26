@@ -50,7 +50,7 @@
         var pusher = jQuery(".pusher", matchedObject);
         var status = jQuery(".status", matchedObject);
 
-        var pusher = pusher.data("pusher");
+        pusher = pusher.data("pusher");
         if (!pusher) {
             return matchedObject;
         }
