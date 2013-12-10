@@ -19,6 +19,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Hive Metrium System. If not, see <http://www.gnu.org/licenses/>.
 
+__author__ = "João Magalhães joamag@hive.pt>"
+""" The author(s) of the module """
+
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -34,16 +37,21 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import account
-import base
-import config
-import debug
-import log
-import omni
+import models
 
-from account import *
-from base import *
-from config import *
-from debug import *
-from log import *
-from omni import *
+from metrium import app
+from metrium import quorum
+
+@app.route("/omni/callback", methods = ("GET", "POST"), json = True)
+def omni_callback():
+    push = quorum.get_field("push") or "default"
+
+    log = models.Log.new()
+    log.message = push
+    log.type = "info"
+    log.owner_extra = "omni"
+    log.save()
+
+    return dict(
+        success = True
+    )
