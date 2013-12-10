@@ -124,19 +124,23 @@ class ImapBot(base.Bot):
         contents = data[0][1]
         message = email.message_from_string(contents)
 
-        message_id = message.get("message-id", None).strip()
+        message_id = message.get("message-id", None)
+        message_id = message_id and message_id.strip()
         message_id = self.decode_header(message_id)
 
-        _from = message.get("from", None).strip()
+        _from = message.get("from", None)
+        _from = _from and _from.strip()
         sender_extra, sender = email.utils.parseaddr(_from)
         sender_extra = self.decode_header(sender_extra)
 
-        date = message.get("date", None).strip()
+        date = message.get("date", None)
+        date = date and date.strip()
         date = self.decode_header(date)
         date_tuple = email.utils.parsedate(date)
         timestamp = time.mktime(date_tuple)
 
-        subject = message.get("subject", None).strip()
+        subject = message.get("subject", None)
+        subject = subject and subject.strip()
         subject = self.decode_header(subject)
 
         mail = models.Mail.find(message_id = message_id)
