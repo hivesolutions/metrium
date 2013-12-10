@@ -115,3 +115,37 @@ def do_pending_config():
     return flask.redirect(
         flask.url_for("base_config")
     )
+
+
+@app.route("/config/omni", methods = ("GET",))
+@quorum.ensure("config.omni")
+def omni_config():
+    config = models.OmniConfig.get(raise_e = False) or {}
+    return flask.render_template(
+        "config/omni.html.tpl",
+        link = "config",
+        sub_link = "omni",
+        config = config,
+        errors = {}
+    )
+
+@app.route("/config/omni", methods = ("POST",))
+@quorum.ensure("config.omni")
+def do_omni_config():
+    config = models.OmniConfig.singleton()
+    try: config.save()
+    except quorum.ValidationError, error:
+        return flask.render_template(
+            "config/omni.html.tpl",
+            link = "config",
+            sub_link = "omni",
+            config = error.model,
+            errors = error.errors
+        )
+
+    # redirects the user to the overall configuration
+    # selection, as this is the default behavior
+    return flask.redirect(
+        flask.url_for("base_config")
+    )
+
