@@ -39,6 +39,8 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import omni
 
+import models
+
 import base
 
 from metrium import quorum
@@ -53,16 +55,27 @@ class OmniBot(base.Bot):
 
     def __init__(self, sleep_time = SLEEP_TIME, *args, **kwargs):
         base.Bot.__init__(self, sleep_time, *args, **kwargs)
-        username = quorum.conf("OMNIX_USERNAME")
-        password = quorum.conf("OMNIX_PASSWORD")
-        self.api = omni.Api(
-            username = username,
-            password = password
-        )
 
     def tick(self):
-        stats = self.api.stats_sales()
-        for object_id in stats:
+        config = models.OmniConfig.get()
+        api = omni.Api(
+            base_url = config.base_url,
+            username = config.username,
+            password = config.password
+        )
+        top_stores = self.top_stores(api)
+
+        pusher = quorum.get_pusher()
+        pusher["global"].trigger("omni.top_stores", {
+            "top_stores" : top_stores
+        })
+        
+    def top_stores(self, api):
+        top = []
+        
+        stats = api.stats_sales()
+        for object_id, values in stats.iteritems():
             object_id = int(object_id)
-            store = self.api.get_store(object_id)
+            store = api.get_store(object_id)
             print store["name"]
+            print values
