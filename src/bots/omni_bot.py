@@ -69,13 +69,22 @@ class OmniBot(base.Bot):
         pusher["global"].trigger("omni.top_stores", {
             "top_stores" : top_stores
         })
-        
+
+    def sales_data(self):
+        pass
+
+    def sales_stores(self, api):
+        pass
+
     def top_stores(self, api):
         top = []
-        
+
         stats = api.stats_sales()
         for object_id, values in stats.iteritems():
             object_id = int(object_id)
             store = api.get_store(object_id)
             print store["name"]
             print values
+
+    def top_sellers(self, api):
+        pass

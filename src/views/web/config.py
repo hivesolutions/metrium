@@ -148,4 +148,3 @@ def do_omni_config():
     return flask.redirect(
         flask.url_for("base_config")
     )
-

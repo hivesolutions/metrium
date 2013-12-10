@@ -8,7 +8,7 @@
         </div>
         <div class="input">
             <input class="text-field focus" name="base_url" placeholder="eg: http://xyz.frontdoorhd.com"
-            	   value="{{ config.base_url }}" data-error="{{ errors.base_url }}" />
+                   value="{{ config.base_url }}" data-error="{{ errors.base_url }}" />
         </div>
         <div class="label">
             <label>Username</label>

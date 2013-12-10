@@ -25,7 +25,7 @@
                 <a href="{{ url_for('pending_config') }}">pending</a>
             {% endif %}
         {% endif %}
-		{% if acl("config.omni") %}
+        {% if acl("config.omni") %}
             //
             {% if sub_link == "omni" %}
                 <a href="{{ url_for('omni_config') }}" class="active">omni</a>
