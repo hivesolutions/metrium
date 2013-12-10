@@ -60,10 +60,12 @@ class Pending(base.Base):
     )
 
     description = dict(
+        type = unicode,
         index = True
     )
 
     author = dict(
+        type = unicode,
         index = True
     )
 
