@@ -79,11 +79,16 @@ class PendingBot(base.Bot):
             conversations = models.Conversation.find(sort = [("date", -1)], folder = folder)
 
             for conversation in conversations:
+                if not conversation.subject: continue
+
                 date = datetime.datetime.utcfromtimestamp(conversation.date)
                 date_s = date.strftime("%d/%m")
                 sender = conversation.sender_extra or conversation.sender
 
-                pending = models.Pending.get(conversation = conversation.id, raise_e = False)
+                pending = models.Pending.get(
+                    conversation = conversation.id,
+                    raise_e = False
+                )
 
                 if pending:
                     pending_changed = not pending.priority == priority or\
