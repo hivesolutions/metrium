@@ -54,6 +54,10 @@ class Log(base.Base):
         index = True
     )
 
+    owner_extra = dict(
+        index = True
+    )
+
     owner = dict(
         type = quorum.reference(
             account.Account,
@@ -91,7 +95,7 @@ class Log(base.Base):
         return {
             "message" : self.message,
             "type" : self.type,
-            "owner" : self.owner.username,
+            "owner" : self.get_owner(),
             "timestamp" : self.timestamp,
             "time_s" : self.time_s()
         }
@@ -99,7 +103,7 @@ class Log(base.Base):
     def pre_create(self):
         base.Base.pre_create(self)
 
-        username = flask.session["username"]
+        username = flask.session.get("username", None)
         self.owner = username
 
     def post_create(self):
@@ -109,3 +113,8 @@ class Log(base.Base):
         pusher["global"].trigger("log.message", {
             "contents" : self.get_event()
         })
+
+    def get_owner(self):
+        if self.owner_extra: return self.owner_extra
+        if self.owner: return self.owner.username
+        return None
