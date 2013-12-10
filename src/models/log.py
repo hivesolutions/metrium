@@ -47,6 +47,7 @@ import account
 class Log(base.Base):
 
     message = dict(
+        type = unicode,
         index = True
     )
 
