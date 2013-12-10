@@ -15,5 +15,11 @@
             </div>
             <div class="description">Settings for the list of pending things</div>
         </li>
+        <li>
+            <div class="name">
+                <a href="{{ url_for('omni_config') }}">Omni</a>
+            </div>
+            <div class="description">Settings for the omni infra-structure</div>
+        </li>
     </ul>
 {% endblock %}
