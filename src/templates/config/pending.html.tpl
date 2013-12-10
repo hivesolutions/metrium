@@ -53,7 +53,7 @@
                 </tr>
             </tfoot>
         </table>
-        <span class="button" data-link="{{ url_for('mail_config') }}">Cancel</span>
+        <span class="button" data-link="{{ url_for('base_config') }}">Cancel</span>
         //
         <span class="button" data-submit="true">Update</span>
     </form>

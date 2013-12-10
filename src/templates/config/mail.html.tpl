@@ -24,7 +24,7 @@
             <input type="password" class="text-field" name="password" placeholder="eg: jonhdoepass"
                    value="{{ config.password }}" data-error="{{ errors.password }}" />
         </div>
-        <span class="button" data-link="{{ url_for('mail_config') }}">Cancel</span>
+        <span class="button" data-link="{{ url_for('base_config') }}">Cancel</span>
         //
         <span class="button" data-submit="true">Update</span>
     </form>

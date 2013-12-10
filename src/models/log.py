@@ -91,6 +91,13 @@ class Log(base.Base):
             "log.message" : events
         }
 
+    @classmethod
+    def _build(cls, model, map):
+        base.Base._build(model, map)
+        owner_extra = model.get("owner_extra", False)
+        owner = model.get("owner", None)
+        model["_owner"] = owner_extra or (owner and owner.username)
+
     def get_event(self):
         return {
             "message" : self.message,
