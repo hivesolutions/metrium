@@ -57,6 +57,7 @@ class Mail(base.Base):
     )
 
     sender_extra = dict(
+        type = unicode,
         index = True
     )
 
@@ -70,6 +71,7 @@ class Mail(base.Base):
     )
 
     subject = dict(
+        type = unicode,
         index = True
     )
 
@@ -90,8 +92,7 @@ class Mail(base.Base):
 
             quorum.not_null("date"),
 
-            quorum.not_null("subject"),
-            quorum.not_empty("subject")
+            quorum.not_null("subject")
         ]
 
     def get_event(self):
