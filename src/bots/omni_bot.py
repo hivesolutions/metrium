@@ -19,6 +19,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Hive Metrium System. If not, see <http://www.gnu.org/licenses/>.
 
+__author__ = "João Magalhães joamag@hive.pt>"
+""" The author(s) of the module """
+
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -34,14 +37,32 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import base
-import imap_bot
-import omni_bot
-import pending_bot
-import twitter_bot
+import omni
 
-from base import *
-from imap_bot import *
-from omni_bot import *
-from pending_bot import *
-from twitter_bot import *
+import base
+
+from metrium import quorum
+
+SLEEP_TIME = 60.0
+""" The default sleep time to be used by the bots
+in case no sleep time is defined in the constructor,
+this bot uses a large value as its tick operation is
+a lot expensive and should be used with care """
+
+class OmniBot(base.Bot):
+
+    def __init__(self, sleep_time = SLEEP_TIME, *args, **kwargs):
+        base.Bot.__init__(self, sleep_time, *args, **kwargs)
+        username = quorum.conf("OMNIX_USERNAME")
+        password = quorum.conf("OMNIX_PASSWORD")
+        self.api = omni.Api(
+            username = username,
+            password = password
+        )
+
+    def tick(self):
+        stats = self.api.stats_sales()
+        for object_id in stats:
+            object_id = int(object_id)
+            store = self.api.get_store(object_id)
+            print store["name"]
