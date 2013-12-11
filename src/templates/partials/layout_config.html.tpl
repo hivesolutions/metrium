@@ -9,6 +9,14 @@
                 <a href="{{ url_for('base_config') }}">base</a>
             {% endif %}
         {% endif %}
+        {% if acl("config.basic") %}
+            //
+            {% if sub_link == "basic" %}
+                <a href="{{ url_for('basic_config') }}" class="active">basic</a>
+            {% else %}
+                <a href="{{ url_for('basic_config') }}">basic</a>
+            {% endif %}
+        {% endif %}
         {% if acl("config.mail") %}
             //
             {% if sub_link == "mail" %}

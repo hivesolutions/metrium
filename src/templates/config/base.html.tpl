@@ -5,6 +5,12 @@
     <ul>
         <li>
             <div class="name">
+                <a href="{{ url_for('basic_config') }}">Basic</a>
+            </div>
+            <div class="description">Global basic configuration of metrium</div>
+        </li>
+        <li>
+            <div class="name">
                 <a href="{{ url_for('mail_config') }}">Mail</a>
             </div>
             <div class="description">IMAP client configuration</div>

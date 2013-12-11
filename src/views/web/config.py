@@ -52,6 +52,38 @@ def base_config():
         sub_link = "base"
     )
 
+@app.route("/config/basic", methods = ("GET",))
+@quorum.ensure("config.basic")
+def basic_config():
+    config = models.BasicConfig.get(raise_e = False) or {}
+    return flask.render_template(
+        "config/basic.html.tpl",
+        link = "config",
+        sub_link = "basic",
+        config = config,
+        errors = {}
+    )
+
+@app.route("/config/basic", methods = ("POST",))
+@quorum.ensure("config.basic")
+def do_basic_config():
+    config = models.BasicConfig.singleton()
+    try: config.save()
+    except quorum.ValidationError, error:
+        return flask.render_template(
+            "config/basic.html.tpl",
+            link = "config",
+            sub_link = "basic",
+            config = error.model,
+            errors = error.errors
+        )
+
+    # redirects the user to the overall configuration
+    # selection, as this is the default behavior
+    return flask.redirect(
+        flask.url_for("base_config")
+    )
+
 @app.route("/config/mail", methods = ("GET",))
 @quorum.ensure("config.mail")
 def mail_config():
