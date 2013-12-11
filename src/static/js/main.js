@@ -507,7 +507,7 @@
                 matchedObject.attr("width", width);
             }
 
-            if(height && height != height) {
+            if(height && height != _height) {
                 _height = height;
                 matchedObject.attr("height", height);
             }
@@ -711,7 +711,7 @@
                 matchedObject.attr("width", width);
             }
 
-            if(height && height != height) {
+            if(height && height != _height) {
                 _height = height;
                 matchedObject.attr("height", height);
             }
