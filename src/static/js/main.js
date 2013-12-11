@@ -496,11 +496,8 @@
             var width = matchedObject.width();
             var height = matchedObject.height();
 
-            var _width = matchedObject.attr("width");
-            var _height = matchedObject.attr("height");
-
-            !_width && matchedObject.attr("width", width);
-            !_height && matchedObject.attr("height", height);
+            width && matchedObject.attr("width", width);
+            height && matchedObject.attr("height", height);
 
             var values = matchedObject.attr("data-values") || "";
             values = values.split(",");
@@ -688,11 +685,8 @@
             var width = matchedObject.width();
             var height = matchedObject.height();
 
-            var _width = matchedObject.attr("width");
-            var _height = matchedObject.attr("height");
-
-            !_width && matchedObject.attr("width", width);
-            !_height && matchedObject.attr("height", height);
+            width && matchedObject.attr("width", width);
+            height && matchedObject.attr("height", height);
 
             var value = matchedObject.attr("data-value");
             var target = matchedObject.attr("data-target");
