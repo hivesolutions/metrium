@@ -1,4 +1,4 @@
-<div class="board">
+<div class="board board-dashboard">
     <div class="line">
         <div class="box">
             <div class="box-contents overview">
@@ -71,7 +71,7 @@
             </div>
         </div>
         <div class="box">
-            <div class="box-contents bubble">
+            <div class="box-contents bubble top-stores">
                 <h1>top</h1>
                 <h2>lojas</h2>
                 <div class="bubble-contents">
@@ -89,7 +89,7 @@
             </div>
         </div>
         <div class="box">
-            <div class="box-contents top">
+            <div class="box-contents top top-sellers">
                 <h1>top</h1>
                 <h2>vendedores</h2>
                 <div class="top-contents">

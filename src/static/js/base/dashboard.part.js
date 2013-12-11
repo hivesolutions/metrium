@@ -133,6 +133,7 @@
         var _modules = function() {
             matchedObject.udate();
             matchedObject.ulog();
+            matchedObject.uglobal();
             matchedObject.upending();
         };
 

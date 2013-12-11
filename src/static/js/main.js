@@ -177,6 +177,7 @@
         var _modules = function() {
             matchedObject.udate();
             matchedObject.ulog();
+            matchedObject.uglobal();
             matchedObject.upending();
         };
 
@@ -369,6 +370,27 @@
         return matchedObject;
     };
 })(jQuery);
+
+(function(jQuery) {
+    jQuery.fn.uglobal = function(options) {
+        var matchedObject = this;
+
+        var initialize = function() {
+            _start();
+        };
+
+        var _start = function() {
+            var global = matchedObject.data("global");
+            global.bind("omni.top_stores", function(data) {
+                        console.info(data);
+                    });
+        };
+
+        initialize();
+        return matchedObject;
+    };
+})(jQuery);
+
 (function(jQuery) {
     jQuery.fn.ulinechart = function(options) {
         var PADDING_TOP = 32;
