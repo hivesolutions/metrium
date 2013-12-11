@@ -3,6 +3,7 @@
 {% block name %}New Message{% endblock %}
 {% block content %}
     <form action="{{ url_for('create_log') }}" method="post" class="form">
+        <input type="hidden" name="owner_extra" />
         <div class="label">
             <label>Message</label>
         </div>

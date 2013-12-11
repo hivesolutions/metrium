@@ -74,7 +74,9 @@ class Log(base.Base):
             quorum.string_gt("message", 4),
 
             quorum.not_null("type"),
-            quorum.not_empty("type")
+            quorum.not_empty("type"),
+
+            quorum.not_null("owner_extra")
         ]
 
     @classmethod
