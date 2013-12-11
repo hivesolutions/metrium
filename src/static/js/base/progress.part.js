@@ -45,6 +45,7 @@
 
             var canvas = matchedObject[0];
             var context = canvas.getContext("2d");
+            context.setTransform(1, 0, 0, 1, 0, 0);
             context.clearRect(0, 0, width, height);
 
             var centerX = width / 2;
