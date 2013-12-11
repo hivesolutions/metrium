@@ -496,14 +496,24 @@
             var width = matchedObject.width();
             var height = matchedObject.height();
 
-            width && matchedObject.attr("width", width);
-            height && matchedObject.attr("height", height);
-
             var widthS = matchedObject.attr("width");
             var heightS = matchedObject.attr("height");
 
-            width = parseInt(widthS);
-            height = parseInt(heightS);
+            var _width = parseInt(widthS);
+            var _height = parseInt(heightS);
+
+            if(width && width != _width) {
+                _width = width;
+                matchedObject.attr("width", width);
+            }
+
+            if(height && height != height) {
+                _height = height;
+                matchedObject.attr("height", height);
+            }
+
+            width = _width;
+            height = _height;
 
             var values = matchedObject.attr("data-values") || "";
             values = values.split(",");
@@ -690,17 +700,24 @@
             var width = matchedObject.width();
             var height = matchedObject.height();
 
-            width && matchedObject.attr("width", width);
-            height && matchedObject.attr("height", height);
-
             var widthS = matchedObject.attr("width");
             var heightS = matchedObject.attr("height");
 
-            width = parseInt(widthS);
-            height = parseInt(heightS);
+            var _width = parseInt(widthS);
+            var _height = parseInt(heightS);
 
-            console.info(width);
-            console.info(height);
+            if(width && width != _width) {
+                _width = width;
+                matchedObject.attr("width", width);
+            }
+
+            if(height && height != height) {
+                _height = height;
+                matchedObject.attr("height", height);
+            }
+
+            width = _width;
+            height = _height;
 
             var value = matchedObject.attr("data-value");
             var target = matchedObject.attr("data-target");
@@ -714,7 +731,6 @@
 
             var canvas = matchedObject[0];
             var context = canvas.getContext("2d");
-
             context.clearRect(0, 0, width, height);
 
             var centerX = width / 2;

@@ -41,6 +41,7 @@ import hashlib
 
 import quorum
 
+import log
 import base
 import conversation
 
@@ -145,6 +146,15 @@ class Pending(base.Base):
         base.Base.pre_create(self)
 
         self.severity_i = SEVERITIES.get(self.severity, 0)
+
+    def post_create(self):
+        base.Base.post_create(self)
+
+        log = log.Log()
+        log.message = self.description
+        log.type = "info"
+        log.owner_extra = "pending"
+        log.save()
 
     def get_event(self):
         return dict(

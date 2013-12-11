@@ -102,13 +102,13 @@ class Log(base.Base):
         model["_owner"] = owner_extra or (owner and owner.username)
 
     def get_event(self):
-        return {
-            "message" : self.message,
-            "type" : self.type,
-            "owner" : self.get_owner(),
-            "timestamp" : self.timestamp,
-            "time_s" : self.time_s()
-        }
+        return dict(
+            message = self.message,
+            type = self.type,
+            owner = self.get_owner(),
+            timestamp = self.timestamp,
+            time_s = self.time_s()
+        )
 
     def pre_create(self):
         base.Base.pre_create(self)
