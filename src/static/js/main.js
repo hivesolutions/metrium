@@ -416,9 +416,6 @@
             value.text(current);
             subValue.text(previous);
 
-            console.info("ratioS");
-            console.info(ratioS);
-
             progress.attr("data-value", ratioS);
             progress.uprogress();
         };
@@ -697,15 +694,18 @@
             value = parseInt(value);
             target = target ? parseInt(target) : null;
 
-            console.info("value");
-            console.info(value);
-
             var valueP = value * 2.0 / 100.0;
             var targetP = target ? (target - value) * 2.0 / 100.0 : 0.0;
             var remainingP = 2.0 - targetP - valueP;
 
             var canvas = matchedObject[0];
             var context = canvas.getContext("2d");
+
+            if(canvas.width == 0 || canvas.height == 0) {
+                console.info("falhou!!!");
+                return;
+            }
+
             context.clearRect(0, 0, canvas.width, canvas.height);
 
             var centerX = canvas.width / 2;

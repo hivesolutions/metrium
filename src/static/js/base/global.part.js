@@ -43,9 +43,6 @@
             value.text(current);
             subValue.text(previous);
 
-            console.info("ratioS");
-            console.info(ratioS);
-
             progress.attr("data-value", ratioS);
             progress.uprogress();
         };
