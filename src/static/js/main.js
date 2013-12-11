@@ -699,6 +699,9 @@
             width = parseInt(widthS);
             height = parseInt(heightS);
 
+            console.info(width);
+            console.info(height);
+
             var value = matchedObject.attr("data-value");
             var target = matchedObject.attr("data-target");
 
