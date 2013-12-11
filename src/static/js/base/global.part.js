@@ -11,6 +11,9 @@
             global.bind("omni.sales_total", function(data) {
                         _updateSalesTotal(data.sales_total);
                     });
+            global.bind("omni.sales_data", function(data) {
+                        _updateSalesData(data.sales_data);
+                    });
             global.bind("omni.sales_stores", function(data) {
                         _updateSalesStores(data.sales_stores);
                     });
@@ -41,6 +44,15 @@
 
             progress.attr("data-value", ratioS);
             progress.uprogress();
+        };
+
+        var _updateSalesData = function(salesData) {
+            var _salesData = jQuery(".sales-data", matchedObject);
+            var lineChart = jQuery(".line-chart", _salesData);
+            var salesDataS = String(salesData);
+
+            lineChart.attr("data-values", salesDataS);
+            lineChart.ulinechart();
         };
 
         var _updateSalesStores = function(salesStores, marker) {

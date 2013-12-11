@@ -2,7 +2,7 @@
     <div class="line">
         <div class="box">
             <div class="box-contents overview sales-total">
-                <canvas class="progress" data-value="25" data-target="0"></canvas>
+                <canvas class="progress" data-value="0" data-target="0"></canvas>
                 <div class="overview-contents">
                     <div class="title">vendas</div>
                     <div class="value"></div>
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="box double">
-            <div class="box-contents chart">
+            <div class="box-contents chart sales-data">
                 <h1>últimos 7 dias</h1>
                 <h2>vendas</h2>
                 <canvas class="line-chart"></canvas>

@@ -21,7 +21,13 @@
             matchedObject.attr("width", width);
             matchedObject.attr("height", height);
 
-            var values = [100, 120, 80, 20, 45, 67, 23];
+            var values = matchedObject.attr("data-values") || "";
+            values = values.split(",");
+            for (var index = 0; index < values.length; index++) {
+                var value = values[index];
+                values[index] = parseFloat(value);
+            }
+
             var maxValue = 0;
 
             for (var index = 0; index < values.length; index++) {

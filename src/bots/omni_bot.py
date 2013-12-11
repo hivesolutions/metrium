@@ -66,12 +66,16 @@ class OmniBot(base.Bot):
 
         self.register_callback(api)
         sales_total = self.sales_total(api)
+        sales_data = self.sales_data(api)
         sales_stores = self.sales_stores(api)
         top_stores = self.top_stores(api)
 
         pusher = quorum.get_pusher()
         pusher["global"].trigger("omni.sales_total", {
             "sales_total" : sales_total
+        })
+        pusher["global"].trigger("omni.sales_data", {
+            "sales_data" : sales_data
         })
         pusher["global"].trigger("omni.sales_stores", {
             "sales_stores" : sales_stores
@@ -121,7 +125,10 @@ class OmniBot(base.Bot):
         return sales_total
 
     def sales_data(self, api):
-        pass
+        stats = api.stats_sales(span = 7, has_global = True)
+        _global = stats["-1"]
+        sales_data = _global["net_price_vat"]
+        return sales_data
 
     def sales_stores(self, api):
         sales_stores = []
