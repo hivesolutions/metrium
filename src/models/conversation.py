@@ -132,13 +132,13 @@ class Conversation(base.Base):
         else: conversation.save()
 
     def get_event(self):
-        return {
-            "sender" : self.sender,
-            "sender_extra" : self.sender_extra,
-            "folder" : self.folder,
-            "date" : self.date,
-            "subject" : self.subject
-        }
+        return dict(
+            sender = self.sender,
+            sender_extra = self.sender_extra,
+            folder = self.folder,
+            date = self.date,
+            subject = self.subject
+        )
 
     def post_create(self):
         base.Base.post_create(self)
