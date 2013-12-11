@@ -151,7 +151,7 @@ class Pending(base.Base):
         base.Base.post_create(self)
 
         log.Log.notify(
-            self.message,
+            self.description,
             type = "info",
             owner_extra = "pending"
         )
@@ -160,7 +160,7 @@ class Pending(base.Base):
         base.Base.post_create(self)
 
         log.Log.notify(
-            "Removed: " + self.message,
+            "Removed: " + self.description,
             type = "warning",
             owner_extra = "pending"
         )
