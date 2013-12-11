@@ -63,9 +63,18 @@ class Omni(base.Base):
 
     @classmethod
     def get_state(cls):
-        events = cls.get()
+        omni = cls.get()
         return {
-            "pending.update" : [{
-                "pendings" : events
+            "omni.sales_total" : [{
+                "sales_total" : omni.sales_total
+            }],
+            "omni.sales_data" : [{
+                "sales_data" : omni.sales_data
+            }],
+            "omni.sales_stores" : [{
+                "sales_stores" : omni.sales_stores
+            }],
+            "omni.top_stores" : [{
+                "top_stores" : omni.top_stores
             }]
         }
