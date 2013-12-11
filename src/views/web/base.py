@@ -108,11 +108,13 @@ def logout():
 @quorum.ensure("state", json = True)
 def state():
     log_state = models.Log.get_state()
+    omni_state = models.Omni.get_state()
     pending_state = models.Pending.get_state()
 
     state = dict(
         log = log_state,
-        pending  = pending_state
+        pending  = pending_state,
+        omni  = omni_state
     )
     return state
 

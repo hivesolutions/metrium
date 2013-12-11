@@ -42,7 +42,7 @@ import base
 class Omni(base.Base):
 
     sales_total = dict(
-        type = float,
+        type = list,
         index = True
     )
 
@@ -63,7 +63,8 @@ class Omni(base.Base):
 
     @classmethod
     def get_state(cls):
-        omni = cls.get()
+        omni = cls.get(raise_e = False)
+        if not omni: return dict()
         return {
             "omni.sales_total" : [{
                 "sales_total" : omni.sales_total

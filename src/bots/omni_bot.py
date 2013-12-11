@@ -70,6 +70,14 @@ class OmniBot(base.Bot):
         sales_stores = self.sales_stores(api)
         top_stores = self.top_stores(api)
 
+        _omni = models.Omni.get(raise_e = False)
+        if not _omni: _omni = models.Omni()
+        _omni.sales_total = sales_total
+        _omni.sales_data = sales_data
+        _omni.sales_stores = sales_stores
+        _omni.top_stores = top_stores
+        _omni.save()
+
         pusher = quorum.get_pusher()
         pusher["global"].trigger("omni.sales_total", {
             "sales_total" : sales_total
