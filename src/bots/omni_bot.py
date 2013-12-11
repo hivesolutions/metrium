@@ -113,12 +113,18 @@ class OmniBot(base.Bot):
         pass
 
     def top_stores(self, api):
-        top = []
+        top_stores = []
 
-        stats = api.stats_sales(has_global = True)
-        for object_id, values in stats.iteritems():
-            object_id = int(object_id)
-            print values["name"]
+        stats = api.stats_sales()
+        for _object_id, values in stats.iteritems():
+            name = values["name"]
+            net_price_vat = values["net_price_vat"]
+            current = net_price_vat[-1]
+            tuple = (current, name)
+            top_stores.append(tuple)
+
+        top_stores.sort()
+        return top_stores
 
     def top_sellers(self, api):
         pass
