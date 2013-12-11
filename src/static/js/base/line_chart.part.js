@@ -18,8 +18,11 @@
             var width = matchedObject.width();
             var height = matchedObject.height();
 
-            matchedObject.attr("width", width);
-            matchedObject.attr("height", height);
+            var _width = matchedObject.attr("width");
+            var _height = matchedObject.attr("height");
+
+            !_width && matchedObject.attr("width", width);
+            !_height && matchedObject.attr("height", height);
 
             var values = matchedObject.attr("data-values") || "";
             values = values.split(",");

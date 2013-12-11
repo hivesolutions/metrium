@@ -14,8 +14,11 @@
             var width = matchedObject.width();
             var height = matchedObject.height();
 
-            matchedObject.attr("width", width);
-            matchedObject.attr("height", height);
+            var _width = matchedObject.attr("width");
+            var _height = matchedObject.attr("height");
+
+            !_width && matchedObject.attr("width", width);
+            !_height && matchedObject.attr("height", height);
 
             var value = matchedObject.attr("data-value");
             var target = matchedObject.attr("data-target");
@@ -29,11 +32,6 @@
 
             var canvas = matchedObject[0];
             var context = canvas.getContext("2d");
-
-            if(canvas.width == 0 || canvas.height == 0) {
-                console.info("falhou!!!");
-                return;
-            }
 
             context.clearRect(0, 0, canvas.width, canvas.height);
 
