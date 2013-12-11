@@ -1,13 +1,13 @@
 <div class="board board-dashboard">
     <div class="line">
         <div class="box">
-            <div class="box-contents overview">
-                <canvas class="progress" data-value="25" data-target="50"></canvas>
+            <div class="box-contents overview sales-total">
+                <canvas class="progress" data-value="25" data-target="0"></canvas>
                 <div class="overview-contents">
-                    <div class="title">produtos</div>
-                    <div class="value">300K</div>
+                    <div class="title">vendas</div>
+                    <div class="value"></div>
                     <div class="line"></div>
-                    <div class="sub-value">1050</div>
+                    <div class="sub-value"></div>
                 </div>
             </div>
         </div>

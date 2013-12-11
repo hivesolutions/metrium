@@ -8,12 +8,39 @@
 
         var _start = function() {
             var global = matchedObject.data("global");
+            global.bind("omni.sales_total", function(data) {
+                        _updateSalesTotal(data.sales_total);
+                    });
             global.bind("omni.sales_stores", function(data) {
                         _updateSalesStores(data.sales_stores);
                     });
             global.bind("omni.top_stores", function(data) {
                         _updateTopStores(data.top_stores);
                     });
+        };
+
+        var _updateSalesTotal = function(salesTotal) {
+            var _salesTotal = jQuery(".sales-total", matchedObject);
+            var value = jQuery(".value", _salesTotal);
+            var subValue = jQuery(".sub-value", _salesTotal);
+            var progress = jQuery(".progress", _salesTotal);
+
+            var previous = salesTotal[0];
+            var current = salesTotal[1];
+            var ratio = current / previous;
+            ratio = ratio > 1.0 ? 1.0 : ratio;
+            ratio *= 100;
+            var ratioS = String(ratio);
+            previous = jQuery.uxround(previous / 1000, 1);
+            current = jQuery.uxround(current / 1000, 1);
+            previous = previous.toFixed(1) + "K";
+            current = current.toFixed(1) + "K";
+
+            value.text(current);
+            subValue.text(previous);
+
+            progress.attr("data-value", ratioS);
+            progress.uprogress();
         };
 
         var _updateSalesStores = function(salesStores, marker) {

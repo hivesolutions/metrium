@@ -31,6 +31,7 @@
 
             var canvas = matchedObject[0];
             var context = canvas.getContext("2d");
+            context.clearRect(0, 0, canvas.width, canvas.height);
 
             var widthChart = canvas.width - PADDING_LEFT - PADDING_RIGHT;
             var heightChart = canvas.height - PADDING_TOP;
