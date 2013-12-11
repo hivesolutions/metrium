@@ -63,6 +63,8 @@ class OmniBot(base.Bot):
             username = config.username,
             password = config.password
         )
+
+        self.register_callback(api)
         top_stores = self.top_stores(api)
 
         pusher = quorum.get_pusher()
@@ -70,7 +72,57 @@ class OmniBot(base.Bot):
             "top_stores" : top_stores
         })
 
-    def sales_data(self):
+    def is_registered(self, api, callback_url):
+        # retrieves the reference to the omni config singleton
+        # and verifies that the registered field exists in case
+        # it does not returns immediately false (no registration)
+        config = models.OmniConfig.get()
+        if not hasattr(config, "registered"): return False
+
+        # retrieves the base url of the omni api from the api client
+        # and then retrieves the (already) registered base url and
+        # callback url values and compares them against the new ones
+        # that are going to be used in case they are the same the
+        # registration is considered to be the same
+        base_url = api.base_url
+        _base_url, _callback_url = config.registered.split("$", 1)
+        return base_url == _base_url and callback_url == _callback_url
+
+    def register_callback(self, api):
+        """
+        Registers the callback url for the currently defined
+        base url, but only in case the registration has not
+        already been done (avoids extra calls).
+
+        @type api: Api
+        @param api: The client api reference to the omni api
+        that is going to be used in the operation.
+        """
+
+        # retrieves the references to both the basic config and
+        # the omni config and uses them to construct the callback
+        # url that is going to be registered
+        config = models.BasicConfig.get()
+        _config = models.OmniConfig.get()
+        callback_url = config.url + "omni/callback"
+
+        # verifies if a previous registration has already been
+        # done in case it has returns immediately otherwise
+        # proceeds with the subscribe web remote call
+        if self.is_registered(api, callback_url): return
+        result = api.subscribe_web(callback_url)
+
+        # populates the registered field of the omni config with
+        # the corresponding base url and callback url string and
+        # then saves the new instance value
+        _config.registered = api.base_url + "$" + callback_url
+        _config.save()
+
+        # returns the result map from the subscription operation
+        # to the caller method (for diagnostics)
+        return result
+
+    def sales_data(self, api):
         pass
 
     def sales_stores(self, api):

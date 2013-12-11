@@ -55,6 +55,8 @@ class OmniConfig(base.Config):
         index = True
     )
 
+    registered = dict()
+
     @classmethod
     def validate_new(cls):
         return super(OmniConfig, cls).validate_new() + [
