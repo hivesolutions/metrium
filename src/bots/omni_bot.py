@@ -72,22 +72,6 @@ class OmniBot(base.Bot):
             "top_stores" : top_stores
         })
 
-    def is_registered(self, api, callback_url):
-        # retrieves the reference to the omni config singleton
-        # and verifies that the registered field exists in case
-        # it does not returns immediately false (no registration)
-        config = models.OmniConfig.get()
-        if not hasattr(config, "registered"): return False
-
-        # retrieves the base url of the omni api from the api client
-        # and then retrieves the (already) registered base url and
-        # callback url values and compares them against the new ones
-        # that are going to be used in case they are the same the
-        # registration is considered to be the same
-        base_url = api.base_url
-        _base_url, _callback_url = config.registered.split("$", 1)
-        return base_url == _base_url and callback_url == _callback_url
-
     def register_callback(self, api):
         """
         Registers the callback url for the currently defined
@@ -109,7 +93,7 @@ class OmniBot(base.Bot):
         # verifies if a previous registration has already been
         # done in case it has returns immediately otherwise
         # proceeds with the subscribe web remote call
-        if self.is_registered(api, callback_url): return
+        if _config.is_registered(api, callback_url): return
         result = api.subscribe_web(callback_url)
 
         # populates the registered field of the omni config with

@@ -74,3 +74,17 @@ class OmniConfig(base.Config):
         base.Config.pre_create(self)
 
         self.name = "omni"
+
+    def is_registered(self, api, callback_url):
+        # verifies that the registered field exists in case
+        # it does not returns immediately false (no registration)
+        if not hasattr(self, "registered"): return False
+
+        # retrieves the base url of the omni api from the api client
+        # and then retrieves the (already) registered base url and
+        # callback url values and compares them against the new ones
+        # that are going to be used in case they are the same the
+        # registration is considered to be the same
+        base_url = api.base_url
+        _base_url, _callback_url = self.registered.split("$", 1)
+        return base_url == _base_url and callback_url == _callback_url
