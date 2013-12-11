@@ -49,6 +49,8 @@ class PendingConfig(base.Config):
         type = list
     )
 
+    signature = dict()
+
     def pre_create(self):
         base.Config.pre_create(self)
 
@@ -56,3 +58,7 @@ class PendingConfig(base.Config):
 
     def items_f(self):
         return zip(self.folders, self.severities)
+
+    def get_signature(self):
+        if not hasattr(self, "signature"): return None
+        return self.signature
