@@ -698,7 +698,7 @@
             target = target ? parseInt(target) : null;
 
             console.info("value");
-            console.info(ratioS);
+            console.info(value);
 
             var valueP = value * 2.0 / 100.0;
             var targetP = target ? (target - value) * 2.0 / 100.0 : 0.0;
