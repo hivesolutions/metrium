@@ -55,6 +55,7 @@ class Bot(threading.Thread):
         threading.Thread.__init__(self, *args, **kwargs)
         self.sleep_time = sleep_time
         self.name = name or self.__class__.__name__
+        self.daemon = True
 
     def run(self):
         self.active = True
