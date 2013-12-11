@@ -44,6 +44,15 @@ import quorum
 import base
 import conversation
 
+SEVERITIES = dict(
+    critical = 10,
+    major = 20,
+    minor = 30,
+    trivial = 40
+)
+""" The map defining the various severity levels and the
+corresponding integer based priority value """
+
 class Pending(base.Base):
 
     priority = dict(
@@ -52,6 +61,11 @@ class Pending(base.Base):
     )
 
     severity = dict(
+        index = True
+    )
+
+    severity_i = dict(
+        type = int,
         index = True
     )
 
@@ -114,27 +128,32 @@ class Pending(base.Base):
 
     @classmethod
     def get_events(cls, count = 10):
-        pendings = cls.find(sort = [("priority", 1)], limit = count)
+        pendings = cls.find(sort = [("severity_i", 1), ("priority", 1)], limit = count)
         return [pending.get_event() for pending in pendings]
 
     @classmethod
     def get_signature(cls, count = 10):
         signature = hashlib.sha256()
-        pendings = cls.find(sort = [("priority", 1)], limit = count)
+        pendings = cls.find(sort = [("severity_i", 1), ("priority", 1)], limit = count)
         for pending in pendings:
             buffer = pending.get_buffer()
             buffer_s = buffer.encode("utf-8")
             signature.update(buffer_s)
         return signature.hexdigest()
 
+    def pre_create(self):
+        base.Base.pre_create(self)
+
+        self.severity_i = SEVERITIES.get(self.severity, 0)
+
     def get_event(self):
-        return {
-            "priority" : self.priority,
-            "severity" : self.severity,
-            "pre" : self.pre,
-            "description" : self.description,
-            "author" : self.author
-        }
+        return dict(
+            priority = self.priority,
+            severity = self.severity,
+            pre = self.pre,
+            description = self.description,
+            author = self.author
+        )
 
     def get_buffer(self):
         return str(self.priority) + self.pre + self.description + self.author
