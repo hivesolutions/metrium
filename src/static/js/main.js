@@ -406,6 +406,7 @@
             var ratio = current / previous;
             ratio = ratio > 1.0 ? 1.0 : ratio;
             ratio *= 100;
+            ratio = Math.floor(ratio);
             var ratioS = String(ratio);
             previous = jQuery.uxround(previous / 1000, 1);
             current = jQuery.uxround(current / 1000, 1);
@@ -414,6 +415,9 @@
 
             value.text(current);
             subValue.text(previous);
+
+            console.info("ratioS");
+            console.info(ratioS);
 
             progress.attr("data-value", ratioS);
             progress.uprogress();
@@ -692,6 +696,9 @@
 
             value = parseInt(value);
             target = target ? parseInt(target) : null;
+
+            console.info("value");
+            console.info(ratioS);
 
             var valueP = value * 2.0 / 100.0;
             var targetP = target ? (target - value) * 2.0 / 100.0 : 0.0;

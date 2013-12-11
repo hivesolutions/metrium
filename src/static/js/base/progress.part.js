@@ -23,6 +23,9 @@
             value = parseInt(value);
             target = target ? parseInt(target) : null;
 
+            console.info("value");
+            console.info(ratioS);
+
             var valueP = value * 2.0 / 100.0;
             var targetP = target ? (target - value) * 2.0 / 100.0 : 0.0;
             var remainingP = 2.0 - targetP - valueP;
