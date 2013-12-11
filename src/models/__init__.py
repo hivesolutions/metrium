@@ -41,6 +41,7 @@ import conversation
 import debug
 import log
 import mail
+import omni
 import pending
 
 from config import *
@@ -51,4 +52,5 @@ from conversation import *
 from debug import *
 from log import *
 from mail import *
+from omni import *
 from pending import *

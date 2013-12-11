@@ -37,21 +37,35 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import models
+import base
 
-from metrium import app
-from metrium import quorum
+class Omni(base.Base):
 
-@app.route("/omni/callback", methods = ("GET", "POST"), json = True)
-def omni_callback():
-    push = quorum.get_field("push") or "default"
-
-    models.Log.notify(
-        push,
-        type = "info",
-        owner_extra = "omni"
+    sales_total = dict(
+        type = float,
+        index = True
     )
 
-    return dict(
-        success = True
+    sales_data = dict(
+        type = list,
+        index = True
     )
+
+    sales_stores = dict(
+        type = list,
+        index = True
+    )
+
+    top_stores = dict(
+        type = list,
+        index = True
+    )
+
+    @classmethod
+    def get_state(cls):
+        events = cls.get()
+        return {
+            "pending.update" : [{
+                "pendings" : events
+            }]
+        }

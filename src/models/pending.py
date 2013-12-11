@@ -57,8 +57,8 @@ corresponding integer based priority value """
 class Pending(base.Base):
 
     priority = dict(
-        index = True,
-        type = int
+        type = int,
+        index = True
     )
 
     severity = dict(
@@ -150,11 +150,20 @@ class Pending(base.Base):
     def post_create(self):
         base.Base.post_create(self)
 
-        _log = log.Log()
-        _log.message = self.description
-        _log.type = "info"
-        _log.owner_extra = "pending"
-        _log.save()
+        log.Log.notify(
+            self.message,
+            type = "info",
+            owner_extra = "pending"
+        )
+
+    def post_delete(self):
+        base.Base.post_create(self)
+
+        log.Log.notify(
+            "Removed: " + self.message,
+            type = "warning",
+            owner_extra = "pending"
+        )
 
     def get_event(self):
         return dict(

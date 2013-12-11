@@ -95,6 +95,14 @@ class Log(base.Base):
         }
 
     @classmethod
+    def notify(cls, message, type = "info", owner_extra = "anonymous"):
+        log = cls()
+        log.message = message
+        log.type = type
+        log.owner_extra = owner_extra
+        log.save()
+
+    @classmethod
     def _build(cls, model, map):
         base.Base._build(model, map)
         owner_extra = model.get("owner_extra", False)
