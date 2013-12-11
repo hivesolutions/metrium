@@ -67,8 +67,7 @@ class PendingBot(base.Bot):
         config = models.PendingConfig.get()
         folders = config.folders
         items_f = config.items_f()
-
-        signature = models.Pending.get_signature(count = count)
+        signature = config.get_signature()
 
         outdated = models.Pending.find(folder = {"$nin" : folders})
         for pending in outdated: pending.delete()
@@ -112,5 +111,10 @@ class PendingBot(base.Bot):
         new_signature = models.Pending.get_signature(count = count)
         has_changed = not signature == new_signature
 
-        pendings = has_changed and models.Pending.get_events(count = count) or []
+        if has_changed:
+            pendings = models.Pending.get_events(count = count) or []
+            config.signature = new_signature
+            config.save()
+        else: pendings = []
+
         return pendings
