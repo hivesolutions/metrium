@@ -21,7 +21,7 @@
     </div>
     <div class="line">
         <div class="box">
-            <div class="box-contents table">
+            <div class="box-contents table sales-stores">
                 <h1>vendas</h1>
                 <h2>lojas</h2>
                 <table>
@@ -30,43 +30,9 @@
                             <th>Loja</th>
                             <th class="value">ontem</th>
                             <th class="value">hoje</th>
-                            <th class="marker"></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Dolce Vita</td>
-                            <td class="value">3623,34</td>
-                            <td class="value">36,23</td>
-                            <td class="marker">
-                                <div class="up color"></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>31 Janeiro</td>
-                            <td class="value">50,23</td>
-                            <td class="value">252,00</td>
-                            <td class="marker">
-                                <div class="up color"></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Joia do Tempo</td>
-                            <td class="value">7890,23</td>
-                            <td class="value">2320,42</td>
-                            <td class="marker">
-                                <div class="down color"></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Galeria da Jóia</td>
-                            <td class="value">523,22</td>
-                            <td class="value">223,22</td>
-                            <td class="marker">
-                                <div class="up color"></div>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
@@ -74,18 +40,7 @@
             <div class="box-contents bubble top-stores">
                 <h1>top</h1>
                 <h2>lojas</h2>
-                <div class="bubble-contents">
-                    <div class="value">254</div>
-                    <div class="title">Galeria da Jóia</div>
-                </div>
-                <div class="bubble-contents double">
-                    <div class="value">254</div>
-                    <div class="title">Dolce Vita</div>
-                </div>
-                <div class="bubble-contents double">
-                    <div class="value">254</div>
-                    <div class="title">31 de Janeiro</div>
-                </div>
+                <div class="bubble-content"></div>
             </div>
         </div>
         <div class="box">

@@ -363,7 +363,7 @@ body.fullscreen #overlay {
     color: rgba(255, 255, 255, 0.4);
     font-size: 26px;
     font-weight: 300;
-    padding: 6px 0px 12px 0px;
+    padding: 6px 0px 6px 0px;
 }
 
 .dashboard .box table th.marker {
@@ -374,17 +374,20 @@ body.fullscreen #overlay {
 
 .dashboard .box table td {
     color: #ffffff;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 300;
     padding: 6px 0px 6px 0px;
 }
 
 .dashboard .box table th.value {
+    max-width: 96px;
+    min-width: 96px;
     text-align: right;
+    width: 96px;
 }
 
 .dashboard .box table td.value {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
     text-align: right;
 }

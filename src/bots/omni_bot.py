@@ -65,9 +65,13 @@ class OmniBot(base.Bot):
         )
 
         self.register_callback(api)
+        sales_stores = self.sales_stores(api)
         top_stores = self.top_stores(api)
 
         pusher = quorum.get_pusher()
+        pusher["global"].trigger("omni.sales_stores", {
+            "sales_stores" : sales_stores
+        })
         pusher["global"].trigger("omni.top_stores", {
             "top_stores" : top_stores
         })
@@ -110,7 +114,19 @@ class OmniBot(base.Bot):
         pass
 
     def sales_stores(self, api):
-        pass
+        sales_stores = []
+
+        stats = api.stats_sales()
+        for _object_id, values in stats.iteritems():
+            name = values["name"]
+            net_price_vat = values["net_price_vat"]
+            current = net_price_vat[-1]
+            previous = net_price_vat[-2]
+            tuple = (current, previous, name)
+            sales_stores.append(tuple)
+
+        sales_stores.sort(reverse = True)
+        return sales_stores
 
     def top_stores(self, api):
         top_stores = []
@@ -118,12 +134,12 @@ class OmniBot(base.Bot):
         stats = api.stats_sales()
         for _object_id, values in stats.iteritems():
             name = values["name"]
-            net_price_vat = values["net_price_vat"]
-            current = net_price_vat[-1]
+            number_sales = values["number_sales"]
+            current = number_sales[-1]
             tuple = (current, name)
             top_stores.append(tuple)
 
-        top_stores.sort()
+        top_stores.sort(reverse = True)
         return top_stores
 
     def top_sellers(self, api):
