@@ -96,14 +96,14 @@ class Mail(base.Base):
         ]
 
     def get_event(self):
-        return {
-            "message_id" : self.message_id,
-            "sender" : self.sender,
-            "sender_extra" : self.sender_extra,
-            "folder" : self.folder,
-            "date" : self.date,
-            "subject" : self.subject
-        }
+        return dict(
+            message_id = self.message_id,
+            sender = self.sender,
+            sender_extra = self.sender_extra,
+            folder = self.folder,
+            date = self.date,
+            subject = self.subject
+        )
 
     def get_subject_f(self):
         subject = self.subject.strip()
