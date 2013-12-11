@@ -150,11 +150,11 @@ class Pending(base.Base):
     def post_create(self):
         base.Base.post_create(self)
 
-        log = log.Log()
-        log.message = self.description
-        log.type = "info"
-        log.owner_extra = "pending"
-        log.save()
+        _log = log.Log()
+        _log.message = self.description
+        _log.type = "info"
+        _log.owner_extra = "pending"
+        _log.save()
 
     def get_event(self):
         return dict(
