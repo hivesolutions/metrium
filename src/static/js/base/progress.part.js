@@ -17,6 +17,12 @@
             width && matchedObject.attr("width", width);
             height && matchedObject.attr("height", height);
 
+            var widthS = matchedObject.attr("width");
+            var heightS = matchedObject.attr("height");
+
+            width = parseInt(widthS);
+            height = parseInt(heightS);
+
             var value = matchedObject.attr("data-value");
             var target = matchedObject.attr("data-target");
 
@@ -30,13 +36,11 @@
             var canvas = matchedObject[0];
             var context = canvas.getContext("2d");
 
-            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.clearRect(0, 0, width, height);
 
-            var centerX = canvas.width / 2;
-            var centerY = canvas.height / 2;
-            var lower = canvas.width > canvas.height
-                    ? canvas.height
-                    : canvas.width;
+            var centerX = width / 2;
+            var centerY = height / 2;
+            var lower = width > height ? height : width;
             var radius = (lower / 2) - 18;
 
             context.translate(centerX, centerY);

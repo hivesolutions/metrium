@@ -21,6 +21,12 @@
             width && matchedObject.attr("width", width);
             height && matchedObject.attr("height", height);
 
+            var widthS = matchedObject.attr("width");
+            var heightS = matchedObject.attr("height");
+
+            width = parseInt(widthS);
+            height = parseInt(heightS);
+
             var values = matchedObject.attr("data-values") || "";
             values = values.split(",");
             for (var index = 0; index < values.length; index++) {
@@ -37,17 +43,16 @@
 
             var canvas = matchedObject[0];
             var context = canvas.getContext("2d");
-            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.clearRect(0, 0, width, height);
 
-            var widthChart = canvas.width - PADDING_LEFT - PADDING_RIGHT;
-            var heightChart = canvas.height - PADDING_TOP;
+            var widthChart = width - PADDING_LEFT - PADDING_RIGHT;
+            var heightChart = height - PADDING_TOP;
             var stepWidth = widthChart / (values.length - 1);
             var xPosition = PADDING_LEFT;
 
             for (var index = 0; index < values.length; index++) {
                 var value = values[index];
-                var yPosition = canvas.height
-                        - (value * heightChart / maxValue);
+                var yPosition = height - (value * heightChart / maxValue);
 
                 if (index != 0) {
                     context.beginPath();
@@ -61,8 +66,8 @@
                     context.fillStyle = "rgba(255, 255, 255, 0.2)";
                     context.moveTo(xPositionP, yPositionP);
                     context.lineTo(xPosition, yPosition);
-                    context.lineTo(xPosition, canvas.height);
-                    context.lineTo(xPositionP, canvas.height);
+                    context.lineTo(xPosition, height);
+                    context.lineTo(xPositionP, height);
                     context.closePath();
                     context.fill();
                 }
@@ -71,8 +76,8 @@
                     context.beginPath();
                     context.strokeStyle = "rgba(255, 255, 255, 0.3)";
                     context.lineWidth = 2;
-                    context.dashedLine(xPosition, yPosition, xPosition,
-                            canvas.height, [6, 4]);
+                    context.dashedLine(xPosition, yPosition, xPosition, height,
+                            [6, 4]);
                     context.stroke();
                 }
 
