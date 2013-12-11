@@ -25,8 +25,8 @@
 
             for (var index = 0; index < size; index++) {
                 var item = salesStores[index];
-                var current = String(item[0]);
-                var previous = String(item[1]);
+                var current = item[0].toFixed(2);
+                var previous = item[1].toFixed(2);
                 var name = item[2];
                 var row = jQuery("<tr>" + "<td>" + name + "</td>"
                         + "<td class=\"value\">" + previous + "</td>"
