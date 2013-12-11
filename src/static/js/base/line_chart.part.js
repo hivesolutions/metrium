@@ -18,24 +18,14 @@
             var width = matchedObject.width();
             var height = matchedObject.height();
 
+            width && matchedObject.attr("width", width);
+            height && matchedObject.attr("height", height);
+
             var widthS = matchedObject.attr("width");
             var heightS = matchedObject.attr("height");
 
-            var _width = parseInt(widthS);
-            var _height = parseInt(heightS);
-
-            if(width && width != _width) {
-                _width = width;
-                matchedObject.attr("width", width);
-            }
-
-            if(height && height != _height) {
-                _height = height;
-                matchedObject.attr("height", height);
-            }
-
-            width = _width;
-            height = _height;
+            width = parseInt(widthS);
+            height = parseInt(heightS);
 
             var values = matchedObject.attr("data-values") || "";
             values = values.split(",");
