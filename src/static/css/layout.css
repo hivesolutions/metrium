@@ -483,6 +483,7 @@ body.fullscreen #overlay {
 .dashboard .box .top-contents .details {
     display: inline-block;
     margin-left: 10px;
+    padding: 4px 0px 4px 0px;
     vertical-align: top;
 }
 
