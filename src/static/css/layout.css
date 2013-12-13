@@ -376,6 +376,9 @@ body.fullscreen #overlay {
     color: #ffffff;
     font-size: 20px;
     font-weight: 300;
+    line-height: 28px;
+    max-height: 28px;
+    overflow: hidden;
     padding: 6px 0px 6px 0px;
 }
 
