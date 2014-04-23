@@ -63,8 +63,10 @@ setuptools.setup(
     },
     install_requires = [
         "flask",
+        "quorum",
         "pymongo",
-        "redis"
+        "redis",
+        "omni_api"
     ],
     classifiers = [
         "Development Status :: 3 - Alpha",

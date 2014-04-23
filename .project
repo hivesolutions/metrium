@@ -3,6 +3,8 @@
 	<name>metrium</name>
 	<comment></comment>
 	<projects>
+		<project>omni_api</project>
+		<project>quorum</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
