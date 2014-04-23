@@ -52,7 +52,6 @@ setuptools.setup(
     zip_safe = False,
     packages = [
         "models",
-        "quorum",
         "views"
     ],
     py_modules = [
