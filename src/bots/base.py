@@ -69,7 +69,7 @@ class Bot(threading.Thread):
             except BaseException, exception:
                 lines = traceback.format_exc().splitlines()
                 models.Debug.log(
-                    "Failed tick due to %s (%s) in %s" %\
+                    "Failed tick due to %s (%s) in %s" %
                     (
                          str(exception),
                          exception.__class__.__name__,
@@ -80,7 +80,7 @@ class Bot(threading.Thread):
             finally: Bot.GLOBAL_LOCK.release()
             models.Debug.log("Tick operation ended in %s" % self.name)
             models.Debug.log(
-                "Sleeping for %d seconds in %s" %\
+                "Sleeping for %d seconds in %s" %
                 (self.sleep_time, self.name)
             )
             time.sleep(self.sleep_time)
