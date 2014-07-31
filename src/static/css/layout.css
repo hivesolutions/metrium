@@ -499,13 +499,6 @@ body.fullscreen #overlay {
     font-weight: bold;
 }
 
-.dashboard .box .top-contents .details .amount {
-    color: rgba(255, 255, 255, 0.8);
-    display: inline;
-    font-size: 24px;
-    font-weight: 300;
-}
-
 .dashboard .box .overview-contents {
     margin-top: 80px;
     text-align: center;

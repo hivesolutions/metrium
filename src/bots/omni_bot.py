@@ -181,8 +181,9 @@ class OmniBot(base.Bot):
             employee = values["employee"]
             amount_price_vat = values["amount_price_vat"]
             number_sales = values["number_sales"]
-            current = number_sales[-1]
-            tuple = (current, amount_price_vat, employee)
+            current_amount = amount_price_vat[-1]
+            current_number = number_sales[-1]
+            tuple = (current_amount, current_number, employee)
             top_employees.append(tuple)
 
         top_employees.sort(reverse = True)

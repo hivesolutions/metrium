@@ -393,6 +393,9 @@
             global.bind("omni.top_stores", function(data) {
                         _updateTopStores(data.top_stores);
                     });
+            global.bind("omni.top_employees", function(data) {
+                        _updateTopEmployees(data.top_employees);
+                    });
         };
 
         var _updateSalesTotal = function(salesTotal) {
@@ -468,6 +471,33 @@
                         + "<div class=\"title\">" + name + "</div>" + "</div>");
                 index != 0 && bubleContents.addClass("double");
                 bubleContent.append(bubleContents);
+            }
+        };
+
+        var _updateTopEmployees = function(topEmployees) {
+            var _topEmployees = jQuery(".top-employees", matchedObject);
+            var topContent = jQuery(".top-content", _topEmployees);
+            topContent.empty();
+
+            var size = topEmployees.length > 3 ? 3 : topEmployees.length;
+
+            for (var index = 0; index < size; index++) {
+                var item = topEmployees[index];
+                var amount = String(item[0]);
+                var number = String(item[1]);
+                var name = item[2];
+                var topContents = jQuery("<div class=\"top-contents\">"
+                        + "<div class=\"rank\">"
+                        + String(index + 1)
+                        + "</div>"
+                        + "<div class=\"picture\">"
+                        + "<img src=\"/static/images/dummies/dummy_picture_2.png\" />"
+                        + "</div>" + "<div class=\"details\">"
+                        + "<div class=\"name\">" + name + "</div>"
+                        + "<div class=\"value\">" + number + "x - </div>"
+                        + "<div class=\"value\">" + amount + "</div>"
+                        + "</div>" + "</div>");
+                topContent.append(topContents);
             }
         };
 
