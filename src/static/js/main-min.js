@@ -19,7 +19,7 @@ tableBody.append(row);}};var _updateTopStores=function(topStores){var _topStores
 +String(index+1)
 +"</div>"
 +"<div class=\"picture\">"
-+"<img src=\"/static/images/dummies/dummy_picture_2.png\" />"
++"<img src=\"/#\" />"
 +"</div>"+"<div class=\"details\">"
 +"<div class=\"name\">"+name+"</div>"
 +"<div class=\"value\">"+number+"x - </div>"
