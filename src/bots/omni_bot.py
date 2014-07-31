@@ -69,6 +69,7 @@ class OmniBot(base.Bot):
         sales_data = self.sales_data(api)
         sales_stores = self.sales_stores(api)
         top_stores = self.top_stores(api)
+        top_employees = self.top_employees(api)
 
         _omni = models.Omni.get(raise_e = False)
         if not _omni: _omni = models.Omni()
@@ -76,6 +77,7 @@ class OmniBot(base.Bot):
         _omni.sales_data = sales_data
         _omni.sales_stores = sales_stores
         _omni.top_stores = top_stores
+        _omni.top_employees = top_employees
         _omni.save()
 
         pusher = quorum.get_pusher()
@@ -90,6 +92,9 @@ class OmniBot(base.Bot):
         })
         pusher["global"].trigger("omni.top_stores", {
             "top_stores" : top_stores
+        })
+        pusher["global"].trigger("omni.top_employees", {
+            "top_employees" : top_employees
         })
 
     def register_callback(self, api):
@@ -167,5 +172,18 @@ class OmniBot(base.Bot):
         top_stores.sort(reverse = True)
         return top_stores
 
-    def top_sellers(self, api):
-        pass
+    def top_employees(self, api):
+        top_employees = []
+
+        stats = api.stats_employee(unit = "month", span = 1, has_global = True)
+        for _object_id, values in stats.iteritems():
+            values = values["-1"]
+            employee = values["employee"]
+            amount_price_vat = values["amount_price_vat"]
+            number_sales = values["number_sales"]
+            current = number_sales[-1]
+            tuple = (current, amount_price_vat, employee)
+            top_employees.append(tuple)
+
+        top_employees.sort(reverse = True)
+        return top_employees
