@@ -61,6 +61,11 @@ class Omni(base.Base):
         index = True
     )
 
+    top_employees = dict(
+        type = list,
+        index = True
+    )
+
     @classmethod
     def get_state(cls):
         omni = cls.get(raise_e = False)
@@ -77,5 +82,8 @@ class Omni(base.Base):
             }],
             "omni.top_stores" : [{
                 "top_stores" : omni.top_stores
+            }],
+            "omni.top_employees" : [{
+                "top_employees" : omni.top_employees
             }]
         }
