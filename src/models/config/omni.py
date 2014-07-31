@@ -79,6 +79,7 @@ class OmniConfig(base.Config):
         # verifies that the registered field exists in case
         # it does not returns immediately false (no registration)
         if not hasattr(self, "registered"): return False
+        if not self.registered: return False
 
         # retrieves the base url of the omni api from the api client
         # and then retrieves the (already) registered base url and
