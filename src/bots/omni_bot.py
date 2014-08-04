@@ -183,7 +183,7 @@ class OmniBot(base.Bot):
             number_sales = values["number_sales"]
             current_amount = amount_price_vat[-1]
             current_number = number_sales[-1]
-            media = api.info_media_entity(int(object_id), dimensions = "50x50")
+            media = api.info_media_entity(int(object_id), dimensions = "64x64")
             image_url = api.base_url + "omni/media/" + media[0]["secret"] if media else None
             tuple = (current_amount, current_number, employee, image_url)
             top_employees.append(tuple)
