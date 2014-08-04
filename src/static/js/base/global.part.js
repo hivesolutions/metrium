@@ -113,13 +113,11 @@
                 var amount = String(item[0]);
                 var number = String(item[1]);
                 var name = item[2];
+                var imageUrl = item[3];
                 var topContents = jQuery("<div class=\"top-contents\">"
-                        + "<div class=\"rank\">"
-                        + String(index + 1)
-                        + "</div>"
-                        + "<div class=\"picture\">"
-                        + "<img src=\"/#\" />"
-                        + "</div>" + "<div class=\"details\">"
+                        + "<div class=\"rank\">" + String(index + 1) + "</div>"
+                        + "<div class=\"picture\">" + "<img src=\"" + imageUrl
+                        + "\" />" + "</div>" + "<div class=\"details\">"
                         + "<div class=\"name\">" + name + "</div>"
                         + "<div class=\"value\">" + number + "x - </div>"
                         + "<div class=\"value\">" + amount + "</div>"

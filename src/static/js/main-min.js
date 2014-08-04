@@ -14,13 +14,10 @@ return value;};initialize();return matchedObject;};})(jQuery);(function(jQuery){
 +"<div class=\"up color\"></div>"+"</td>");}
 tableBody.append(row);}};var _updateTopStores=function(topStores){var _topStores=jQuery(".top-stores",matchedObject);var bubleContent=jQuery(".bubble-content",_topStores);bubleContent.empty();var size=topStores.length>3?3:topStores.length;for(var index=0;index<size;index++){var item=topStores[index];var value=String(item[0]);var name=item[1];var bubleContents=jQuery("<div class=\"bubble-contents\">"
 +"<div class=\"value\">"+value+"</div>"
-+"<div class=\"title\">"+name+"</div>"+"</div>");index!=0&&bubleContents.addClass("double");bubleContent.append(bubleContents);}};var _updateTopEmployees=function(topEmployees){var _topEmployees=jQuery(".top-employees",matchedObject);var topContent=jQuery(".top-content",_topEmployees);topContent.empty();var size=topEmployees.length>3?3:topEmployees.length;for(var index=0;index<size;index++){var item=topEmployees[index];var amount=String(item[0]);var number=String(item[1]);var name=item[2];var topContents=jQuery("<div class=\"top-contents\">"
-+"<div class=\"rank\">"
-+String(index+1)
-+"</div>"
-+"<div class=\"picture\">"
-+"<img src=\"/#\" />"
-+"</div>"+"<div class=\"details\">"
++"<div class=\"title\">"+name+"</div>"+"</div>");index!=0&&bubleContents.addClass("double");bubleContent.append(bubleContents);}};var _updateTopEmployees=function(topEmployees){var _topEmployees=jQuery(".top-employees",matchedObject);var topContent=jQuery(".top-content",_topEmployees);topContent.empty();var size=topEmployees.length>3?3:topEmployees.length;for(var index=0;index<size;index++){var item=topEmployees[index];var amount=String(item[0]);var number=String(item[1]);var name=item[2];var imageUrl=item[3];var topContents=jQuery("<div class=\"top-contents\">"
++"<div class=\"rank\">"+String(index+1)+"</div>"
++"<div class=\"picture\">"+"<img src=\""+imageUrl
++"\" />"+"</div>"+"<div class=\"details\">"
 +"<div class=\"name\">"+name+"</div>"
 +"<div class=\"value\">"+number+"x - </div>"
 +"<div class=\"value\">"+amount+"</div>"
