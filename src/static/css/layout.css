@@ -263,15 +263,27 @@ body.fullscreen #overlay {
     line-height: 60px;
 }
 
+body.romantic .dashboard .date .week-day {
+    font-size: 48px;
+}
+
 .dashboard .date .day {
     color: rgba(255, 255, 255, 0.3);
     font-size: 40px;
     line-height: 46px;
 }
 
+body.romantic .dashboard .date .day {
+    font-size: 36px;
+}
+
 .dashboard .date .time {
     font-size: 40px;
     line-height: 46px;
+}
+
+body.romantic .dashboard .date .time {
+    font-size: 36px;
 }
 
 .dashboard .news-item {
