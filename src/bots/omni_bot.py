@@ -147,7 +147,7 @@ class OmniBot(base.Bot):
         sales_stores = []
 
         stats = api.stats_sales(span = 2)
-        for _object_id, values in stats.iteritems():
+        for _object_id, values in stats.items():
             name = values["name"]
             net_price_vat = values["net_price_vat"]
             current = net_price_vat[-1]
@@ -162,7 +162,7 @@ class OmniBot(base.Bot):
         top_stores = []
 
         stats = api.stats_sales(span = 1)
-        for _object_id, values in stats.iteritems():
+        for _object_id, values in stats.items():
             name = values["name"]
             number_sales = values["number_sales"]
             current = number_sales[-1]
@@ -176,7 +176,7 @@ class OmniBot(base.Bot):
         top_employees = []
 
         stats = api.stats_employee(unit = "month", span = 1, has_global = True)
-        for object_id, values in stats.iteritems():
+        for object_id, values in stats.items():
             values = values["-1"]
             employee = values["employee"]
             amount_price_vat = values["amount_price_vat"]
