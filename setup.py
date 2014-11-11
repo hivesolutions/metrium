@@ -42,7 +42,7 @@ import setuptools
 
 setuptools.setup(
     name = "metrium",
-    version = "0.1.1",
+    version = "0.1.2",
     author = "Hive Solutions Lda.",
     author_email = "development@hive.pt",
     description = "Pingu Web Interface",
@@ -65,8 +65,9 @@ setuptools.setup(
     package_data = {
         "metrium" : [
             "static/css/*",
-            "static/images/*/*",
-            "static/images/*",
+            "static/images/*.png",
+            "static/images/*.ico",
+            "static/images/logos/*.png",
             "static/js/*",
             "static/sounds/*",
             "templates/*.tpl",

@@ -1,7 +1,8 @@
 include src/metrium/metrium.wsgi
 recursive-include src/metrium/static/css *
-recursive-include src/metrium/static/images *
-recursive-include src/metrium/static/images/logos *
+recursive-include src/metrium/static/images *.png
+recursive-include src/metrium/static/images *.ico
+recursive-include src/metrium/static/images/logos *.png
 recursive-include src/metrium/static/js *
 recursive-include src/metrium/static/sounds *
 recursive-include src/metrium/templates *.tpl
