@@ -65,7 +65,8 @@ setuptools.setup(
     package_data = {
         "metrium" : [
             "static/css/*",
-            "static/images/**",
+            "static/images/*",
+            "static/images/logos/*",
             "static/js/*",
             "static/sounds/*",
             "templates/*.tpl",
