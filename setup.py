@@ -62,6 +62,21 @@ setuptools.setup(
     package_dir = {
         "" : os.path.normpath("src")
     },
+    package_data = {
+        "metrium" : [
+            "static/css/*",
+            "static/images/**",
+            "static/js/*",
+            "static/sounds/*",
+            "templates/*.tpl",
+            "templates/accounts/*.tpl",
+            "templates/boards/*.tpl",
+            "templates/config/*.tpl",
+            "templates/debug/*.tpl",
+            "templates/log/*.tpl",
+            "templates/partials/*.tpl"
+        ]
+    },
     install_requires = [
         "flask",
         "quorum",
