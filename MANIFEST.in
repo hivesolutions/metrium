@@ -8,8 +8,7 @@ recursive-include src/metrium/static/js *.join
 recursive-include src/metrium/static/js/base *.js
 recursive-include src/metrium/static/sounds *
 recursive-include src/metrium/templates *.tpl
-recursive-include src/metrium/templates/accounts *.tpl
-recursive-include src/metrium/templates/accounts *.tpl
+recursive-include src/metrium/templates/account *.tpl
 recursive-include src/metrium/templates/boards *.tpl
 recursive-include src/metrium/templates/config *.tpl
 recursive-include src/metrium/templates/debug *.tpl

@@ -73,7 +73,7 @@ setuptools.setup(
             "static/js/base/*.js",
             "static/sounds/*",
             "templates/*.tpl",
-            "templates/accounts/*.tpl",
+            "templates/account/*.tpl",
             "templates/boards/*.tpl",
             "templates/config/*.tpl",
             "templates/debug/*.tpl",
