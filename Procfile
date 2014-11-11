@@ -1,1 +1,1 @@
-web: cd src && python metrium/base.py
+web: cd src && python metrium/main.py
