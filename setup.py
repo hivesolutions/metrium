@@ -51,11 +51,13 @@ setuptools.setup(
     url = "http://metrium.com",
     zip_safe = False,
     packages = [
-        "models",
-        "views"
-    ],
-    py_modules = [
-        "metrium"
+        "metrium",
+        "metrium.bots",
+        "metrium.models",
+        "metrium.models.config",
+        "metrium.views",
+        "metrium.views.api",
+        "metrium.views.web"
     ],
     package_dir = {
         "" : os.path.normpath("src")
@@ -74,6 +76,11 @@ setuptools.setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.6",
-        "Programming Language :: Python :: 2.7"
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.0",
+        "Programming Language :: Python :: 3.1",
+        "Programming Language :: Python :: 3.2",
+        "Programming Language :: Python :: 3.3",
+        "Programming Language :: Python :: 3.4"
     ]
 )
