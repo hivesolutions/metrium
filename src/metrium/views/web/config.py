@@ -69,7 +69,7 @@ def basic_config():
 def do_basic_config():
     config = models.BasicConfig.singleton()
     try: config.save()
-    except quorum.ValidationError, error:
+    except quorum.ValidationError as error:
         return flask.render_template(
             "config/basic.html.tpl",
             link = "config",
@@ -101,7 +101,7 @@ def mail_config():
 def do_mail_config():
     config = models.MailConfig.singleton()
     try: config.save()
-    except quorum.ValidationError, error:
+    except quorum.ValidationError as error:
         return flask.render_template(
             "config/mail.html.tpl",
             link = "config",
@@ -133,7 +133,7 @@ def pending_config():
 def do_pending_config():
     config = models.PendingConfig.singleton()
     try: config.save()
-    except quorum.ValidationError, error:
+    except quorum.ValidationError as error:
         return flask.render_template(
             "config/pending.html.tpl",
             link = "config",
@@ -166,7 +166,7 @@ def omni_config():
 def do_omni_config():
     config = models.OmniConfig.singleton()
     try: config.save()
-    except quorum.ValidationError, error:
+    except quorum.ValidationError as error:
         return flask.render_template(
             "config/omni.html.tpl",
             link = "config",

@@ -78,7 +78,7 @@ def create_log():
     # should be ran upon the save operation
     log = models.Log.new()
     try: log.save()
-    except quorum.ValidationError, error:
+    except quorum.ValidationError as error:
         return flask.render_template(
             "log/new.html.tpl",
             link = "logs",

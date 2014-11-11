@@ -39,8 +39,9 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import flask #@UnusedImport
 
-import models
 import quorum
+
+import metrium.models
 
 SECRET_KEY = "bha7t47805sv5jvmnhlj4nx7r2o97jos"
 """ The "secret" key to be at the internal encryption
@@ -66,10 +67,10 @@ app = quorum.load(
     redis_session = True,
     mongo_database = MONGO_DATABASE,
     logger = "metrium.debug",
-    models = models
+    models = metrium.models
 )
 
-from views import * #@UnusedWildImport
+import metrium.views #@UnusedImport
 
 if __name__ == "__main__":
     quorum.run(server = "netius")

@@ -40,7 +40,6 @@ __license__ = "GNU General Public License (GPL), Version 3"
 import quorum
 
 from metrium.models import base
-from metrium.models import conversation
 
 class Mail(base.Base):
 
@@ -117,6 +116,7 @@ class Mail(base.Base):
     def post_create(self):
         base.Base.post_create(self)
 
+        from metrium.models import conversation
         conversation.Conversation.try_create(self)
 
         pusher = quorum.get_pusher()
@@ -127,6 +127,7 @@ class Mail(base.Base):
     def pre_delete(self):
         base.Base.pre_delete(self)
 
+        from metrium.models import conversation
         conversation.Conversation.try_delete(self)
 
     def _string_without(self, value, token):
