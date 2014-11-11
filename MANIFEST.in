@@ -3,7 +3,9 @@ recursive-include src/metrium/static/css *
 recursive-include src/metrium/static/images *.png
 recursive-include src/metrium/static/images *.ico
 recursive-include src/metrium/static/images/logos *.png
-recursive-include src/metrium/static/js *
+recursive-include src/metrium/static/js *.js
+recursive-include src/metrium/static/js *.join
+recursive-include src/metrium/static/js/base *.js
 recursive-include src/metrium/static/sounds *
 recursive-include src/metrium/templates *.tpl
 recursive-include src/metrium/templates/accounts *.tpl
