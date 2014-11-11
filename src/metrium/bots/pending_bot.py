@@ -39,11 +39,10 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import datetime
 
-import models
+from metrium import models
 
-import base
-
-from metrium import quorum
+from metrium.bots import base
+from metrium.main import quorum
 
 SLEEP_TIME = 20.0
 """ The default sleep time to be used by the bots

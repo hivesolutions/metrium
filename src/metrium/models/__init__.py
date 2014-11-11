@@ -44,7 +44,7 @@ from . import mail
 from . import omni
 from . import pending
 
-from .config import *
+from .config import Config, BasicConfig, MailConfig, OmniConfig, PendingConfig
 from .account import Account
 from .base import Base
 from .conversation import Conversation

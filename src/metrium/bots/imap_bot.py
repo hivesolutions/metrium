@@ -43,9 +43,9 @@ import imaplib
 import email.utils
 import email.header
 
-import models
+from metrium import models
 
-import base
+from metrium.bots import base
 
 SLEEP_TIME = 30.0
 """ The default sleep time to be used by the bots

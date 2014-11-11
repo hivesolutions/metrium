@@ -171,7 +171,7 @@ class Account(base.Base):
 
         # creates the sha1 hash value for the password and verifies that
         # the provided password is the expected
-        password_sha1 = hashlib.sha1(password + PASSWORD_SALT).hexdigest()
+        password_sha1 = hashlib.sha1(quorum.legacy.bytes(password + PASSWORD_SALT)).hexdigest()
         _password = account.password
         if not password_sha1 == _password:
             raise quorum.OperationalError(
