@@ -37,34 +37,21 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import models
+from metrium import models
 
-from metrium import app
-from metrium import flask
-from metrium import quorum
+from metrium.main import app
+from metrium.main import quorum
 
-@app.route("/debug", methods = ("GET",))
-@quorum.ensure("debug.list")
-def list_debug():
-    return flask.render_template(
-        "debug/list.html.tpl",
-        link = "debug"
+@app.route("/omni/callback", methods = ("GET", "POST"), json = True)
+def omni_callback():
+    push = quorum.get_field("push") or "default"
+
+    models.Log.notify(
+        push,
+        type = "info",
+        owner_extra = "omni"
     )
 
-@app.route("/debug.json", methods = ("GET",), json = True)
-@quorum.ensure("debug.list", json = True)
-def list_debug_json():
-    object = quorum.get_object(alias = True, find = True)
-    accounts = models.Debug.find(map = True, sort = [("timestamp", -1)], **object)
-    return accounts
-
-@app.route("/debug/<int:id>", methods = ("GET",))
-@quorum.ensure("debug.show")
-def show_debug(id):
-    debug = models.Debug.get(id = id)
-    return flask.render_template(
-        "debug/show.html.tpl",
-        link = "debug",
-        sub_link = "show",
-        debug = debug
+    return dict(
+        success = True
     )

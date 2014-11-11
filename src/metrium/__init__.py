@@ -34,14 +34,10 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import base
-import imap_bot
-import omni_bot
-import pending_bot
-import twitter_bot
+from . import models
+from . import views
+from . import main
 
-from base import *
-from imap_bot import *
-from omni_bot import *
-from pending_bot import *
-from twitter_bot import *
+from .models import *
+from .views import *
+from .main import app

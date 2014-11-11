@@ -37,38 +37,28 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import quorum
+from metrium.models.config import base
 
-import base
+class PendingConfig(base.Config):
 
-class MailConfig(base.Config):
-
-    host = dict(
-        index = True
+    folders = dict(
+        type = list
     )
 
-    username = dict(
-        index = True
+    severities = dict(
+        type = list
     )
 
-    password = dict(
-        index = True
-    )
-
-    @classmethod
-    def validate_new(cls):
-        return super(MailConfig, cls).validate_new() + [
-            quorum.not_null("host"),
-            quorum.not_empty("host"),
-
-            quorum.not_null("username"),
-            quorum.not_empty("username"),
-
-            quorum.not_null("password"),
-            quorum.not_empty("password"),
-        ]
+    signature = dict()
 
     def pre_create(self):
         base.Config.pre_create(self)
 
-        self.name = "mail"
+        self.name = "pending"
+
+    def items_f(self):
+        return zip(self.folders, self.severities)
+
+    def get_signature(self):
+        if not hasattr(self, "signature"): return None
+        return self.signature

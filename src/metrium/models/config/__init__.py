@@ -34,23 +34,14 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import config
-import account
-import base
-import conversation
-import debug
-import log
-import mail
-import omni
-import pending
+from . import base
+from . import basic
+from . import mail
+from . import omni
+from . import pending
 
-from config import *
-from account import *
-from base import *
-from config import *
-from conversation import *
-from debug import *
-from log import *
-from mail import *
-from omni import *
-from pending import *
+from .base import Config
+from .basic import BasicConfig
+from .mail import MailConfig
+from .omni import OmniConfig
+from .pending import PendingConfig

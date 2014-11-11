@@ -39,22 +39,36 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import quorum
 
-import base
+from metrium.models.config import base
 
-class BasicConfig(base.Config):
+class MailConfig(base.Config):
 
-    url = dict(
+    host = dict(
+        index = True
+    )
+
+    username = dict(
+        index = True
+    )
+
+    password = dict(
         index = True
     )
 
     @classmethod
     def validate_new(cls):
-        return super(BasicConfig, cls).validate_new() + [
-            quorum.not_null("url"),
-            quorum.not_empty("url")
+        return super(MailConfig, cls).validate_new() + [
+            quorum.not_null("host"),
+            quorum.not_empty("host"),
+
+            quorum.not_null("username"),
+            quorum.not_empty("username"),
+
+            quorum.not_null("password"),
+            quorum.not_empty("password"),
         ]
 
     def pre_create(self):
         base.Config.pre_create(self)
 
-        self.name = "basic"
+        self.name = "mail"

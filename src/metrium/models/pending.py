@@ -41,9 +41,9 @@ import hashlib
 
 import quorum
 
-import log
-import base
-import conversation
+from metrium.models import log
+from metrium.models import base
+from metrium.models import conversation
 
 SEVERITIES = dict(
     critical = 10,
@@ -75,12 +75,10 @@ class Pending(base.Base):
     )
 
     description = dict(
-        type = unicode,
         index = True
     )
 
     author = dict(
-        type = unicode,
         index = True
     )
 

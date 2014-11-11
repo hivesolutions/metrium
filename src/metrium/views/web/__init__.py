@@ -34,16 +34,18 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import account
-import base
-import config
-import debug
-import log
-import omni
+from . import account
+from . import base
+from . import config
+from . import debug
+from . import log
+from . import omni
 
-from account import *
-from base import *
-from config import *
-from debug import *
-from log import *
-from omni import *
+from .account import list_accounts, list_accounts_json, new_account, create_account,\
+    show_account, show_account_s, edit_account, update_account, delete_account
+from .base import index, about, signin, login, logout, state, board, video
+from .config import base_config, basic_config, do_basic_config, mail_config,\
+    do_mail_config, pending_config, do_pending_config, omni_config, do_omni_config
+from .debug import list_debug, list_debug_json, show_debug
+from .log import list_logs, list_logs_json, new_log, create_log
+from .omni import omni_callback

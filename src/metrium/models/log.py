@@ -41,13 +41,12 @@ import flask
 
 import quorum
 
-import base
-import account
+from metrium.models import base
+from metrium.models import account
 
 class Log(base.Base):
 
     message = dict(
-        type = unicode,
         index = True
     )
 

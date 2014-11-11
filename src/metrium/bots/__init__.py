@@ -19,9 +19,6 @@
 # You should have received a copy of the GNU General Public License
 # along with Hive Metrium System. If not, see <http://www.gnu.org/licenses/>.
 
-__author__ = "João Magalhães <joamag@hive.pt>"
-""" The author(s) of the module """
-
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -37,28 +34,14 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import base
+from . import base
+from . import imap_bot
+from . import omni_bot
+from . import pending_bot
+from . import twitter_bot
 
-class PendingConfig(base.Config):
-
-    folders = dict(
-        type = list
-    )
-
-    severities = dict(
-        type = list
-    )
-
-    signature = dict()
-
-    def pre_create(self):
-        base.Config.pre_create(self)
-
-        self.name = "pending"
-
-    def items_f(self):
-        return zip(self.folders, self.severities)
-
-    def get_signature(self):
-        if not hasattr(self, "signature"): return None
-        return self.signature
+from .base import Bot
+from .imap_bot import ImapBot
+from .omni_bot import OmniBot
+from .pending_bot import PendingBot
+from .twitter_bot import TwitterBot

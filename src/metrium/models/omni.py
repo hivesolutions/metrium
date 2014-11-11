@@ -37,55 +37,53 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import quorum
+from metrium.models import base
 
-import base
+class Omni(base.Base):
 
-class OmniConfig(base.Config):
-
-    base_url = dict(
+    sales_total = dict(
+        type = list,
         index = True
     )
 
-    username = dict(
+    sales_data = dict(
+        type = list,
         index = True
     )
 
-    password = dict(
+    sales_stores = dict(
+        type = list,
         index = True
     )
 
-    registered = dict()
+    top_stores = dict(
+        type = list,
+        index = True
+    )
+
+    top_employees = dict(
+        type = list,
+        index = True
+    )
 
     @classmethod
-    def validate_new(cls):
-        return super(OmniConfig, cls).validate_new() + [
-            quorum.not_null("base_url"),
-            quorum.not_empty("base_url"),
-
-            quorum.not_null("username"),
-            quorum.not_empty("username"),
-
-            quorum.not_null("password"),
-            quorum.not_empty("password"),
-        ]
-
-    def pre_create(self):
-        base.Config.pre_create(self)
-
-        self.name = "omni"
-
-    def is_registered(self, api, callback_url):
-        # verifies that the registered field exists in case
-        # it does not returns immediately false (no registration)
-        if not hasattr(self, "registered"): return False
-        if not self.registered: return False
-
-        # retrieves the base url of the omni api from the api client
-        # and then retrieves the (already) registered base url and
-        # callback url values and compares them against the new ones
-        # that are going to be used in case they are the same the
-        # registration is considered to be the same
-        base_url = api.base_url
-        _base_url, _callback_url = self.registered.split("$", 1)
-        return base_url == _base_url and callback_url == _callback_url
+    def get_state(cls):
+        omni = cls.get(raise_e = False)
+        if not omni: return dict()
+        return {
+            "omni.sales_total" : [{
+                "sales_total" : omni.sales_total
+            }],
+            "omni.sales_data" : [{
+                "sales_data" : omni.sales_data
+            }],
+            "omni.sales_stores" : [{
+                "sales_stores" : omni.sales_stores
+            }],
+            "omni.top_stores" : [{
+                "top_stores" : omni.top_stores
+            }],
+            "omni.top_employees" : [{
+                "top_employees" : omni.top_employees
+            }]
+        }

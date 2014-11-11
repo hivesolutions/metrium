@@ -37,53 +37,39 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import base
+import datetime
 
-class Omni(base.Base):
+from metrium.models import base
 
-    sales_total = dict(
-        type = list,
-        index = True
-    )
+MAXIMUM_MESSAGES = 1000
+""" The maximum allowed number of messages, messages after
+this offset value will be deleted when the garbage collection
+trigger value is enabled """
 
-    sales_data = dict(
-        type = list,
-        index = True
-    )
+class Debug(base.Base):
 
-    sales_stores = dict(
-        type = list,
-        index = True
-    )
+    message = dict()
 
-    top_stores = dict(
-        type = list,
-        index = True
-    )
-
-    top_employees = dict(
-        type = list,
-        index = True
+    lines = dict(
+        type = list
     )
 
     @classmethod
-    def get_state(cls):
-        omni = cls.get(raise_e = False)
-        if not omni: return dict()
-        return {
-            "omni.sales_total" : [{
-                "sales_total" : omni.sales_total
-            }],
-            "omni.sales_data" : [{
-                "sales_data" : omni.sales_data
-            }],
-            "omni.sales_stores" : [{
-                "sales_stores" : omni.sales_stores
-            }],
-            "omni.top_stores" : [{
-                "top_stores" : omni.top_stores
-            }],
-            "omni.top_employees" : [{
-                "top_employees" : omni.top_employees
-            }]
-        }
+    def log(cls, message, lines = []):
+        debug = cls()
+        debug.message = message
+        debug.lines = lines
+        debug.save()
+
+        if not debug.id % MAXIMUM_MESSAGES == 0: return
+
+        outdated = cls.find(skip = MAXIMUM_MESSAGES, sort = [("timestamp", -1)])
+        for item in outdated: item.delete()
+
+    @classmethod
+    def _build(cls, model, map):
+        base.Base._build(model, map)
+        timestamp = model.get("timestamp", None)
+        timestamp_date = timestamp and datetime.datetime.utcfromtimestamp(timestamp)
+        timestamp_string = timestamp_date and timestamp_date.strftime("%d/%m/%Y %H:%M:%S")
+        model["timestamp_l"] = timestamp_string

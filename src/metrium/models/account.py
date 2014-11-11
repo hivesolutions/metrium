@@ -44,7 +44,7 @@ import datetime
 
 import quorum
 
-import base
+from metrium.models import base
 
 PASSWORD_SALT = "metrium"
 """ The salt suffix to be used during the encoding

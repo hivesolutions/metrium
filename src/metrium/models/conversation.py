@@ -39,25 +39,16 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import quorum
 
-import base
-import conversation
+from metrium.models import base
+from metrium.models import mail
 
-class Mail(base.Base):
-
-    uid = dict(
-        index = True
-    )
-
-    message_id = dict(
-        index = True
-    )
+class Conversation(base.Base):
 
     sender = dict(
         index = True
     )
 
     sender_extra = dict(
-        type = unicode,
         index = True
     )
 
@@ -71,19 +62,19 @@ class Mail(base.Base):
     )
 
     subject = dict(
-        type = unicode,
         index = True
+    )
+
+    mails = dict(
+        type = quorum.references(
+            mail.Mail,
+            name = "id"
+        )
     )
 
     @classmethod
     def validate_new(cls):
-        return super(Mail, cls).validate_new() + [
-            quorum.not_null("uid"),
-            quorum.not_empty("uid"),
-
-            quorum.not_null("message_id"),
-            quorum.not_empty("message_id"),
-
+        return super(Conversation, cls).validate_new() + [
             quorum.not_null("sender"),
             quorum.not_empty("sender"),
 
@@ -95,9 +86,51 @@ class Mail(base.Base):
             quorum.not_null("subject")
         ]
 
+    @classmethod
+    def from_mail(cls, mail):
+        instance = cls()
+        instance.sender = mail.sender
+        instance.sender_extra = mail.sender_extra
+        instance.folder = mail.folder
+        instance.date = mail.date
+        instance.subject = mail.get_subject_f()
+        instance.mails = []
+        return instance
+
+    @classmethod
+    def try_create(cls, mail):
+        subject = mail.get_subject_f()
+        conversation = cls.get(
+            subject = subject,
+            raise_e = False
+        )
+
+        if not conversation:
+            conversation = cls.from_mail(mail)
+
+        conversation.mails.append(mail.id)
+        conversation.save()
+
+    @classmethod
+    def try_delete(cls, mail):
+        subject = mail.get_subject_f()
+        conversation = cls.get(
+            subject = subject,
+            raise_e = False
+        )
+
+        if not conversation: return
+
+        exists = conversation.mails.contains(mail.id)
+        if not exists: return
+
+        conversation.mails.remove(mail.id)
+        is_empty = conversation.mails.is_empty()
+        if is_empty: conversation.delete()
+        else: conversation.save()
+
     def get_event(self):
         return dict(
-            message_id = self.message_id,
             sender = self.sender,
             sender_extra = self.sender_extra,
             folder = self.folder,
@@ -105,33 +138,17 @@ class Mail(base.Base):
             subject = self.subject
         )
 
-    def get_subject_f(self):
-        subject = self.subject.strip()
-        subject = self._string_without(subject, "re: ")
-        subject = self._string_without(subject, "Re: ")
-        subject = self._string_without(subject, "RE: ")
-        subject = self._string_without(subject, "fw: ")
-        subject = self._string_without(subject, "Fw: ")
-        subject = self._string_without(subject, "FW: ")
-        subject = subject.strip()
-        return subject
-
     def post_create(self):
         base.Base.post_create(self)
 
-        conversation.Conversation.try_create(self)
-
         pusher = quorum.get_pusher()
-        pusher["global"].trigger("mail.new", {
+        pusher["global"].trigger("conversation.new", {
             "contents" : self.get_event()
         })
 
     def pre_delete(self):
         base.Base.pre_delete(self)
 
-        conversation.Conversation.try_delete(self)
-
-    def _string_without(self, value, token):
-        if not value.startswith(token): return value
-        token_l = len(token)
-        return value[token_l:]
+        import pending
+        pendings = pending.Pending.find(conversation = self.id)
+        for pending in pendings: pending.delete()

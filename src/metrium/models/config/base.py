@@ -37,9 +37,9 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import models.base
+from metrium.models import base
 
-class Config(models.base.Base):
+class Config(base.Base):
 
     name = dict(
         index = True
