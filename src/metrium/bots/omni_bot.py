@@ -41,8 +41,9 @@ import omni
 
 from metrium import models
 
-from metrium.bots import base
 from metrium.main import quorum
+
+from . import base
 
 SLEEP_TIME = 60.0
 """ The default sleep time to be used by the bots

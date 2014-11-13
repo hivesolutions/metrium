@@ -39,8 +39,8 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import quorum
 
-from metrium.models import base
-from metrium.models import mail
+from . import base
+from . import mail
 
 class Conversation(base.Base):
 

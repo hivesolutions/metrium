@@ -39,7 +39,7 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import quorum
 
-from metrium.models.config import base
+from . import base
 
 class BasicConfig(base.Config):
 

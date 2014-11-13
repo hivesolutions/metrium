@@ -39,7 +39,7 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import datetime
 
-from metrium.models import base
+from . import base
 
 MAXIMUM_MESSAGES = 1000
 """ The maximum allowed number of messages, messages after

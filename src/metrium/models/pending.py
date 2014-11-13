@@ -41,9 +41,9 @@ import hashlib
 
 import quorum
 
-from metrium.models import log
-from metrium.models import base
-from metrium.models import conversation
+from . import log
+from . import base
+from . import conversation
 
 SEVERITIES = dict(
     critical = 10,

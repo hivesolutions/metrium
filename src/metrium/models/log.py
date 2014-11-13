@@ -41,8 +41,8 @@ import flask
 
 import quorum
 
-from metrium.models import base
-from metrium.models import account
+from . import base
+from . import account
 
 class Log(base.Base):
 

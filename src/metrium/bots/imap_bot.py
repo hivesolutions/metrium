@@ -45,7 +45,7 @@ import email.header
 
 from metrium import models
 
-from metrium.bots import base
+from . import base
 
 SLEEP_TIME = 30.0
 """ The default sleep time to be used by the bots
