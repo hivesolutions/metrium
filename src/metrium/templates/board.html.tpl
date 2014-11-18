@@ -34,6 +34,7 @@
             <div class="boards">
                 {% include "boards/global.html.tpl" %}
                 {% include "boards/pending.html.tpl" %}
+                {% include "boards/sales.html.tpl" %}
             </div>
         </div>
     </div>
