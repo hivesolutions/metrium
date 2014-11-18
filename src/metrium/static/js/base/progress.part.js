@@ -33,40 +33,47 @@
             var targetP = target ? (target - value) * 2.0 / 100.0 : 0.0;
             var remainingP = 2.0 - targetP - valueP;
 
-            var canvas = matchedObject[0];
-            var context = canvas.getContext("2d");
-            context.setTransform(1, 0, 0, 1, 0, 0);
-            context.clearRect(0, 0, width, height);
+            var _draw = function(canvas) {
+                var context = canvas.getContext("2d");
+                context.setTransform(1, 0, 0, 1, 0, 0);
+                context.clearRect(0, 0, width, height);
 
-            var centerX = width / 2;
-            var centerY = height / 2;
-            var lower = width > height ? height : width;
-            var radius = (lower / 2) - 18;
+                var centerX = width / 2;
+                var centerY = height / 2;
+                var lower = width > height ? height : width;
+                var radius = (lower / 2) - 18;
 
-            context.translate(centerX, centerY);
-            context.rotate(Math.PI / 2 * -1);
+                context.translate(centerX, centerY);
+                context.rotate(Math.PI / 2 * -1);
 
-            context.beginPath();
-            context.arc(0, 0, radius, 0, valueP * Math.PI, false);
-            context.lineWidth = 12;
-            context.strokeStyle = "#d6de23";
-            context.stroke();
-            context.rotate(valueP * Math.PI);
-
-            if (target) {
                 context.beginPath();
-                context.arc(0, 0, radius, 0, targetP * Math.PI, false);
+                context.arc(0, 0, radius, 0, valueP * Math.PI, false);
                 context.lineWidth = 12;
-                context.strokeStyle = "#ee4036";
+                context.strokeStyle = "#d6de23";
                 context.stroke();
-                context.rotate(targetP * Math.PI);
-            }
+                context.rotate(valueP * Math.PI);
 
-            context.beginPath();
-            context.arc(0, 0, radius, 0, remainingP * Math.PI, false);
-            context.lineWidth = 12;
-            context.strokeStyle = "rgba(255, 255, 255, 0.6)";
-            context.stroke();
+                if (target) {
+                    context.beginPath();
+                    context.arc(0, 0, radius, 0, targetP * Math.PI, false);
+                    context.lineWidth = 12;
+                    context.strokeStyle = "#ee4036";
+                    context.stroke();
+                    context.rotate(targetP * Math.PI);
+                }
+
+                context.beginPath();
+                context.arc(0, 0, radius, 0, remainingP * Math.PI, false);
+                context.lineWidth = 12;
+                context.strokeStyle = "rgba(255, 255, 255, 0.6)";
+                context.stroke();
+            };
+
+            matchedObject.each(function(index, element) {
+                        var _element = jQuery(this);
+                        var canvas = _element[0];
+                        _draw(canvas);
+                    });
         };
 
         initialize();
