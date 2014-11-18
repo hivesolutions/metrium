@@ -51,6 +51,7 @@
         var matchedObject = this;
         var pusher = jQuery(".pusher", matchedObject);
         var status = jQuery(".status", matchedObject);
+        var _window = jQuery(window);
 
         pusher = pusher.data("pusher");
         if (!pusher) {
@@ -76,6 +77,22 @@
                     function(event, type, owner, message) {
                         _showMessage(type, owner, message);
                         _playSound("/static/sounds/" + type + ".mp3");
+                    });
+
+            _window.keydown(function(event) {
+                        var keyValue = event.keyCode
+                                ? event.keyCode
+                                : event.charCode ? event.charCode : event.which;
+
+                        switch (keyValue) {
+                            case 37 :
+                                _previous();
+                                break;
+
+                            case 39 :
+                                _next();
+                                break;
+                        }
                     });
 
             connection.bind("connecting", function() {
@@ -145,10 +162,22 @@
             }
 
             setInterval(function() {
-                        var index = matchedObject.data("index");
-                        index = index + 1 >= boards.length ? 0 : index + 1;
-                        _showBoard(index);
+                        _next();
                     }, BOARD_TIMEOUT);
+        };
+
+        var _next = function() {
+            var boards = jQuery(".boards > .board", matchedObject);
+            var index = matchedObject.data("index");
+            index = index + 1 >= boards.length ? 0 : index + 1;
+            _showBoard(index);
+        };
+
+        var _previous = function() {
+            var boards = jQuery(".boards > .board", matchedObject);
+            var index = matchedObject.data("index");
+            index = index - 1 >= 0 ? index - 1 : boards.length - 1;
+            _showBoard(index);
         };
 
         var _hide = function() {
@@ -390,6 +419,9 @@
             global.bind("omni.sales_stores", function(data) {
                         _updateSalesStores(data.sales_stores);
                     });
+            global.bind("omni.entries_stores", function(data) {
+                        _updateEntriesStores(data.entries_stores);
+                    });
             global.bind("omni.top_stores", function(data) {
                         _updateTopStores(data.top_stores);
                     });
@@ -455,6 +487,29 @@
             }
         };
 
+        var _updateEntriesStores = function(entriesStores, marker) {
+            var _entriesStores = jQuery(".entries-stores", matchedObject);
+            var tableBody = jQuery("table > tbody", _entriesStores);
+            tableBody.empty();
+
+            var size = entriesStores.length > 5 ? 5 : entriesStores.length;
+
+            for (var index = 0; index < size; index++) {
+                var item = entriesStores[index];
+                var current = item[0].toFixed(0) + " x";
+                var previous = item[1].toFixed(0) + " x";
+                var name = item[2];
+                var row = jQuery("<tr>" + "<td>" + name + "</td>"
+                        + "<td class=\"value\">" + previous + "</td>"
+                        + "<td class=\"value\">" + current + "</td>" + "</tr>");
+                if (marker) {
+                    row.append("<td class=\"marker\">"
+                            + "<div class=\"up color\"></div>" + "</td>");
+                }
+                tableBody.append(row);
+            }
+        };
+
         var _updateTopStores = function(topStores) {
             var _topStores = jQuery(".top-stores", matchedObject);
             var bubleContent = jQuery(".bubble-content", _topStores);
@@ -483,8 +538,8 @@
 
             for (var index = 0; index < size; index++) {
                 var item = topEmployees[index];
-                var amount = item[0].toFixed(2);
-                var number = item[1].toFixed(0);
+                var amount = String(item[0]);
+                var number = String(item[1]);
                 var name = item[2];
                 var imageUrl = item[3];
                 var topContents = jQuery("<div class=\"top-contents\">"

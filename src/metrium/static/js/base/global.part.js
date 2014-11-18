@@ -17,6 +17,9 @@
             global.bind("omni.sales_stores", function(data) {
                         _updateSalesStores(data.sales_stores);
                     });
+            global.bind("omni.entries_stores", function(data) {
+                        _updateEntriesStores(data.entries_stores);
+                    });
             global.bind("omni.top_stores", function(data) {
                         _updateTopStores(data.top_stores);
                     });
@@ -70,6 +73,29 @@
                 var item = salesStores[index];
                 var current = item[0].toFixed(2);
                 var previous = item[1].toFixed(2);
+                var name = item[2];
+                var row = jQuery("<tr>" + "<td>" + name + "</td>"
+                        + "<td class=\"value\">" + previous + "</td>"
+                        + "<td class=\"value\">" + current + "</td>" + "</tr>");
+                if (marker) {
+                    row.append("<td class=\"marker\">"
+                            + "<div class=\"up color\"></div>" + "</td>");
+                }
+                tableBody.append(row);
+            }
+        };
+
+        var _updateEntriesStores = function(entriesStores, marker) {
+            var _entriesStores = jQuery(".entries-stores", matchedObject);
+            var tableBody = jQuery("table > tbody", _entriesStores);
+            tableBody.empty();
+
+            var size = entriesStores.length > 5 ? 5 : entriesStores.length;
+
+            for (var index = 0; index < size; index++) {
+                var item = entriesStores[index];
+                var current = item[0].toFixed(0) + " x";
+                var previous = item[1].toFixed(0) + " x";
                 var name = item[2];
                 var row = jQuery("<tr>" + "<td>" + name + "</td>"
                         + "<td class=\"value\">" + previous + "</td>"

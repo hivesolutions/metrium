@@ -11,9 +11,9 @@
             <div class="logo"></div>
             <ul class="sections">
                 <li class="active">global</li>
+                <li>vendas</li>
                 <li>pendentes</li>
                 <li>encomendas</li>
-                <li>vendas</li>
                 <li>gravações</li>
             </ul>
         </div>
@@ -33,8 +33,8 @@
             </div>
             <div class="boards">
                 {% include "boards/global.html.tpl" %}
-                {% include "boards/pending.html.tpl" %}
                 {% include "boards/sales.html.tpl" %}
+                {% include "boards/pending.html.tpl" %}
             </div>
         </div>
     </div>

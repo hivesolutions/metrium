@@ -41,7 +41,7 @@ import time
 import threading
 import traceback
 
-import models
+from metrium import models
 
 SLEEP_TIME = 1.0
 """ The default sleep time to be used by the bots
