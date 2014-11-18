@@ -39,9 +39,9 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import datetime
 
-from metrium import models
+import quorum
 
-from metrium.main import quorum
+from metrium import models
 
 from . import base
 
