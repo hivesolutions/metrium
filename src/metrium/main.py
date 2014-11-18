@@ -53,10 +53,10 @@ the mongo database """
 
 @quorum.onrun
 def onrun():
-    import bots
-    omni_bot = bots.OmniBot()
-    imap_bot = bots.ImapBot()
-    pending_bot = bots.PendingBot()
+    import metrium.bots
+    omni_bot = metrium.bots.OmniBot()
+    imap_bot = metrium.bots.ImapBot()
+    pending_bot = metrium.bots.PendingBot()
     omni_bot.start()
     imap_bot.start()
     pending_bot.start()
