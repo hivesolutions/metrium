@@ -56,6 +56,11 @@ class Omni(base.Base):
         index = True
     )
 
+    entries_stores = dict(
+        type = list,
+        index = True
+    )
+
     top_stores = dict(
         type = list,
         index = True
@@ -79,6 +84,9 @@ class Omni(base.Base):
             }],
             "omni.sales_stores" : [{
                 "sales_stores" : omni.sales_stores
+            }],
+            "omni.entries_stores" : [{
+                "entries_stores" : omni.entries_stores
             }],
             "omni.top_stores" : [{
                 "top_stores" : omni.top_stores
