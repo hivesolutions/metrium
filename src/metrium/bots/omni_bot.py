@@ -68,6 +68,7 @@ class OmniBot(base.Bot):
         sales_total = self.sales_total(api)
         sales_data = self.sales_data(api)
         sales_stores = self.sales_stores(api)
+        entries_stores = self.entries_stores(api)
         top_stores = self.top_stores(api)
         top_employees = self.top_employees(api)
 
@@ -76,6 +77,7 @@ class OmniBot(base.Bot):
         _omni.sales_total = sales_total
         _omni.sales_data = sales_data
         _omni.sales_stores = sales_stores
+        _omni.entries_stores = entries_stores
         _omni.top_stores = top_stores
         _omni.top_employees = top_employees
         _omni.save()
@@ -89,6 +91,9 @@ class OmniBot(base.Bot):
         })
         pusher["global"].trigger("omni.sales_stores", {
             "sales_stores" : sales_stores
+        })
+        pusher["global"].trigger("omni.entries_stores", {
+            "entries_stores" : entries_stores
         })
         pusher["global"].trigger("omni.top_stores", {
             "top_stores" : top_stores
@@ -157,6 +162,21 @@ class OmniBot(base.Bot):
 
         sales_stores.sort(reverse = True)
         return sales_stores
+
+    def entries_stores(self, api):
+        entries_stores = []
+
+        stats = api.stats_sales(span = 2)
+        for _object_id, values in stats.items():
+            name = values["name"]
+            number_entries = values["number_entries"]
+            current = number_entries[-1]
+            previous = number_entries[-2]
+            tuple = (current, previous, name)
+            entries_stores.append(tuple)
+
+        entries_stores.sort(reverse = True)
+        return entries_stores
 
     def top_stores(self, api):
         top_stores = []
