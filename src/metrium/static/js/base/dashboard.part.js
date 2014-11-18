@@ -7,6 +7,7 @@
         var matchedObject = this;
         var pusher = jQuery(".pusher", matchedObject);
         var status = jQuery(".status", matchedObject);
+        var _window = jQuery(window);
 
         pusher = pusher.data("pusher");
         if (!pusher) {
@@ -32,6 +33,22 @@
                     function(event, type, owner, message) {
                         _showMessage(type, owner, message);
                         _playSound("/static/sounds/" + type + ".mp3");
+                    });
+
+            _window.keydown(function(event) {
+                        var keyValue = event.keyCode
+                                ? event.keyCode
+                                : event.charCode ? event.charCode : event.which;
+
+                        switch (keyValue) {
+                            case 37 :
+                                _previous();
+                                break;
+
+                            case 39 :
+                                _next();
+                                break;
+                        }
                     });
 
             connection.bind("connecting", function() {
@@ -101,10 +118,22 @@
             }
 
             setInterval(function() {
-                        var index = matchedObject.data("index");
-                        index = index + 1 >= boards.length ? 0 : index + 1;
-                        _showBoard(index);
+                        _next();
                     }, BOARD_TIMEOUT);
+        };
+
+        var _next = function() {
+            var boards = jQuery(".boards > .board", matchedObject);
+            var index = matchedObject.data("index");
+            index = index + 1 >= boards.length ? 0 : index + 1;
+            _showBoard(index);
+        };
+
+        var _previous = function() {
+            var boards = jQuery(".boards > .board", matchedObject);
+            var index = matchedObject.data("index");
+            index = index - 1 >= 0 ? index - 1 : boards.length - 1;
+            _showBoard(index);
         };
 
         var _hide = function() {
