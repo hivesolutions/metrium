@@ -117,7 +117,7 @@
 
             for (var index = 0; index < size; index++) {
                 var item = topStores[index];
-                var value = String(item[0]);
+                var value = item[0].toFixed(0);
                 var name = item[1];
                 var bubleContents = jQuery("<div class=\"bubble-contents\">"
                         + "<div class=\"value\">" + value + "</div>"
@@ -136,8 +136,8 @@
 
             for (var index = 0; index < size; index++) {
                 var item = topEmployees[index];
-                var amount = String(item[0]);
-                var number = String(item[1]);
+                var amount = item[0].toFixed(2);
+                var number = item[1].toFixed(0);
                 var name = item[2];
                 var imageUrl = item[3];
                 var topContents = jQuery("<div class=\"top-contents\">"
