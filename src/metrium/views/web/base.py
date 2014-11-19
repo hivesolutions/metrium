@@ -62,12 +62,18 @@ def about():
 
 @app.route("/signin", methods = ("GET",))
 def signin():
+    next = quorum.get_field("next")
     return flask.render_template(
-        "signin.html.tpl"
+        "signin.html.tpl",
+        next = next
     )
 
 @app.route("/signin", methods = ("POST",))
 def login():
+    # retrieves the next field that may be used latter
+    # to re-direct the user back to the original place
+    next = quorum.get_field("next")
+
     # retrieves the username and the password fields
     # and uses them to run the login logic raising an
     # error in case an invalid authentication occurs
@@ -78,6 +84,7 @@ def login():
         return flask.render_template(
             "signin.html.tpl",
             username = username,
+            next = next,
             error = error.message
         )
 
@@ -91,18 +98,19 @@ def login():
     flask.session.permanent = True
 
     return flask.redirect(
-        flask.url_for("index")
+        next or flask.url_for("index")
     )
 
 @app.route("/signout", methods = ("GET", "POST"))
 def logout():
+    next = quorum.get_field("next")
+
     if "username" in flask.session: del flask.session["username"]
     if "tokens" in flask.session: del flask.session["tokens"]
 
     return flask.redirect(
-        flask.url_for("signin")
+        flask.url_for("signin", next = next)
     )
-
 
 @app.route("/state", methods = ("GET",), json = True)
 @quorum.ensure("state", json = True)
@@ -113,8 +121,8 @@ def state():
 
     state = dict(
         log = log_state,
-        pending  = pending_state,
-        omni  = omni_state
+        pending = pending_state,
+        omni = omni_state
     )
     return state
 
