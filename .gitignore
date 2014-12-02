@@ -3,5 +3,5 @@
 
 *.shelve*
 
-/dist/
-/src/metrium.egg-info/
+/dist
+/src/metrium.egg-info
