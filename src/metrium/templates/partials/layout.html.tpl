@@ -30,6 +30,12 @@
                     <a href="{{ url_for('list_logs') }}">log</a>
                 {% endif %}
                 //
+                {% if link == "events" %}
+                    <a href="{{ url_for('base_events') }}" class="active">events</a>
+                {% else %}
+                    <a href="{{ url_for('base_events') }}">events</a>
+                {% endif %}
+                //
                 {% if link == "config" %}
                     <a href="{{ url_for('base_config') }}" class="active">config</a>
                 {% else %}

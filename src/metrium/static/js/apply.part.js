@@ -14,5 +14,8 @@
 
         var lineChart = jQuery(".line-chart", matchedObject);
         lineChart.ulinechart();
+
+        var videoPreview = jQuery(".video-preview", matchedObject);
+        videoPreview.uvideopreview();
     };
 })(jQuery);

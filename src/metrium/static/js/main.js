@@ -39,6 +39,9 @@
 
         var lineChart = jQuery(".line-chart", matchedObject);
         lineChart.ulinechart();
+
+        var videoPreview = jQuery(".video-preview", matchedObject);
+        videoPreview.uvideopreview();
     };
 })(jQuery);
 
@@ -116,7 +119,7 @@
 
             global.bind("video.open", function(data) {
                         var url = data.url;
-                        _showVideo(url);
+                        url && _showVideo(url);
                     });
 
             video.bind("ended", function() {
@@ -861,6 +864,33 @@
                     var pusher = new Pusher(key);
                     element.data("pusher", pusher);
                 });
+        return matchedObject;
+    };
+})(jQuery);
+
+(function(jQuery) {
+    jQuery.fn.uvideopreview = function(options) {
+        var matchedObject = this;
+        var url = jQuery(".text-field[name=url]", matchedObject);
+        var previewPanel = jQuery(".preview-panel", matchedObject);
+
+        previewPanel.hide();
+
+        url.bind("value_change", function() {
+                    var element = jQuery(this);
+                    var videoPreview = element.parents(".video-preview");
+                    var previewPanel = jQuery(".preview-panel", videoPreview);
+                    var videoTarget = jQuery(".video-target", previewPanel);
+                    var value = element.uxvalue();
+                    if (value) {
+                        previewPanel.show();
+                        videoTarget.html(value);
+                        videoTarget.uxvideo();
+                    } else {
+                        previewPanel.hide();
+                    }
+                });
+
         return matchedObject;
     };
 })(jQuery);

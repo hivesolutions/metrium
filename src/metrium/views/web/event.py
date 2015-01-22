@@ -19,6 +19,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Hive Metrium System. If not, see <http://www.gnu.org/licenses/>.
 
+__author__ = "João Magalhães <joamag@hive.pt>"
+""" The author(s) of the module """
+
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -34,20 +37,40 @@ __copyright__ = "Copyright (c) 2008-2015 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-from . import account
-from . import base
-from . import config
-from . import debug
-from . import event
-from . import log
-from . import omni
+from metrium.main import app
+from metrium.main import flask
+from metrium.main import quorum
 
-from .account import list_accounts, list_accounts_json, new_account, create_account,\
-    show_account, show_account_s, edit_account, update_account, delete_account
-from .base import index, about, signin, login, logout, state, board, video
-from .config import base_config, basic_config, do_basic_config, mail_config,\
-    do_mail_config, pending_config, do_pending_config, omni_config, do_omni_config
-from .debug import list_debug, list_debug_json, show_debug
-from .event import base_events, video_event, do_video_event
-from .log import list_logs, list_logs_json, new_log, create_log
-from .omni import omni_callback
+@app.route("/events", methods = ("GET",))
+@quorum.ensure("event.base")
+def base_events():
+    return flask.render_template(
+        "event/base.html.tpl",
+        link = "events",
+        sub_link = "base"
+    )
+
+@app.route("/events/videos/new", methods = ("GET",))
+@quorum.ensure("event.video")
+def video_event():
+    return flask.render_template(
+        "event/video.html.tpl",
+        link = "events",
+        sub_link = "video",
+        video = {},
+        errors = {}
+    )
+
+@app.route("/events/videos", methods = ("POST",))
+@quorum.ensure("event.video")
+def do_video_event():
+    url = quorum.get_field("url")
+
+    pusher = quorum.get_pusher()
+    pusher["global"].trigger("video.open", {
+        "url" : url
+    })
+
+    return flask.redirect(
+        flask.url_for("base_events")
+    )

@@ -636,3 +636,7 @@ body.romantic .dashboard .date .time {
 .dashboard .box ul.pending li.major .marker {
     background-position: 0px -72px;
 }
+
+.video-preview .video-target {
+    margin-top: 10px;
+}

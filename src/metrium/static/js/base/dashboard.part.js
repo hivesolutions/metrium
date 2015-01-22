@@ -72,7 +72,7 @@
 
             global.bind("video.open", function(data) {
                         var url = data.url;
-                        _showVideo(url);
+                        url && _showVideo(url);
                     });
 
             video.bind("ended", function() {
