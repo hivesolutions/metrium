@@ -86,6 +86,7 @@ setuptools.setup(
         "quorum",
         "pymongo",
         "redis",
+        "pusher",
         "omni_api"
     ],
     classifiers = [
