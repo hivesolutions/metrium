@@ -83,22 +83,22 @@ class OmniBot(base.Bot):
         _omni.save()
 
         pusher = quorum.get_pusher()
-        pusher["global"].trigger("omni.sales_total", {
+        pusher.trigger("global", "omni.sales_total", {
             "sales_total" : sales_total
         })
-        pusher["global"].trigger("omni.sales_data", {
+        pusher.trigger("global", "omni.sales_data", {
             "sales_data" : sales_data
         })
-        pusher["global"].trigger("omni.sales_stores", {
+        pusher.trigger("global", "omni.sales_stores", {
             "sales_stores" : sales_stores
         })
-        pusher["global"].trigger("omni.entries_stores", {
+        pusher.trigger("global", "omni.entries_stores", {
             "entries_stores" : entries_stores
         })
-        pusher["global"].trigger("omni.top_stores", {
+        pusher.trigger("global", "omni.top_stores", {
             "top_stores" : top_stores
         })
-        pusher["global"].trigger("omni.top_employees", {
+        pusher.trigger("global", "omni.top_employees", {
             "top_employees" : top_employees
         })
 

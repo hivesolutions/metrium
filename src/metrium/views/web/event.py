@@ -67,7 +67,7 @@ def do_video_event():
     url = quorum.get_field("url")
 
     pusher = quorum.get_pusher()
-    pusher["global"].trigger("video.open", {
+    pusher.trigger("global", "video.open", {
         "url" : url
     })
 

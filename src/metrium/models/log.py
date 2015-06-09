@@ -128,7 +128,7 @@ class Log(base.Base):
         base.Base.post_create(self)
 
         pusher = quorum.get_pusher()
-        pusher["global"].trigger("log.message", {
+        pusher.trigger("global", "log.message", {
             "contents" : self.get_event()
         })
 

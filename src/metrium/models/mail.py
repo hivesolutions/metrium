@@ -120,7 +120,7 @@ class Mail(base.Base):
         conversation.Conversation.try_create(self)
 
         pusher = quorum.get_pusher()
-        pusher["global"].trigger("mail.new", {
+        pusher.trigger("global", "mail.new", {
             "contents" : self.get_event()
         })
 

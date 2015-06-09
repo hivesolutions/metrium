@@ -59,7 +59,7 @@ class PendingBot(base.Bot):
         if not pendings: return
 
         pusher = quorum.get_pusher()
-        pusher["global"].trigger("pending.update", {
+        pusher.trigger("global", "pending.update", {
             "pendings" : pendings
         })
 

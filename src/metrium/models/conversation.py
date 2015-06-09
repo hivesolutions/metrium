@@ -142,7 +142,7 @@ class Conversation(base.Base):
         base.Base.post_create(self)
 
         pusher = quorum.get_pusher()
-        pusher["global"].trigger("conversation.new", {
+        pusher.trigger("global", "conversation.new", {
             "contents" : self.get_event()
         })
 
