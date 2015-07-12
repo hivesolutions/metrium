@@ -35,12 +35,14 @@ __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
 from . import base
+from . import github_bot
 from . import imap_bot
 from . import omni_bot
 from . import pending_bot
 from . import twitter_bot
 
 from .base import Bot
+from .github_bot import GithubBot
 from .imap_bot import ImapBot
 from .omni_bot import OmniBot
 from .pending_bot import PendingBot
