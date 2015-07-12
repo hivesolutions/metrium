@@ -184,11 +184,16 @@ def do_omni_config():
 @quorum.ensure("config.github")
 def github_config():
     config = models.GithubConfig.get(raise_e = False) or {}
+    if config:
+        api = config.get_api()
+        repos = api.self_repos()
+    else: repos = []
     return flask.render_template(
         "config/github.html.tpl",
         link = "config",
         sub_link = "github",
         config = config,
+        repos = repos,
         errors = {}
     )
     
