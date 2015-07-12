@@ -42,6 +42,11 @@ import quorum
 
 from . import base
 
+SCOPE = (
+    "user:email",
+    "repo"
+)
+
 class GithubConfig(base.Config):
 
     access_token = dict(
@@ -67,9 +72,9 @@ class GithubConfig(base.Config):
         ]
 
     @classmethod
-    def get_api(cls):
+    def get_api(cls, scope = SCOPE):
         config = cls.singleton()
-        api = github.Api()
+        api = github.Api(scope = scope)
         api.access_token = config and config.access_token
         return api
 
