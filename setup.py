@@ -88,7 +88,7 @@ setuptools.setup(
         "redis",
         "pusher",
         "omni_api",
-        "github_api"
+        "github_api_python"
     ],
     classifiers = [
         "Development Status :: 3 - Alpha",
