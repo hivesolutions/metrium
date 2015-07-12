@@ -44,20 +44,32 @@ from metrium.main import flask
 from metrium.main import quorum
 
 @app.route("/github/authorize", methods = ("GET",))
+@quorum.ensure("github.authorize")
 def github_authorize():
+    next = quorum.get_field("next")
     api = models.GithubConfig.get_api()
     return flask.redirect(
-        api.oauth_authorize()
+        api.oauth_authorize(state = next)
     )
 
 @app.route("/github/oauth", methods = ("GET",))
 def github_oauth():
     code = quorum.get_field("code")
+    next = quorum.get_field("next")
+    error = quorum.get_field("error")
+    error_description = quorum.get_field("error_description")
+    if error:
+        return flask.render_template(
+            "error.html.tpl",
+            error = error,
+            description = error_description
+        )
+    
     api = models.GithubConfig.get_api()
     access_token = api.oauth_access(code)
     config = models.GithubConfig.singleton()
     config.access_token = access_token
     flask.session["gh.access_token"] = access_token
     return flask.redirect(
-        flask.url_for("github.index")
+        next or flask.url_for("index")
     )
