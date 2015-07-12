@@ -37,6 +37,7 @@ __copyright__ = "Copyright (c) 2008-2015 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
+import omni
 import quorum
 
 from . import base
@@ -69,6 +70,15 @@ class OmniConfig(base.Config):
             quorum.not_null("password"),
             quorum.not_empty("password")
         ]
+
+    @classmethod
+    def get_api(cls):
+        config = cls.singleton()
+        api = omni.Api()
+        api.base_url = config and config.base_url,
+        api.username = config and config.username,
+        api.password = config and config.password
+        return api
 
     def pre_create(self):
         base.Config.pre_create(self)
