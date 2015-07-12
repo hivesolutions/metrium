@@ -3,6 +3,6 @@
 {% block name %}Config :: GitHub{% endblock %}
 {% block content %}
     <form action="{{ url_for('do_github_config') }}" method="post" class="form">
-        <span class="button" data-link="#">Link Account</span>
+        <span class="button" data-link="{{ url_for('github_authorize') }}">Link Account</span>
     </form>
 {% endblock %}
