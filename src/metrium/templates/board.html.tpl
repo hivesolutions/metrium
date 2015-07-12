@@ -10,11 +10,13 @@
         <div class="header">
             <div class="logo"></div>
             <ul class="sections">
-                <li class="active">global</li>
-                <li>vendas</li>
-                <li>pendentes</li>
-                <li>encomendas</li>
-                <li>gravações</li>
+            	{% if variant == "sales" %}
+                    <li class="active">global</li>
+                    <li>vendas</li>
+                    <li>pendentes</li>
+                    <li>encomendas</li>
+                    <li>gravações</li>
+                {% endif %}
             </ul>
         </div>
         <div class="message success">
@@ -32,9 +34,11 @@
                 <div class="news"></div>
             </div>
             <div class="boards">
-                {% include "boards/global.html.tpl" %}
-                {% include "boards/sales.html.tpl" %}
-                {% include "boards/pending.html.tpl" %}
+            	{% if variant == "sales" %}
+                    {% include "boards/global.html.tpl" %}
+                    {% include "boards/sales.html.tpl" %}
+                    {% include "boards/pending.html.tpl" %}
+                {% endif %}
             </div>
         </div>
     </div>
