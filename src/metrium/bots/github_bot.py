@@ -67,7 +67,7 @@ class GithubBot(base.Bot):
         _github.save()
 
         pusher = quorum.get_pusher()
-        pusher.trigger("global", "omni.commits_total", {
+        pusher.trigger("global", "github.commits_total", {
             "commits_total" : commits_total
         })
 
@@ -85,7 +85,7 @@ class GithubBot(base.Bot):
             if not item: continue
             item_l = len(item)
             current = item[-1]
-            previous = item[-1] if item_l > 1 else dict(total = 0)
+            previous = item[-2] if item_l > 1 else dict(total = 0)
             current_t = current["total"]
             previous_t = previous["total"]
             count[0] += previous_t
