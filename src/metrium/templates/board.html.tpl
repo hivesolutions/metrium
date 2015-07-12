@@ -2,7 +2,7 @@
 {% block title %}Dashboard{% endblock %}
 {% block name %}Dashboard{% endblock %}
 {% block content %}
-    <div class="dashboard">
+    <div class="dashboard {{ variant }}">
         <audio class="sound"></audio>
         <div class="video" data-width="1280" data-height="780" data-hd="1"
              data-chromeless="1" data-auto_play="1"></div>
@@ -33,7 +33,9 @@
                     <div class="day"></div>
                     <div class="time"></div>
                 </div>
-                <div class="news"></div>
+                {% if variant == "sales" %}
+                    <div class="news"></div>
+                {% endif %}
             </div>
             <div class="boards">
                 {% if variant == "sales" %}
