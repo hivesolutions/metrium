@@ -55,7 +55,7 @@ def github_authorize():
 @app.route("/github/oauth", methods = ("GET",))
 def github_oauth():
     code = quorum.get_field("code")
-    next = quorum.get_field("next")
+    next = quorum.get_field("state")
     error = quorum.get_field("error")
     error_description = quorum.get_field("error_description")
     if error:
