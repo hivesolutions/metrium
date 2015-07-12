@@ -75,8 +75,8 @@ class OmniConfig(base.Config):
     def get_api(cls):
         config = cls.singleton()
         api = omni.Api()
-        api.base_url = config and config.base_url,
-        api.username = config and config.username,
+        api.base_url = config and config.base_url
+        api.username = config and config.username
         api.password = config and config.password
         return api
 
