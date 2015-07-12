@@ -37,8 +37,6 @@ __copyright__ = "Copyright (c) 2008-2015 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import omni
-
 import quorum
 
 from metrium import models
@@ -57,12 +55,7 @@ class OmniBot(base.Bot):
         base.Bot.__init__(self, sleep_time, *args, **kwargs)
 
     def tick(self):
-        config = models.OmniConfig.get()
-        api = omni.Api(
-            base_url = config.base_url,
-            username = config.username,
-            password = config.password
-        )
+        api = models.OmniConfig.get_api()
 
         self.register_callback(api)
         sales_total = self.sales_total(api)
