@@ -43,7 +43,7 @@ from metrium import models
 
 from . import base
 
-SLEEP_TIME = 120.0
+SLEEP_TIME = 1200.0
 """ The default sleep time to be used by the bots
 in case no sleep time is defined in the constructor,
 this bot uses a large value as its tick operation is
