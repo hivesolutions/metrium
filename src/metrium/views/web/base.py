@@ -129,8 +129,10 @@ def state():
 @app.route("/board", methods = ("GET",))
 @quorum.ensure("board")
 def board():
+    variant = quorum.get_field("variant", "sales")
     return flask.render_template(
-        "board.html.tpl"
+        "board.html.tpl",
+        variant = variant
     )
 
 @app.route("/video", methods = ("GET",))
