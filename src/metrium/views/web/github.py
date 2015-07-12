@@ -67,8 +67,11 @@ def github_oauth():
 
     api = models.GithubConfig.get_api()
     access_token = api.oauth_access(code)
+    user = api.self_user()
     config = models.GithubConfig.singleton()
     config.access_token = access_token
+    config.username = user["login"]
+    config.save()
     flask.session["gh.access_token"] = access_token
     return flask.redirect(
         next or flask.url_for("index")
