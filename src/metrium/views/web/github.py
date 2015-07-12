@@ -64,7 +64,7 @@ def github_oauth():
             error = error,
             description = error_description
         )
-    
+
     api = models.GithubConfig.get_api()
     access_token = api.oauth_access(code)
     config = models.GithubConfig.singleton()

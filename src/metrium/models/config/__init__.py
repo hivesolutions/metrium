@@ -35,15 +35,15 @@ __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
 from . import base
-from . import basic
-from . import github
-from . import mail
-from . import omni
-from . import pending
+from . import basic_c
+from . import github_c
+from . import mail_c
+from . import omni_c
+from . import pending_c
 
 from .base import Config
-from .basic import BasicConfig
-from .github import GithubConfig
-from .mail import MailConfig
-from .omni import OmniConfig
-from .pending import PendingConfig
+from .basic_c import BasicConfig
+from .github_c import GithubConfig
+from .mail_c import MailConfig
+from .omni_c import OmniConfig
+from .pending_c import PendingConfig
