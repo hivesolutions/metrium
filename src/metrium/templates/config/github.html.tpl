@@ -15,15 +15,15 @@
                     <label>Repos</label>
                 </div>
                  <div class="input">
-                 	{% for repo in repos %}
+                     {% for repo in repos %}
                         <div class="option">
                             <span class="float-left">{{ repo.full_name }}</span>
                             {% if repo.full_name in config.repos %}
                                 <input class="float-right" type="checkbox"
-                                	   name="repos" value="{{ repo.full_name }}" checked="1" />
+                                       name="repos" value="{{ repo.full_name }}" checked="1" />
                             {% else %}
                                 <input class="float-right" type="checkbox"
-                                	   name="repos" value="{{ repo.full_name }}" />
+                                       name="repos" value="{{ repo.full_name }}" />
                             {% endif %}
                             <div class="clear"></div>
                         </div>
@@ -34,8 +34,8 @@
             //
             <span class="button" data-submit="true">Update</span>
             <div class="alternative">
-            	<span class="button"
-            		  data-link="{{ url_for('github_authorize', next = url_for('base_config')) }}">Link Account</span>
+                <span class="button"
+                      data-link="{{ url_for('github_authorize', next = url_for('base_config')) }}">Link Account</span>
             </div>
         </form>
     {% endif %}
