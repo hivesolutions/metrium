@@ -37,13 +37,14 @@ __copyright__ = "Copyright (c) 2008-2015 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
+import github
 import quorum
 
 from . import base
 
 class GithubConfig(base.Config):
 
-    token = dict(
+    access_token = dict(
         index = True
     )
 
@@ -54,12 +55,19 @@ class GithubConfig(base.Config):
     @classmethod
     def validate_new(cls):
         return super(GithubConfig, cls).validate_new() + [
-            quorum.not_null("token"),
-            quorum.not_empty("token"),
+            quorum.not_null("access_token"),
+            quorum.not_empty("access_token"),
 
             quorum.not_null("username"),
             quorum.not_empty("username")
         ]
+
+    @classmethod
+    def get_api(cls):
+        config = cls.singleton()
+        api = github.Api()
+        api.access_token = config and config.access_token
+        return api
 
     def pre_create(self):
         base.Config.pre_create(self)
