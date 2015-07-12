@@ -56,9 +56,11 @@ def onrun():
     from metrium import bots
     omni_bot = bots.OmniBot()
     imap_bot = bots.ImapBot()
+    github_bot = bots.GithubBot()
     pending_bot = bots.PendingBot()
     omni_bot.start()
     imap_bot.start()
+    github_bot.start()
     pending_bot.start()
 
 app = quorum.load(
