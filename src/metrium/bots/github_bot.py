@@ -37,13 +37,15 @@ __copyright__ = "Copyright (c) 2008-2015 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
+import datetime
+
 import quorum
 
 from metrium import models
 
 from . import base
 
-SLEEP_TIME = 60.0
+SLEEP_TIME = 120.0
 """ The default sleep time to be used by the bots
 in case no sleep time is defined in the constructor,
 this bot uses a large value as its tick operation is
@@ -55,10 +57,13 @@ class GithubBot(base.Bot):
         base.Bot.__init__(self, sleep_time, *args, **kwargs)
 
     def tick(self):
-        api = models.OmniConfig.get_api()
+        api = models.GithubConfig.get_api()
+        config = models.GithubConfig.singleton()
 
-        self.register_callback(api)
-        top_commiters = self.top_commiters(api)
+        #self.register_callback(api)
+        print("coiso")
+        self.commits_total(api, config)
+        #top_commiters = self.top_commiters(api)
 
         #_omni = models.Omni.get(raise_e = False)
         #if not _omni: _omni = models.Omni()
@@ -90,11 +95,19 @@ class GithubBot(base.Bot):
         #    "top_employees" : top_employees
         #})
 
-    def commits_total(self, api):
-        stats = api.stats_sales(span = 2, has_global = True)
-        _global = stats["-1"]
-        sales_total = _global["net_price_vat"]
-        return sales_total
+    def commits_total(self, api, config):
+        today = datetime.datetime.today()
+        index = (today.weekday() + 1) % 7
+        count = 0
+        for repo in config.repos:
+            owner, repo = repo.split("/", 1)
+            activity = api.stats_activity_repo(owner, repo)
+            if not activity: continue
+            last = activity[-1]
+            days = last["days"]
+            day = days[index]
+            count += day
+        print(count)
 
     def commits_repo(self, api):
         sales_stores = []
