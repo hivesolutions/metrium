@@ -74,10 +74,11 @@ class OmniConfig(base.Config):
     @classmethod
     def get_api(cls):
         config = cls.singleton()
-        api = omni.Api()
-        api.base_url = config and config.base_url
-        api.username = config and config.username
-        api.password = config and config.password
+        api = omni.Api(
+            base_url = config and config.base_url,
+            username = config and config.username,
+            password = config and config.password
+        )
         return api
 
     def pre_create(self):
