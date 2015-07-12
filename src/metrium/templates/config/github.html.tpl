@@ -14,6 +14,21 @@
                 <div class="label">
                     <label>Repos</label>
                 </div>
+                 <div class="input">
+                 	{% for repo in repos %}
+                        <div class="option">
+                            <span class="float-left">{{ repo.full_name }}</span>
+                            {% if repo.full_name in config.repos %}
+                                <input class="float-right" type="checkbox"
+                                	   name="repos" value="{{ repo.full_name }}" checked="1" />
+                            {% else %}
+                                <input class="float-right" type="checkbox"
+                                	   name="repos" value="{{ repo.full_name }}" />
+                            {% endif %}
+                            <div class="clear"></div>
+                        </div>
+                    {% endfor %}
+                </div>
             {% endif %}
             <span class="button" data-link="{{ url_for('base_config') }}">Cancel</span>
             //
