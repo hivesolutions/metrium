@@ -196,7 +196,7 @@ def github_config():
         repos = repos,
         errors = {}
     )
-    
+
 @app.route("/config/github", methods = ("POST",))
 @quorum.ensure("config.github")
 def do_github_config():
