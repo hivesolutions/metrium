@@ -37,8 +37,6 @@ __copyright__ = "Copyright (c) 2008-2015 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import datetime
-
 import quorum
 
 from metrium import models
@@ -61,24 +59,24 @@ class GithubBot(base.Bot):
         config = models.GithubConfig.singleton()
 
         #self.register_callback(api)
-        print("coiso")
-        self.commits_total(api, config)
+        activity = self.activity(api, config)
+        commits_total = self.commits_total(api, activity)
         #top_commiters = self.top_commiters(api)
 
-        #_omni = models.Omni.get(raise_e = False)
-        #if not _omni: _omni = models.Omni()
-        #_omni.sales_total = sales_total
+        _github = models.Github.get(raise_e = False)
+        if not _github: _github = models.Github()
+        _github.commits_total = commits_total
         #_omni.sales_data = sales_data
         #_omni.sales_stores = sales_stores
         #_omni.entries_stores = entries_stores
         #_omni.top_stores = top_stores
         #_omni.top_employees = top_employees
-        #_omni.save()
+        _github.save()
 
-        #pusher = quorum.get_pusher()
-        #pusher.trigger("global", "omni.sales_total", {
-        #    "sales_total" : sales_total
-        #})
+        pusher = quorum.get_pusher()
+        pusher.trigger("global", "omni.commits_total", {
+            "commits_total" : commits_total
+        })
         #pusher.trigger("global", "omni.sales_data", {
         #    "sales_data" : sales_data
         #})
@@ -95,19 +93,26 @@ class GithubBot(base.Bot):
         #    "top_employees" : top_employees
         #})
 
-    def commits_total(self, api, config):
-        today = datetime.datetime.today()
-        index = (today.weekday() + 1) % 7
-        count = 0
+    def activity(self, api, config):
+        activity = dict()
         for repo in config.repos:
             owner, repo = repo.split("/", 1)
-            activity = api.stats_activity_repo(owner, repo)
-            if not activity: continue
-            last = activity[-1]
-            days = last["days"]
-            day = days[index]
-            count += day
-        print(count)
+            item = api.stats_activity_repo(owner, repo)
+            activity[repo] = item
+        return activity
+
+    def commits_total(self, api, activity):
+        count = [0, 0]
+        for _repo, item in quorum.legacy.iteritems(activity):
+            if not item: continue
+            item_l = len(item)
+            current = item[-1]
+            previous = item[-1] if item_l > 1 else dict(total = 0)
+            current_t = current["total"]
+            previous_t = previous["total"]
+            count[0] += previous_t
+            count[1] += current_t
+        return count
 
     def commits_repo(self, api):
         sales_stores = []
