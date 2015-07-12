@@ -735,6 +735,10 @@
 
             var context = jQuery(".context", matchedObject);
             var news = jQuery(".news", context);
+            if (news.length == 0) {
+                return;
+            }
+
             var item = "<div class=\"news-item\">" + "<div class=\"title\">"
                     + "<span class=\"time\">" + timeLine + "</span>"
                     + "<span class=\"message\">" + contents.owner + "</span>"
