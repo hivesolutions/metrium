@@ -10,12 +10,14 @@
         <div class="header">
             <div class="logo"></div>
             <ul class="sections">
-            	{% if variant == "sales" %}
+                {% if variant == "sales" %}
                     <li class="active">global</li>
                     <li>vendas</li>
                     <li>pendentes</li>
                     <li>encomendas</li>
                     <li>gravações</li>
+                {% elif variant == "commits" %}
+                    <li class="active">global</li>
                 {% endif %}
             </ul>
         </div>
@@ -34,10 +36,12 @@
                 <div class="news"></div>
             </div>
             <div class="boards">
-            	{% if variant == "sales" %}
-                    {% include "boards/global.html.tpl" %}
-                    {% include "boards/sales.html.tpl" %}
-                    {% include "boards/pending.html.tpl" %}
+                {% if variant == "sales" %}
+                    {% include "boards/sales/global.html.tpl" %}
+                    {% include "boards/sales/sales.html.tpl" %}
+                    {% include "boards/sales/pending.html.tpl" %}
+                {% elif variant == "commits" %}
+                    {% include "boards/commits/global.html.tpl" %}
                 {% endif %}
             </div>
         </div>
