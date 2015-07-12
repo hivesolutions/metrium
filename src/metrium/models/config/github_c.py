@@ -52,6 +52,10 @@ class GithubConfig(base.Config):
         index = True
     )
 
+    repos = dict(
+        type = list
+    )
+
     @classmethod
     def validate_new(cls):
         return super(GithubConfig, cls).validate_new() + [
