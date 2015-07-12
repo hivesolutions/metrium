@@ -41,5 +41,13 @@
                 <a href="{{ url_for('omni_config') }}">omni</a>
             {% endif %}
         {% endif %}
+        {% if acl("config.github") %}
+            //
+            {% if sub_link == "github" %}
+                <a href="{{ url_for('github_config') }}" class="active">github</a>
+            {% else %}
+                <a href="{{ url_for('github_config') }}">github</a>
+            {% endif %}
+        {% endif %}
     </div>
 {% endblock %}

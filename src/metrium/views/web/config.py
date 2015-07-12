@@ -148,7 +148,6 @@ def do_pending_config():
         flask.url_for("base_config")
     )
 
-
 @app.route("/config/omni", methods = ("GET",))
 @quorum.ensure("config.omni")
 def omni_config():
@@ -171,6 +170,38 @@ def do_omni_config():
             "config/omni.html.tpl",
             link = "config",
             sub_link = "omni",
+            config = error.model,
+            errors = error.errors
+        )
+
+    # redirects the user to the overall configuration
+    # selection, as this is the default behavior
+    return flask.redirect(
+        flask.url_for("base_config")
+    )
+
+@app.route("/config/github", methods = ("GET",))
+@quorum.ensure("config.github")
+def github_config():
+    config = models.GithubConfig.get(raise_e = False) or {}
+    return flask.render_template(
+        "config/github.html.tpl",
+        link = "config",
+        sub_link = "github",
+        config = config,
+        errors = {}
+    )
+
+@app.route("/config/omni", methods = ("POST",))
+@quorum.ensure("config.omni")
+def do_github_config():
+    config = models.GithubConfig.singleton()
+    try: config.save()
+    except quorum.ValidationError as error:
+        return flask.render_template(
+            "config/github.html.tpl",
+            link = "config",
+            sub_link = "github",
             config = error.model,
             errors = error.errors
         )

@@ -25,7 +25,13 @@
             <div class="name">
                 <a href="{{ url_for('omni_config') }}">Omni</a>
             </div>
-            <div class="description">Settings for the omni infra-structure</div>
+            <div class="description">Settings for the Omni infra-structure</div>
+        </li>
+        <li>
+            <div class="name">
+                <a href="{{ url_for('github_config') }}">GitHub</a>
+            </div>
+            <div class="description">Settings for the GitHub website</div>
         </li>
     </ul>
 {% endblock %}

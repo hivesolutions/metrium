@@ -19,6 +19,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Hive Metrium System. If not, see <http://www.gnu.org/licenses/>.
 
+__author__ = "João Magalhães <joamag@hive.pt>"
+""" The author(s) of the module """
+
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -34,25 +37,31 @@ __copyright__ = "Copyright (c) 2008-2015 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-from . import config
-from . import account
-from . import base
-from . import conversation
-from . import debug
-from . import github
-from . import log
-from . import mail
-from . import omni
-from . import pending
+import quorum
 
-from .config import Config, BasicConfig, GithubConfig, MailConfig, OmniConfig,\
-    PendingConfig
-from .account import Account
-from .base import Base
-from .conversation import Conversation
-from .debug import Debug
-from .github import Github
-from .log import Log
-from .mail import Mail
-from .omni import Omni
-from .pending import Pending
+from . import base
+
+class GithubConfig(base.Config):
+
+    token = dict(
+        index = True
+    )
+
+    username = dict(
+        index = True
+    )
+
+    @classmethod
+    def validate_new(cls):
+        return super(GithubConfig, cls).validate_new() + [
+            quorum.not_null("token"),
+            quorum.not_empty("token"),
+
+            quorum.not_null("username"),
+            quorum.not_empty("username")
+        ]
+
+    def pre_create(self):
+        base.Config.pre_create(self)
+
+        self.name = "github"

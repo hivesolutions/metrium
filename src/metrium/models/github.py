@@ -19,6 +19,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Hive Metrium System. If not, see <http://www.gnu.org/licenses/>.
 
+__author__ = "João Magalhães <joamag@hive.pt>"
+""" The author(s) of the module """
+
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -34,25 +37,7 @@ __copyright__ = "Copyright (c) 2008-2015 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-from . import config
-from . import account
 from . import base
-from . import conversation
-from . import debug
-from . import github
-from . import log
-from . import mail
-from . import omni
-from . import pending
 
-from .config import Config, BasicConfig, GithubConfig, MailConfig, OmniConfig,\
-    PendingConfig
-from .account import Account
-from .base import Base
-from .conversation import Conversation
-from .debug import Debug
-from .github import Github
-from .log import Log
-from .mail import Mail
-from .omni import Omni
-from .pending import Pending
+class Github(base.Base):
+    pass

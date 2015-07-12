@@ -67,7 +67,7 @@ class OmniConfig(base.Config):
             quorum.not_empty("username"),
 
             quorum.not_null("password"),
-            quorum.not_empty("password"),
+            quorum.not_empty("password")
         ]
 
     def pre_create(self):

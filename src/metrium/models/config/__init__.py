@@ -36,12 +36,14 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 from . import base
 from . import basic
+from . import github
 from . import mail
 from . import omni
 from . import pending
 
 from .base import Config
 from .basic import BasicConfig
+from .github import GithubConfig
 from .mail import MailConfig
 from .omni import OmniConfig
 from .pending import PendingConfig
