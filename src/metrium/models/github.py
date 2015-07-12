@@ -40,4 +40,18 @@ __license__ = "GNU General Public License (GPL), Version 3"
 from . import base
 
 class Github(base.Base):
-    pass
+
+    commits_total = dict(
+        type = list,
+        index = True
+    )
+
+    @classmethod
+    def get_state(cls):
+        omni = cls.get(raise_e = False)
+        if not omni: return dict()
+        return {
+            "github.commits_total" : [{
+                "commits_total" : omni.commits_total
+            }]
+        }
