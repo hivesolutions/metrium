@@ -162,8 +162,9 @@
         var _modules = function() {
             matchedObject.udate();
             matchedObject.ulog();
-            matchedObject.uglobal();
+            matchedObject.uglobalsales();
             matchedObject.upending();
+            matchedObject.uglobalcommits();
         };
 
         var _showBoard = function(index) {

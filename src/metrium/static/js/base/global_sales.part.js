@@ -1,5 +1,5 @@
 (function(jQuery) {
-    jQuery.fn.uglobal = function(options) {
+    jQuery.fn.uglobalsales = function(options) {
         var matchedObject = this;
 
         var initialize = function() {
