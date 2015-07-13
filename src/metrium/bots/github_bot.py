@@ -111,3 +111,6 @@ class GithubBot(base.Bot):
         count = reversed(count)
         count = list(count)
         return count
+
+    def commits_users(self, api):
+        pass
