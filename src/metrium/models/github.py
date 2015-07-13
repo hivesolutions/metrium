@@ -46,6 +46,11 @@ class Github(base.Base):
         index = True
     )
 
+    commits_data = dict(
+        type = list,
+        index = True
+    )
+
     @classmethod
     def get_state(cls):
         omni = cls.get(raise_e = False)
@@ -53,5 +58,8 @@ class Github(base.Base):
         return {
             "github.commits_total" : [{
                 "commits_total" : omni.commits_total
+            }],
+            "github.commits_data" : [{
+                "commits_data" : omni.commits_data
             }]
         }

@@ -60,15 +60,20 @@ class GithubBot(base.Bot):
 
         activity = self.activity(api, config)
         commits_total = self.commits_total(api, activity)
+        commits_data = self.commits_data(api, activity)
 
         _github = models.Github.get(raise_e = False)
         if not _github: _github = models.Github()
         _github.commits_total = commits_total
+        _github.commits_data = commits_data
         _github.save()
 
         pusher = quorum.get_pusher()
         pusher.trigger("global", "github.commits_total", {
             "commits_total" : commits_total
+        })
+        pusher.trigger("global", "github.commits_data", {
+            "commits_data" : commits_data
         })
 
     def activity(self, api, config):
@@ -80,7 +85,7 @@ class GithubBot(base.Bot):
         return activity
 
     def commits_total(self, api, activity):
-        count = [0, 0]
+        count = [0] * 2
         for _repo, item in quorum.legacy.iteritems(activity):
             if not item: continue
             item_l = len(item)
@@ -90,4 +95,17 @@ class GithubBot(base.Bot):
             previous_t = previous["total"]
             count[0] += previous_t
             count[1] += current_t
+        return count
+
+    def commits_data(self, api, activity):
+        count = [0] * 7
+        for _repo, item in quorum.legacy.iteritems(activity):
+            if not item: continue
+            item = reversed(item)
+            item = list(item)
+            item = item[:7]
+            for index in quorum.legacy.range(len(item)):
+                current = item[index]
+                value = current["total"]
+                count[index] += value
         return count
