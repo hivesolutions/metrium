@@ -108,4 +108,6 @@ class GithubBot(base.Bot):
                 current = item[index]
                 value = current["total"]
                 count[index] += value
+        count = reversed(count)
+        count = list(count)
         return count

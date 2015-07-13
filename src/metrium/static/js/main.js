@@ -417,6 +417,9 @@
             global.bind("github.commits_total", function(data) {
                         _updateCommitsTotal(data.commits_total);
                     });
+            global.bind("github.commits_data", function(data) {
+                        _updateCommitsData(data.commits_data);
+                    });
         };
 
         var _updateCommitsTotal = function(commitsTotal) {
@@ -438,6 +441,15 @@
 
             progress.attr("data-value", ratioS);
             progress.uprogress();
+        };
+
+        var _updateCommitsData = function(commitsData) {
+            var _commitsData = jQuery(".commits-data", matchedObject);
+            var lineChart = jQuery(".line-chart", _commitsData);
+            var commitsDataS = String(commitsData);
+
+            lineChart.attr("data-values", commitsDataS);
+            lineChart.ulinechart();
         };
 
         initialize();
