@@ -51,6 +51,11 @@ class Github(base.Base):
         index = True
     )
 
+    issues_users = dict(
+        type = list,
+        index = True
+    )
+
     @classmethod
     def get_state(cls):
         omni = cls.get(raise_e = False)
@@ -61,5 +66,8 @@ class Github(base.Base):
             }],
             "github.commits_data" : [{
                 "commits_data" : omni.commits_data
+            }],
+            "github.issues_users" : [{
+                "issues_users" : omni.issues_users
             }]
         }
