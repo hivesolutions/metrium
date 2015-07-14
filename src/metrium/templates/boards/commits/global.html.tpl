@@ -19,4 +19,22 @@
             </div>
         </div>
     </div>
+    <div class="line">
+        <div class="box">
+            <div class="box-contents table issues-users">
+                <h1>issues</h1>
+                <h2>users</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th class="value">closed</th>
+                            <th class="value">open</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

@@ -420,6 +420,9 @@
             global.bind("github.commits_data", function(data) {
                         _updateCommitsData(data.commits_data);
                     });
+            global.bind("github.issues_users", function(data) {
+                        _updateIssuesUsers(data.issues_users);
+                    });
         };
 
         var _updateCommitsTotal = function(commitsTotal) {
@@ -450,6 +453,25 @@
 
             lineChart.attr("data-values", commitsDataS);
             lineChart.ulinechart();
+        };
+
+        var _updateIssuesUsers = function(issuesUsers) {
+            var _issuesUsers = jQuery(".issues-users", matchedObject);
+            var tableBody = jQuery("table > tbody", _issuesUsers);
+            tableBody.empty();
+
+            var size = issuesUsers.length > 5 ? 5 : issuesUsers.length;
+
+            for (var index = 0; index < size; index++) {
+                var item = issuesUsers[index];
+                var open = item[0];
+                var closed = item[1];
+                var name = item[2];
+                var row = jQuery("<tr>" + "<td>" + name + "</td>"
+                        + "<td class=\"value\">" + closed + "</td>"
+                        + "<td class=\"value\">" + open + "</td>" + "</tr>");
+                tableBody.append(row);
+            }
         };
 
         initialize();
