@@ -43,7 +43,7 @@ import quorum
 from . import base
 
 SCOPE = (
-    "user:email",
+    "user",
     "repo"
 )
 
