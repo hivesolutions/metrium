@@ -13,7 +13,7 @@
         </div>
         <div class="box double">
             <div class="box-contents chart commits-data">
-                <h1>últimos 7 semanas</h1>
+                <h1>últimas 7 semanas</h1>
                 <h2>commits</h2>
                 <canvas class="line-chart"></canvas>
             </div>
