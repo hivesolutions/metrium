@@ -59,13 +59,17 @@ class GithubBot(base.Bot):
         config = models.GithubConfig.singleton()
 
         activity = self.activity(api, config)
+        issues = self.issues(api, config)
+
         commits_total = self.commits_total(api, activity)
         commits_data = self.commits_data(api, activity)
+        issues_users = self.issues_users(api, issues)
 
         _github = models.Github.get(raise_e = False)
         if not _github: _github = models.Github()
         _github.commits_total = commits_total
         _github.commits_data = commits_data
+        _github.issues_users = issues_users
         _github.save()
 
         pusher = quorum.get_pusher()
@@ -74,6 +78,9 @@ class GithubBot(base.Bot):
         })
         pusher.trigger("global", "github.commits_data", {
             "commits_data" : commits_data
+        })
+        pusher.trigger("global", "github.issues_users", {
+            "issues_users" : issues_users
         })
 
     def activity(self, api, config):
@@ -84,9 +91,26 @@ class GithubBot(base.Bot):
             activity[repo] = item
         return activity
 
+    def participation(self, api, config):
+        participation = dict()
+        for repo in config.repos:
+            owner, repo = repo.split("/", 1)
+            item = api.stats_participation_repo(owner, repo)
+            participation[repo] = item
+        return participation
+
+    def issues(self, api, config):
+        issues = dict()
+        for repo in config.repos:
+            owner, repo = repo.split("/", 1)
+            _issues = api.issues_repo(owner, repo)
+            issues[repo] = _issues
+        return issues
+
     def commits_total(self, api, activity):
         count = [0] * 2
-        for _repo, item in quorum.legacy.iteritems(activity):
+
+        for _repo, item in activity.items():
             if not item: continue
             item_l = len(item)
             current = item[-1]
@@ -95,22 +119,43 @@ class GithubBot(base.Bot):
             previous_t = previous["total"]
             count[0] += previous_t
             count[1] += current_t
+
         return count
 
     def commits_data(self, api, activity):
         count = [0] * 7
-        for _repo, item in quorum.legacy.iteritems(activity):
+
+        for _repo, item in activity.items():
             if not item: continue
             item = reversed(item)
             item = list(item)
             item = item[:7]
+
             for index in quorum.legacy.range(len(item)):
                 current = item[index]
                 value = current["total"]
                 count[index] += value
+
         count = reversed(count)
         count = list(count)
         return count
 
-    def commits_users(self, api):
-        pass
+    def issues_users(self, api, issues):
+        issues_users = dict()
+
+        for _repo, item in issues.items():
+            for _issue in item:
+                assignee = _issue["assignee"]
+                if not assignee: continue
+                user = assignee["login"]
+                state = _issue["state"]
+                if not state in ("open", "closed"): continue
+                data = issues_users.get(user, [0, 0, user])
+                if state == "open": data[0] += 1
+                if state == "closed": data[1] += 1
+                issues_users[user] = data
+
+        issues_users = issues_users.values()
+        issues_users = list(issues_users)
+        issues_users.sort(reverse = True)
+        return issues_users
