@@ -59,17 +59,20 @@ class GithubBot(base.Bot):
         config = models.GithubConfig.singleton()
 
         activity = self.activity(api, config)
+        contrib = self.contrib(api, config)
         issues = self.issues(api, config)
 
         commits_total = self.commits_total(api, activity)
         commits_data = self.commits_data(api, activity)
         issues_users = self.issues_users(api, issues)
+        commits_users = self.commits_users(api, contrib)
 
         _github = models.Github.get(raise_e = False)
         if not _github: _github = models.Github()
         _github.commits_total = commits_total
         _github.commits_data = commits_data
         _github.issues_users = issues_users
+        _github.commits_users = commits_users
         _github.save()
 
         pusher = quorum.get_pusher()
@@ -81,6 +84,9 @@ class GithubBot(base.Bot):
         })
         pusher.trigger("global", "github.issues_users", {
             "issues_users" : issues_users
+        })
+        pusher.trigger("global", "github.commits_users", {
+            "commits_users" : commits_users
         })
 
     def activity(self, api, config):
@@ -98,6 +104,14 @@ class GithubBot(base.Bot):
             item = api.stats_participation_repo(owner, repo)
             participation[repo] = item
         return participation
+
+    def contrib(self, api, config):
+        contrib = dict()
+        for repo in config.repos:
+            owner, repo = repo.split("/", 1)
+            item = api.stats_contrib_repo(owner, repo)
+            contrib[repo] = item
+        return contrib
 
     def issues(self, api, config):
         issues = dict()
@@ -144,11 +158,11 @@ class GithubBot(base.Bot):
         issues_users = dict()
 
         for _repo, item in issues.items():
-            for _issue in item:
-                assignee = _issue["assignee"]
+            for issue in item:
+                assignee = issue["assignee"]
                 if not assignee: continue
                 user = assignee["login"]
-                state = _issue["state"]
+                state = issue["state"]
                 if not state in ("open", "closed"): continue
                 data = issues_users.get(user, [0, 0, user])
                 if state == "open": data[0] += 1
@@ -159,3 +173,23 @@ class GithubBot(base.Bot):
         issues_users = list(issues_users)
         issues_users.sort(reverse = True)
         return issues_users
+
+    def commits_users(self, api, contrib):
+        commits_users = dict()
+
+        for _repo, item in contrib.items():
+            for structure in item:
+                author = structure["author"]
+                if not author: continue
+                user = author["login"]
+                weeks = structure["weeks"]
+                last = weeks[-1]
+                data = commits_users.get(user, [0, 0, user])
+                data[0] += last["a"] - last["d"]
+                data[1] += last["c"]
+                commits_users[user] = data
+
+        commits_users = commits_users.values()
+        commits_users = list(commits_users)
+        commits_users.sort(reverse = True)
+        return commits_users

@@ -36,5 +36,21 @@
                 </table>
             </div>
         </div>
+        <div class="box">
+            <div class="box-contents table commits-users">
+                <h1>commits</h1>
+                <h2>users</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th class="value">lin.</th>
+                            <th class="value">comm.</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
