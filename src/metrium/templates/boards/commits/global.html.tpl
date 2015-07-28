@@ -45,7 +45,7 @@
                         <tr>
                             <th>User</th>
                             <th class="value">lin.</th>
-                            <th class="value">comm.</th>
+                            <th class="value">com.</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
