@@ -58,7 +58,7 @@
 
         pusher = pusher.data("pusher");
         if (!pusher) {
-            return matchedObject;
+            return this;
         }
 
         var initialize = function() {
@@ -330,7 +330,7 @@
         };
 
         initialize();
-        return matchedObject;
+        return this;
     };
 })(jQuery);
 
@@ -400,7 +400,7 @@
         };
 
         initialize();
-        return matchedObject;
+        return this;
     };
 })(jQuery);
 
@@ -497,7 +497,7 @@
         };
 
         initialize();
-        return matchedObject;
+        return this;
     };
 })(jQuery);
 
@@ -656,7 +656,7 @@
         };
 
         initialize();
-        return matchedObject;
+        return this;
     };
 })(jQuery);
 
@@ -764,7 +764,7 @@
         };
 
         initialize();
-        return matchedObject;
+        return this;
     };
 })(jQuery);
 
@@ -830,7 +830,7 @@
         };
 
         initialize();
-        return matchedObject;
+        return this;
     };
 })(jQuery);
 
@@ -866,7 +866,7 @@
         };
 
         initialize();
-        return matchedObject;
+        return this;
     };
 })(jQuery);
 
@@ -949,7 +949,7 @@
         };
 
         initialize();
-        return matchedObject;
+        return this;
     };
 })(jQuery);
 
@@ -966,7 +966,7 @@
                     var pusher = new Pusher(key);
                     element.data("pusher", pusher);
                 });
-        return matchedObject;
+        return this;
     };
 })(jQuery);
 
@@ -993,7 +993,7 @@
                     }
                 });
 
-        return matchedObject;
+        return this;
     };
 })(jQuery);
 
