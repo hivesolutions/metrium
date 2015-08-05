@@ -11,7 +11,7 @@
 
         pusher = pusher.data("pusher");
         if (!pusher) {
-            return matchedObject;
+            return this;
         }
 
         var initialize = function() {
@@ -283,7 +283,7 @@
         };
 
         initialize();
-        return matchedObject;
+        return this;
     };
 })(jQuery);
 
@@ -353,6 +353,6 @@
         };
 
         initialize();
-        return matchedObject;
+        return this;
     };
 })(jQuery);

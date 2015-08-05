@@ -11,6 +11,6 @@
                     var pusher = new Pusher(key);
                     element.data("pusher", pusher);
                 });
-        return matchedObject;
+        return this;
     };
 })(jQuery);
