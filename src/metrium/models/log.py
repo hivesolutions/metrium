@@ -103,7 +103,7 @@ class Log(base.Base):
 
     @classmethod
     def _build(cls, model, map):
-        base.Base._build(model, map)
+        super(Log, cls)._build(model, map)
         owner_extra = model.get("owner_extra", False)
         owner = model.get("owner", None)
         model["_owner"] = owner_extra or (owner and owner.username)

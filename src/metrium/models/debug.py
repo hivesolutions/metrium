@@ -68,7 +68,7 @@ class Debug(base.Base):
 
     @classmethod
     def _build(cls, model, map):
-        base.Base._build(model, map)
+        super(Debug, cls)._build(model, map)
         timestamp = model.get("timestamp", None)
         timestamp_date = timestamp and datetime.datetime.utcfromtimestamp(timestamp)
         timestamp_string = timestamp_date and timestamp_date.strftime("%d/%m/%Y %H:%M:%S")
