@@ -77,9 +77,9 @@
 
             video.bind("ended", function() {
                         var element = jQuery(this);
-                        var overlay = jQuery(".overlay");
+                        var overlay = jQuery(".overlay:first");
 
-                        overlay.fadeOut(250);
+                        overlay.triggerHandler("hide", [250]);
                         element.fadeOut(250);
                     });
         };
@@ -191,13 +191,13 @@
                 return;
             }
 
-            var overlay = jQuery(".overlay");
+            var overlay = jQuery(".overlay:first");
             var video = jQuery(".video", matchedObject);
 
             video.html(link);
             video.uxvideo();
 
-            overlay.fadeIn(350);
+            overlay.triggerHandler("show", [350]);
             video.fadeIn(350);
             video.uxcenter(0, 0, false, false, false, true);
         };
@@ -268,17 +268,17 @@
         };
 
         var _showError = function() {
-            var overlay = jQuery(".overlay");
+            var overlay = jQuery(".overlay:first");
             var errorPanel = jQuery(".error-panel");
-            overlay.fadeIn(350);
+            overlay.triggerHandler("show", [350]);
             errorPanel.fadeIn(350);
             errorPanel.uxcenter(0, 0, false, false, false, true);
         };
 
         var _hideError = function() {
-            var overlay = jQuery(".overlay");
+            var overlay = jQuery(".overlay:first");
             var errorPanel = jQuery(".error-panel");
-            overlay.fadeOut(200);
+            overlay.triggerHandler("hide", [200]);
             errorPanel.fadeOut(200);
         };
 
