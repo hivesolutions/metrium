@@ -171,7 +171,7 @@ class Account(base.Base):
 
         # creates the sha1 hash value for the password and verifies that
         # the provided password is the expected
-        password_sha1 = hashlib.sha1(quorum.legacy.bytes(password + PASSWORD_SALT)).hexdigest()
+        password_sha1 = cls._encrypt_g(value = password, salt = PASSWORD_SALT)
         _password = account.password
         if not password_sha1 == _password:
             raise quorum.OperationalError(
@@ -231,15 +231,21 @@ class Account(base.Base):
         model["email_s"] = email and email.replace("@", " at ").replace(".", " dot ")
         model["last_login_l"] = last_login_string
 
+    @classmethod
+    def _encrypt_g(cls, value = None, salt = None):
+        value = value or str(uuid.uuid4())
+        base = quorum.legacy.bytes(value + salt)
+        return hashlib.sha1(base).hexdigest()
+
     def pre_create(self):
         base.Base.pre_create(self)
 
         # "encrypts" the password into the target format defined
         # by the salt and the sha1 hash function and then creates
         # the api key for the current account
-        self.password = hashlib.sha1(quorum.legacy.bytes(self.password + PASSWORD_SALT)).hexdigest()
-        self.api_key = hashlib.sha1(quorum.legacy.bytes(str(uuid.uuid4()))).hexdigest()
-        self.confirmation = hashlib.sha1(quorum.legacy.bytes(str(uuid.uuid4()))).hexdigest()
+        self.password = self._encrypt(value = self.password, salt = PASSWORD_SALT)
+        self.api_key = self._encrypt()
+        self.confirmation = self._encrypt()
 
         # updates the various default values for the current account
         # user to be created
@@ -252,10 +258,11 @@ class Account(base.Base):
     def pre_update(self):
         base.Base.pre_update(self)
 
-        # in case the currently set password is empty it must
-        # be removed (not meant to be updated)
         has_password = hasattr(self, "password")
-        if has_password and self.password == "": del self.password
+        if not has_password: return
+
+        if self.password == "": del self.password
+        else: self.password = self._encrypt(value = self.password, salt = PASSWORD_SALT)
 
     def post_create(self):
         base.Base.post_create(self)
@@ -286,3 +293,7 @@ class Account(base.Base):
 
     def type_s(self):
         return TYPE_NAMES.get(self.type, None)
+
+    def _encrypt(self, value = None, salt = None):
+        cls = self.__class__
+        return cls._encrypt_g(value = value, salt = salt)
