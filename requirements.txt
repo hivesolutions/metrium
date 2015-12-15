@@ -2,5 +2,4 @@ netius
 flask
 quorum
 pymongo
-redis
 pusher
