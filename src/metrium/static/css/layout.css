@@ -78,19 +78,23 @@ body.fullscreen #overlay {
     margin: 8px 0px 8px 0px;
 }
 
-.info {
+div.info,
+.marker.info {
     color: #3668c6;
 }
 
-.success {
+div.success,
+.marker.success {
     color: #32951b;
 }
 
-.warning {
+div.warning,
+.marker.warning {
     color: #ea7a15;
 }
 
-.error {
+div.error,
+.marker.error {
     color: #c31f30;
 }
 
