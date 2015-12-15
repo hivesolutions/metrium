@@ -234,6 +234,7 @@ class Account(base.Base):
     @classmethod
     def _encrypt_g(cls, value = None, salt = None):
         value = value or str(uuid.uuid4())
+        salt = salt or ""
         base = quorum.legacy.bytes(value + salt)
         return hashlib.sha1(base).hexdigest()
 
@@ -259,7 +260,9 @@ class Account(base.Base):
         base.Base.pre_update(self)
 
         has_password = hasattr(self, "password")
+        has_password = has_password and hasattr(self, "password_confirm")
         if not has_password: return
+        if not self.password == self.password_confirm: return
 
         if self.password == "": del self.password
         else: self.password = self._encrypt(value = self.password, salt = PASSWORD_SALT)
