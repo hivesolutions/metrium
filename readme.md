@@ -1,0 +1,3 @@
+# Metrium
+
+Simple dashboard system.
