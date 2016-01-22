@@ -25,4 +25,4 @@ RUN apt-get update && apt-get install -y -q python python-setuptools python-dev 
 libffi-dev libssl-dev
 RUN pip install -r /requirements.txt && pip install -r /extra.txt && pip install --upgrade netius
 
-CMD python /src/metrium/main.py
+CMD ["/usr/bin/python", "/src/metrium/main.py"]
