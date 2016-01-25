@@ -9,17 +9,17 @@
         var _start = function() {
             var global = matchedObject.data("global");
             global.bind("github.commits_total", function(data) {
-                        _updateCommitsTotal(data.commits_total);
-                    });
+                _updateCommitsTotal(data.commits_total);
+            });
             global.bind("github.commits_data", function(data) {
-                        _updateCommitsData(data.commits_data);
-                    });
+                _updateCommitsData(data.commits_data);
+            });
             global.bind("github.issues_users", function(data) {
-                        _updateIssuesUsers(data.issues_users);
-                    });
+                _updateIssuesUsers(data.issues_users);
+            });
             global.bind("github.commits_users", function(data) {
-                        _updateCommitsUsers(data.commits_users);
-                    });
+                _updateCommitsUsers(data.commits_users);
+            });
         };
 
         var _updateCommitsTotal = function(commitsTotal) {
@@ -64,9 +64,8 @@
                 var open = item[0];
                 var closed = item[1];
                 var name = item[2];
-                var row = jQuery("<tr>" + "<td>" + name + "</td>"
-                        + "<td class=\"value\">" + closed + "</td>"
-                        + "<td class=\"value\">" + open + "</td>" + "</tr>");
+                var row = jQuery("<tr>" + "<td>" + name + "</td>" + "<td class=\"value\">" + closed +
+                    "</td>" + "<td class=\"value\">" + open + "</td>" + "</tr>");
                 tableBody.append(row);
             }
         };
@@ -83,9 +82,8 @@
                 var lines = item[0];
                 var commits = item[1];
                 var name = item[2];
-                var row = jQuery("<tr>" + "<td>" + name + "</td>"
-                        + "<td class=\"value\">" + lines + "</td>"
-                        + "<td class=\"value\">" + commits + "</td>" + "</tr>");
+                var row = jQuery("<tr>" + "<td>" + name + "</td>" + "<td class=\"value\">" + lines +
+                    "</td>" + "<td class=\"value\">" + commits + "</td>" + "</tr>");
                 tableBody.append(row);
             }
         };

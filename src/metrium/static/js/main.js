@@ -77,58 +77,56 @@
             var video = jQuery(".video", matchedObject);
 
             matchedObject.bind("message",
-                    function(event, type, owner, message) {
-                        _showMessage(type, owner, message);
-                        _playSound("/static/sounds/" + type + ".mp3");
-                    });
+                function(event, type, owner, message) {
+                    _showMessage(type, owner, message);
+                    _playSound("/static/sounds/" + type + ".mp3");
+                });
 
             _window.keydown(function(event) {
-                        var keyValue = event.keyCode
-                                ? event.keyCode
-                                : event.charCode ? event.charCode : event.which;
+                var keyValue = event.keyCode ? event.keyCode : event.charCode ? event.charCode :
+                    event.which;
 
-                        switch (keyValue) {
-                            case 37 :
-                                _previous();
-                                break;
+                switch (keyValue) {
+                    case 37:
+                        _previous();
+                        break;
 
-                            case 39 :
-                                _next();
-                                break;
-                        }
-                    });
+                    case 39:
+                        _next();
+                        break;
+                }
+            });
 
-            connection.bind("connecting", function() {
-                    });
+            connection.bind("connecting", function() {});
 
             connection.bind("connected", function() {
-                        _hideError();
-                    });
+                _hideError();
+            });
 
             connection.bind("unavailable", function() {
-                        _showError();
-                    });
+                _showError();
+            });
 
             connection.bind("disconnected", function() {
-                        _showError();
-                    });
+                _showError();
+            });
 
             connection.bind("error", function(error) {
-                        _showError();
-                    });
+                _showError();
+            });
 
             global.bind("video.open", function(data) {
-                        var url = data.url;
-                        url && _showVideo(url);
-                    });
+                var url = data.url;
+                url && _showVideo(url);
+            });
 
             video.bind("ended", function() {
-                        var element = jQuery(this);
-                        var overlay = jQuery(".overlay:first");
+                var element = jQuery(this);
+                var overlay = jQuery(".overlay:first");
 
-                        overlay.triggerHandler("hide", [250]);
-                        element.fadeOut(250);
-                    });
+                overlay.triggerHandler("hide", [250]);
+                element.fadeOut(250);
+            });
         };
 
         var _layout = function() {
@@ -138,18 +136,18 @@
 
         var _general = function() {
             jQuery.ajax({
-                        url : "/state",
-                        beforeSend : function() {
-                            _hide();
-                        },
-                        success : function(data) {
-                            _onState(data);
-                            _show();
-                        },
-                        error : function() {
-                            _show();
-                        }
-                    });
+                url: "/state",
+                beforeSend: function() {
+                    _hide();
+                },
+                success: function(data) {
+                    _onState(data);
+                    _show();
+                },
+                error: function() {
+                    _show();
+                }
+            });
         };
 
         var _boards = function() {
@@ -165,8 +163,8 @@
             }
 
             setInterval(function() {
-                        _next();
-                    }, BOARD_TIMEOUT);
+                _next();
+            }, BOARD_TIMEOUT);
         };
 
         var _next = function() {
@@ -219,17 +217,16 @@
             var sections = jQuery("ul.sections > li.active", matchedObject);
 
             boards.fadeOut(350, function() {
-                        var board = jQuery(".boards > .board:nth-child("
-                                        + (index + 1) + ")", matchedObject);
-                        var section = jQuery("ul.sections > li:nth-child("
-                                        + (index + 1) + ")", matchedObject);
+                var board = jQuery(".boards > .board:nth-child(" + (index + 1) + ")", matchedObject);
+                var section = jQuery("ul.sections > li:nth-child(" + (index + 1) + ")",
+                    matchedObject);
 
-                        sections.removeClass("active");
-                        section.addClass("active");
-                        board.fadeIn(350);
+                sections.removeClass("active");
+                section.addClass("active");
+                board.fadeIn(350);
 
-                        matchedObject.data("index", index);
-                    });
+                matchedObject.data("index", index);
+            });
         };
 
         var _showVideo = function(link) {
@@ -288,15 +285,15 @@
             var timing = MESSAGE_TIMEOUT / lines;
 
             var interval = setInterval(function() {
-                        _message.animate({
-                                    scrollTop : "+=" + LINE_HEIGHT + "px"
-                                }, 300);
-                    }, timing);
+                _message.animate({
+                    scrollTop: "+=" + LINE_HEIGHT + "px"
+                }, 300);
+            }, timing);
 
             var timeout = setTimeout(function() {
-                        clearInterval(interval);
-                        _message.fadeOut(150);
-                    }, MESSAGE_TIMEOUT);
+                clearInterval(interval);
+                _message.fadeOut(150);
+            }, MESSAGE_TIMEOUT);
 
             matchedObject.data("timeout", timeout);
             matchedObject.data("interval", interval);
@@ -340,16 +337,20 @@
         var TIMEOUT = 10000;
 
         var DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
-                "Friday", "Starturday"];
+            "Friday", "Starturday"
+        ];
         var DAYS_PT = ["Domnigo", "Segunda-feira", "Terça-Feira",
-                "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
+            "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"
+        ];
 
         var MONTHS = ["January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November",
-                "December"];
+            "July", "August", "September", "October", "November",
+            "December"
+        ];
         var MONTHS_PT = ["Janeiro", "Febreiro", "Março", "Abril", "Maio",
-                "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro",
-                "Dezembro"];
+            "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro",
+            "Dezembro"
+        ];
 
         var matchedObject = this;
 
@@ -360,8 +361,8 @@
         var _start = function() {
             _update();
             setInterval(function() {
-                        _update();
-                    }, TIMEOUT);
+                _update();
+            }, TIMEOUT);
         };
 
         var _update = function() {
@@ -415,17 +416,17 @@
         var _start = function() {
             var global = matchedObject.data("global");
             global.bind("github.commits_total", function(data) {
-                        _updateCommitsTotal(data.commits_total);
-                    });
+                _updateCommitsTotal(data.commits_total);
+            });
             global.bind("github.commits_data", function(data) {
-                        _updateCommitsData(data.commits_data);
-                    });
+                _updateCommitsData(data.commits_data);
+            });
             global.bind("github.issues_users", function(data) {
-                        _updateIssuesUsers(data.issues_users);
-                    });
+                _updateIssuesUsers(data.issues_users);
+            });
             global.bind("github.commits_users", function(data) {
-                        _updateCommitsUsers(data.commits_users);
-                    });
+                _updateCommitsUsers(data.commits_users);
+            });
         };
 
         var _updateCommitsTotal = function(commitsTotal) {
@@ -470,9 +471,8 @@
                 var open = item[0];
                 var closed = item[1];
                 var name = item[2];
-                var row = jQuery("<tr>" + "<td>" + name + "</td>"
-                        + "<td class=\"value\">" + closed + "</td>"
-                        + "<td class=\"value\">" + open + "</td>" + "</tr>");
+                var row = jQuery("<tr>" + "<td>" + name + "</td>" + "<td class=\"value\">" + closed +
+                    "</td>" + "<td class=\"value\">" + open + "</td>" + "</tr>");
                 tableBody.append(row);
             }
         };
@@ -489,9 +489,8 @@
                 var lines = item[0];
                 var commits = item[1];
                 var name = item[2];
-                var row = jQuery("<tr>" + "<td>" + name + "</td>"
-                        + "<td class=\"value\">" + lines + "</td>"
-                        + "<td class=\"value\">" + commits + "</td>" + "</tr>");
+                var row = jQuery("<tr>" + "<td>" + name + "</td>" + "<td class=\"value\">" + lines +
+                    "</td>" + "<td class=\"value\">" + commits + "</td>" + "</tr>");
                 tableBody.append(row);
             }
         };
@@ -512,23 +511,23 @@
         var _start = function() {
             var global = matchedObject.data("global");
             global.bind("omni.sales_total", function(data) {
-                        _updateSalesTotal(data.sales_total);
-                    });
+                _updateSalesTotal(data.sales_total);
+            });
             global.bind("omni.sales_data", function(data) {
-                        _updateSalesData(data.sales_data);
-                    });
+                _updateSalesData(data.sales_data);
+            });
             global.bind("omni.sales_stores", function(data) {
-                        _updateSalesStores(data.sales_stores);
-                    });
+                _updateSalesStores(data.sales_stores);
+            });
             global.bind("omni.entries_stores", function(data) {
-                        _updateEntriesStores(data.entries_stores);
-                    });
+                _updateEntriesStores(data.entries_stores);
+            });
             global.bind("omni.top_stores", function(data) {
-                        _updateTopStores(data.top_stores);
-                    });
+                _updateTopStores(data.top_stores);
+            });
             global.bind("omni.top_employees", function(data) {
-                        _updateTopEmployees(data.top_employees);
-                    });
+                _updateTopEmployees(data.top_employees);
+            });
         };
 
         var _updateSalesTotal = function(salesTotal) {
@@ -577,12 +576,10 @@
                 var current = item[0].toFixed(2);
                 var previous = item[1].toFixed(2);
                 var name = item[2];
-                var row = jQuery("<tr>" + "<td>" + name + "</td>"
-                        + "<td class=\"value\">" + previous + "</td>"
-                        + "<td class=\"value\">" + current + "</td>" + "</tr>");
+                var row = jQuery("<tr>" + "<td>" + name + "</td>" + "<td class=\"value\">" + previous +
+                    "</td>" + "<td class=\"value\">" + current + "</td>" + "</tr>");
                 if (marker) {
-                    row.append("<td class=\"marker\">"
-                            + "<div class=\"up color\"></div>" + "</td>");
+                    row.append("<td class=\"marker\">" + "<div class=\"up color\"></div>" + "</td>");
                 }
                 tableBody.append(row);
             }
@@ -600,12 +597,10 @@
                 var current = item[0].toFixed(0) + " x";
                 var previous = item[1].toFixed(0) + " x";
                 var name = item[2];
-                var row = jQuery("<tr>" + "<td>" + name + "</td>"
-                        + "<td class=\"value\">" + previous + "</td>"
-                        + "<td class=\"value\">" + current + "</td>" + "</tr>");
+                var row = jQuery("<tr>" + "<td>" + name + "</td>" + "<td class=\"value\">" + previous +
+                    "</td>" + "<td class=\"value\">" + current + "</td>" + "</tr>");
                 if (marker) {
-                    row.append("<td class=\"marker\">"
-                            + "<div class=\"up color\"></div>" + "</td>");
+                    row.append("<td class=\"marker\">" + "<div class=\"up color\"></div>" + "</td>");
                 }
                 tableBody.append(row);
             }
@@ -622,9 +617,8 @@
                 var item = topStores[index];
                 var value = item[0].toFixed(0);
                 var name = item[1];
-                var bubleContents = jQuery("<div class=\"bubble-contents\">"
-                        + "<div class=\"value\">" + value + "</div>"
-                        + "<div class=\"title\">" + name + "</div>" + "</div>");
+                var bubleContents = jQuery("<div class=\"bubble-contents\">" + "<div class=\"value\">" +
+                    value + "</div>" + "<div class=\"title\">" + name + "</div>" + "</div>");
                 index != 0 && bubleContents.addClass("double");
                 bubleContent.append(bubleContents);
             }
@@ -643,14 +637,11 @@
                 var number = item[1].toFixed(0);
                 var name = item[2];
                 var imageUrl = item[3];
-                var topContents = jQuery("<div class=\"top-contents\">"
-                        + "<div class=\"rank\">" + String(index + 1) + "</div>"
-                        + "<div class=\"picture\">" + "<img src=\"" + imageUrl
-                        + "\" />" + "</div>" + "<div class=\"details\">"
-                        + "<div class=\"name\">" + name + "</div>"
-                        + "<div class=\"value\">" + number + "x - </div>"
-                        + "<div class=\"value\">" + amount + "</div>"
-                        + "</div>" + "</div>");
+                var topContents = jQuery("<div class=\"top-contents\">" + "<div class=\"rank\">" + String(
+                        index + 1) + "</div>" + "<div class=\"picture\">" + "<img src=\"" + imageUrl +
+                    "\" />" + "</div>" + "<div class=\"details\">" + "<div class=\"name\">" + name +
+                    "</div>" + "<div class=\"value\">" + number + "x - </div>" +
+                    "<div class=\"value\">" + amount + "</div>" + "</div>" + "</div>");
                 topContent.append(topContents);
             }
         };
@@ -740,7 +731,7 @@
                         context.strokeStyle = "rgba(255, 255, 255, 0.3)";
                         context.lineWidth = 2;
                         context.dashedLine(xPosition, yPosition, xPosition,
-                                height, [6, 4]);
+                            height, [6, 4]);
                         context.stroke();
                     }
 
@@ -757,10 +748,10 @@
             };
 
             matchedObject.each(function(index, element) {
-                        var _element = jQuery(this);
-                        var canvas = _element[0];
-                        _draw(canvas);
-                    });
+                var _element = jQuery(this);
+                var canvas = _element[0];
+                _draw(canvas);
+            });
         };
 
         initialize();
@@ -779,8 +770,8 @@
         var _start = function() {
             var global = matchedObject.data("global");
             global.bind("log.message", function(data) {
-                        _new(data.contents);
-                    });
+                _new(data.contents);
+            });
         };
 
         var _new = function(contents) {
@@ -795,18 +786,17 @@
                 return;
             }
 
-            var item = "<div class=\"news-item\">" + "<div class=\"title\">"
-                    + "<span class=\"time\">" + timeLine + "</span>"
-                    + "<span class=\"message\">" + contents.owner + "</span>"
-                    + "<span class=\"marker " + contents.type + "\"></span>"
-                    + "</div>" + "<div class=\"message\">" + contents.message
-                    + "</div>" + "</div>";
+            var item = "<div class=\"news-item\">" + "<div class=\"title\">" + "<span class=\"time\">" +
+                timeLine + "</span>" + "<span class=\"message\">" + contents.owner + "</span>" +
+                "<span class=\"marker " + contents.type + "\"></span>" + "</div>" +
+                "<div class=\"message\">" + contents.message + "</div>" + "</div>";
             news.prepend(item);
 
             var newsElement = news[0];
 
             matchedObject.trigger("message", [contents.type, contents.owner,
-                            contents.message]);
+                contents.message
+            ]);
 
             while (true) {
                 var overflows = newsElement.scrollHeight > newsElement.clientHeight;
@@ -845,8 +835,8 @@
         var _start = function() {
             var global = matchedObject.data("global");
             global.bind("pending.update", function(data) {
-                        _update(data.pendings);
-                    });
+                _update(data.pendings);
+            });
         };
 
         var _update = function(pendings) {
@@ -857,11 +847,10 @@
 
             for (var index = 0; index < pendings.length; index++) {
                 var item = pendings[index];
-                _pending.append("<li class=\"" + item.severity + "\">"
-                        + "<span class=\"pre\">" + item.pre + "</span>"
-                        + "<span class=\"description\">" + item.description
-                        + "</span>" + "<span class=\"author\">" + item.author
-                        + "</span>" + "<span class=\"marker\"></div>" + "</li>");
+                _pending.append("<li class=\"" + item.severity + "\">" + "<span class=\"pre\">" + item.pre +
+                    "</span>" + "<span class=\"description\">" + item.description + "</span>" +
+                    "<span class=\"author\">" + item.author + "</span>" +
+                    "<span class=\"marker\"></div>" + "</li>");
             }
         };
 
@@ -942,10 +931,10 @@
             };
 
             matchedObject.each(function(index, element) {
-                        var _element = jQuery(this);
-                        var canvas = _element[0];
-                        _draw(canvas);
-                    });
+                var _element = jQuery(this);
+                var canvas = _element[0];
+                _draw(canvas);
+            });
         };
 
         initialize();
@@ -957,15 +946,15 @@
     jQuery.fn.upusher = function(options) {
         var matchedObject = this;
         matchedObject.each(function() {
-                    var element = jQuery(this);
-                    var key = element.attr("data-key");
-                    if (!key) {
-                        return;
-                    }
+            var element = jQuery(this);
+            var key = element.attr("data-key");
+            if (!key) {
+                return;
+            }
 
-                    var pusher = new Pusher(key);
-                    element.data("pusher", pusher);
-                });
+            var pusher = new Pusher(key);
+            element.data("pusher", pusher);
+        });
         return this;
     };
 })(jQuery);
@@ -979,27 +968,27 @@
         previewPanel.hide();
 
         url.bind("value_change", function() {
-                    var element = jQuery(this);
-                    var videoPreview = element.parents(".video-preview");
-                    var previewPanel = jQuery(".preview-panel", videoPreview);
-                    var videoTarget = jQuery(".video-target", previewPanel);
-                    var value = element.uxvalue();
-                    if (value) {
-                        previewPanel.show();
-                        videoTarget.html(value);
-                        videoTarget.uxvideo();
-                    } else {
-                        previewPanel.hide();
-                    }
-                });
+            var element = jQuery(this);
+            var videoPreview = element.parents(".video-preview");
+            var previewPanel = jQuery(".preview-panel", videoPreview);
+            var videoTarget = jQuery(".video-target", previewPanel);
+            var value = element.uxvalue();
+            if (value) {
+                previewPanel.show();
+                videoTarget.html(value);
+                videoTarget.uxvideo();
+            } else {
+                previewPanel.hide();
+            }
+        });
 
         return this;
     };
 })(jQuery);
 
 jQuery(document).ready(function() {
-            var _body = jQuery("body");
-            _body.bind("applied", function(event, base) {
-                        base.uapply();
-                    });
-        });
+    var _body = jQuery("body");
+    _body.bind("applied", function(event, base) {
+        base.uapply();
+    });
+});

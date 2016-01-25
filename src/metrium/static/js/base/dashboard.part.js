@@ -30,58 +30,56 @@
             var video = jQuery(".video", matchedObject);
 
             matchedObject.bind("message",
-                    function(event, type, owner, message) {
-                        _showMessage(type, owner, message);
-                        _playSound("/static/sounds/" + type + ".mp3");
-                    });
+                function(event, type, owner, message) {
+                    _showMessage(type, owner, message);
+                    _playSound("/static/sounds/" + type + ".mp3");
+                });
 
             _window.keydown(function(event) {
-                        var keyValue = event.keyCode
-                                ? event.keyCode
-                                : event.charCode ? event.charCode : event.which;
+                var keyValue = event.keyCode ? event.keyCode : event.charCode ? event.charCode :
+                    event.which;
 
-                        switch (keyValue) {
-                            case 37 :
-                                _previous();
-                                break;
+                switch (keyValue) {
+                    case 37:
+                        _previous();
+                        break;
 
-                            case 39 :
-                                _next();
-                                break;
-                        }
-                    });
+                    case 39:
+                        _next();
+                        break;
+                }
+            });
 
-            connection.bind("connecting", function() {
-                    });
+            connection.bind("connecting", function() {});
 
             connection.bind("connected", function() {
-                        _hideError();
-                    });
+                _hideError();
+            });
 
             connection.bind("unavailable", function() {
-                        _showError();
-                    });
+                _showError();
+            });
 
             connection.bind("disconnected", function() {
-                        _showError();
-                    });
+                _showError();
+            });
 
             connection.bind("error", function(error) {
-                        _showError();
-                    });
+                _showError();
+            });
 
             global.bind("video.open", function(data) {
-                        var url = data.url;
-                        url && _showVideo(url);
-                    });
+                var url = data.url;
+                url && _showVideo(url);
+            });
 
             video.bind("ended", function() {
-                        var element = jQuery(this);
-                        var overlay = jQuery(".overlay:first");
+                var element = jQuery(this);
+                var overlay = jQuery(".overlay:first");
 
-                        overlay.triggerHandler("hide", [250]);
-                        element.fadeOut(250);
-                    });
+                overlay.triggerHandler("hide", [250]);
+                element.fadeOut(250);
+            });
         };
 
         var _layout = function() {
@@ -91,18 +89,18 @@
 
         var _general = function() {
             jQuery.ajax({
-                        url : "/state",
-                        beforeSend : function() {
-                            _hide();
-                        },
-                        success : function(data) {
-                            _onState(data);
-                            _show();
-                        },
-                        error : function() {
-                            _show();
-                        }
-                    });
+                url: "/state",
+                beforeSend: function() {
+                    _hide();
+                },
+                success: function(data) {
+                    _onState(data);
+                    _show();
+                },
+                error: function() {
+                    _show();
+                }
+            });
         };
 
         var _boards = function() {
@@ -118,8 +116,8 @@
             }
 
             setInterval(function() {
-                        _next();
-                    }, BOARD_TIMEOUT);
+                _next();
+            }, BOARD_TIMEOUT);
         };
 
         var _next = function() {
@@ -172,17 +170,16 @@
             var sections = jQuery("ul.sections > li.active", matchedObject);
 
             boards.fadeOut(350, function() {
-                        var board = jQuery(".boards > .board:nth-child("
-                                        + (index + 1) + ")", matchedObject);
-                        var section = jQuery("ul.sections > li:nth-child("
-                                        + (index + 1) + ")", matchedObject);
+                var board = jQuery(".boards > .board:nth-child(" + (index + 1) + ")", matchedObject);
+                var section = jQuery("ul.sections > li:nth-child(" + (index + 1) + ")",
+                    matchedObject);
 
-                        sections.removeClass("active");
-                        section.addClass("active");
-                        board.fadeIn(350);
+                sections.removeClass("active");
+                section.addClass("active");
+                board.fadeIn(350);
 
-                        matchedObject.data("index", index);
-                    });
+                matchedObject.data("index", index);
+            });
         };
 
         var _showVideo = function(link) {
@@ -241,15 +238,15 @@
             var timing = MESSAGE_TIMEOUT / lines;
 
             var interval = setInterval(function() {
-                        _message.animate({
-                                    scrollTop : "+=" + LINE_HEIGHT + "px"
-                                }, 300);
-                    }, timing);
+                _message.animate({
+                    scrollTop: "+=" + LINE_HEIGHT + "px"
+                }, 300);
+            }, timing);
 
             var timeout = setTimeout(function() {
-                        clearInterval(interval);
-                        _message.fadeOut(150);
-                    }, MESSAGE_TIMEOUT);
+                clearInterval(interval);
+                _message.fadeOut(150);
+            }, MESSAGE_TIMEOUT);
 
             matchedObject.data("timeout", timeout);
             matchedObject.data("interval", interval);
@@ -293,16 +290,20 @@
         var TIMEOUT = 10000;
 
         var DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
-                "Friday", "Starturday"];
+            "Friday", "Starturday"
+        ];
         var DAYS_PT = ["Domnigo", "Segunda-feira", "Terça-Feira",
-                "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
+            "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"
+        ];
 
         var MONTHS = ["January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November",
-                "December"];
+            "July", "August", "September", "October", "November",
+            "December"
+        ];
         var MONTHS_PT = ["Janeiro", "Febreiro", "Março", "Abril", "Maio",
-                "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro",
-                "Dezembro"];
+            "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro",
+            "Dezembro"
+        ];
 
         var matchedObject = this;
 
@@ -313,8 +314,8 @@
         var _start = function() {
             _update();
             setInterval(function() {
-                        _update();
-                    }, TIMEOUT);
+                _update();
+            }, TIMEOUT);
         };
 
         var _update = function() {

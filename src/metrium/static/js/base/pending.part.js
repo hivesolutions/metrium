@@ -9,8 +9,8 @@
         var _start = function() {
             var global = matchedObject.data("global");
             global.bind("pending.update", function(data) {
-                        _update(data.pendings);
-                    });
+                _update(data.pendings);
+            });
         };
 
         var _update = function(pendings) {
@@ -21,11 +21,10 @@
 
             for (var index = 0; index < pendings.length; index++) {
                 var item = pendings[index];
-                _pending.append("<li class=\"" + item.severity + "\">"
-                        + "<span class=\"pre\">" + item.pre + "</span>"
-                        + "<span class=\"description\">" + item.description
-                        + "</span>" + "<span class=\"author\">" + item.author
-                        + "</span>" + "<span class=\"marker\"></div>" + "</li>");
+                _pending.append("<li class=\"" + item.severity + "\">" + "<span class=\"pre\">" + item.pre +
+                    "</span>" + "<span class=\"description\">" + item.description + "</span>" +
+                    "<span class=\"author\">" + item.author + "</span>" +
+                    "<span class=\"marker\"></div>" + "</li>");
             }
         };
 

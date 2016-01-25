@@ -9,23 +9,23 @@
         var _start = function() {
             var global = matchedObject.data("global");
             global.bind("omni.sales_total", function(data) {
-                        _updateSalesTotal(data.sales_total);
-                    });
+                _updateSalesTotal(data.sales_total);
+            });
             global.bind("omni.sales_data", function(data) {
-                        _updateSalesData(data.sales_data);
-                    });
+                _updateSalesData(data.sales_data);
+            });
             global.bind("omni.sales_stores", function(data) {
-                        _updateSalesStores(data.sales_stores);
-                    });
+                _updateSalesStores(data.sales_stores);
+            });
             global.bind("omni.entries_stores", function(data) {
-                        _updateEntriesStores(data.entries_stores);
-                    });
+                _updateEntriesStores(data.entries_stores);
+            });
             global.bind("omni.top_stores", function(data) {
-                        _updateTopStores(data.top_stores);
-                    });
+                _updateTopStores(data.top_stores);
+            });
             global.bind("omni.top_employees", function(data) {
-                        _updateTopEmployees(data.top_employees);
-                    });
+                _updateTopEmployees(data.top_employees);
+            });
         };
 
         var _updateSalesTotal = function(salesTotal) {
@@ -74,12 +74,10 @@
                 var current = item[0].toFixed(2);
                 var previous = item[1].toFixed(2);
                 var name = item[2];
-                var row = jQuery("<tr>" + "<td>" + name + "</td>"
-                        + "<td class=\"value\">" + previous + "</td>"
-                        + "<td class=\"value\">" + current + "</td>" + "</tr>");
+                var row = jQuery("<tr>" + "<td>" + name + "</td>" + "<td class=\"value\">" + previous +
+                    "</td>" + "<td class=\"value\">" + current + "</td>" + "</tr>");
                 if (marker) {
-                    row.append("<td class=\"marker\">"
-                            + "<div class=\"up color\"></div>" + "</td>");
+                    row.append("<td class=\"marker\">" + "<div class=\"up color\"></div>" + "</td>");
                 }
                 tableBody.append(row);
             }
@@ -97,12 +95,10 @@
                 var current = item[0].toFixed(0) + " x";
                 var previous = item[1].toFixed(0) + " x";
                 var name = item[2];
-                var row = jQuery("<tr>" + "<td>" + name + "</td>"
-                        + "<td class=\"value\">" + previous + "</td>"
-                        + "<td class=\"value\">" + current + "</td>" + "</tr>");
+                var row = jQuery("<tr>" + "<td>" + name + "</td>" + "<td class=\"value\">" + previous +
+                    "</td>" + "<td class=\"value\">" + current + "</td>" + "</tr>");
                 if (marker) {
-                    row.append("<td class=\"marker\">"
-                            + "<div class=\"up color\"></div>" + "</td>");
+                    row.append("<td class=\"marker\">" + "<div class=\"up color\"></div>" + "</td>");
                 }
                 tableBody.append(row);
             }
@@ -119,9 +115,8 @@
                 var item = topStores[index];
                 var value = item[0].toFixed(0);
                 var name = item[1];
-                var bubleContents = jQuery("<div class=\"bubble-contents\">"
-                        + "<div class=\"value\">" + value + "</div>"
-                        + "<div class=\"title\">" + name + "</div>" + "</div>");
+                var bubleContents = jQuery("<div class=\"bubble-contents\">" + "<div class=\"value\">" +
+                    value + "</div>" + "<div class=\"title\">" + name + "</div>" + "</div>");
                 index != 0 && bubleContents.addClass("double");
                 bubleContent.append(bubleContents);
             }
@@ -140,14 +135,11 @@
                 var number = item[1].toFixed(0);
                 var name = item[2];
                 var imageUrl = item[3];
-                var topContents = jQuery("<div class=\"top-contents\">"
-                        + "<div class=\"rank\">" + String(index + 1) + "</div>"
-                        + "<div class=\"picture\">" + "<img src=\"" + imageUrl
-                        + "\" />" + "</div>" + "<div class=\"details\">"
-                        + "<div class=\"name\">" + name + "</div>"
-                        + "<div class=\"value\">" + number + "x - </div>"
-                        + "<div class=\"value\">" + amount + "</div>"
-                        + "</div>" + "</div>");
+                var topContents = jQuery("<div class=\"top-contents\">" + "<div class=\"rank\">" + String(
+                        index + 1) + "</div>" + "<div class=\"picture\">" + "<img src=\"" + imageUrl +
+                    "\" />" + "</div>" + "<div class=\"details\">" + "<div class=\"name\">" + name +
+                    "</div>" + "<div class=\"value\">" + number + "x - </div>" +
+                    "<div class=\"value\">" + amount + "</div>" + "</div>" + "</div>");
                 topContent.append(topContents);
             }
         };

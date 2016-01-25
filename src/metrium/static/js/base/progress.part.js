@@ -70,10 +70,10 @@
             };
 
             matchedObject.each(function(index, element) {
-                        var _element = jQuery(this);
-                        var canvas = _element[0];
-                        _draw(canvas);
-                    });
+                var _element = jQuery(this);
+                var canvas = _element[0];
+                _draw(canvas);
+            });
         };
 
         initialize();

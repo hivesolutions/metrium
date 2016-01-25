@@ -2,15 +2,15 @@
     jQuery.fn.upusher = function(options) {
         var matchedObject = this;
         matchedObject.each(function() {
-                    var element = jQuery(this);
-                    var key = element.attr("data-key");
-                    if (!key) {
-                        return;
-                    }
+            var element = jQuery(this);
+            var key = element.attr("data-key");
+            if (!key) {
+                return;
+            }
 
-                    var pusher = new Pusher(key);
-                    element.data("pusher", pusher);
-                });
+            var pusher = new Pusher(key);
+            element.data("pusher", pusher);
+        });
         return this;
     };
 })(jQuery);

@@ -78,7 +78,7 @@
                         context.strokeStyle = "rgba(255, 255, 255, 0.3)";
                         context.lineWidth = 2;
                         context.dashedLine(xPosition, yPosition, xPosition,
-                                height, [6, 4]);
+                            height, [6, 4]);
                         context.stroke();
                     }
 
@@ -95,10 +95,10 @@
             };
 
             matchedObject.each(function(index, element) {
-                        var _element = jQuery(this);
-                        var canvas = _element[0];
-                        _draw(canvas);
-                    });
+                var _element = jQuery(this);
+                var canvas = _element[0];
+                _draw(canvas);
+            });
         };
 
         initialize();

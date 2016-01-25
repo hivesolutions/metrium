@@ -9,8 +9,8 @@
         var _start = function() {
             var global = matchedObject.data("global");
             global.bind("log.message", function(data) {
-                        _new(data.contents);
-                    });
+                _new(data.contents);
+            });
         };
 
         var _new = function(contents) {
@@ -25,18 +25,17 @@
                 return;
             }
 
-            var item = "<div class=\"news-item\">" + "<div class=\"title\">"
-                    + "<span class=\"time\">" + timeLine + "</span>"
-                    + "<span class=\"message\">" + contents.owner + "</span>"
-                    + "<span class=\"marker " + contents.type + "\"></span>"
-                    + "</div>" + "<div class=\"message\">" + contents.message
-                    + "</div>" + "</div>";
+            var item = "<div class=\"news-item\">" + "<div class=\"title\">" + "<span class=\"time\">" +
+                timeLine + "</span>" + "<span class=\"message\">" + contents.owner + "</span>" +
+                "<span class=\"marker " + contents.type + "\"></span>" + "</div>" +
+                "<div class=\"message\">" + contents.message + "</div>" + "</div>";
             news.prepend(item);
 
             var newsElement = news[0];
 
             matchedObject.trigger("message", [contents.type, contents.owner,
-                            contents.message]);
+                contents.message
+            ]);
 
             while (true) {
                 var overflows = newsElement.scrollHeight > newsElement.clientHeight;
