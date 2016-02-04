@@ -292,6 +292,7 @@
         var DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
             "Friday", "Starturday"
         ];
+
         var DAYS_PT = ["Domnigo", "Segunda-feira", "Terça-Feira",
             "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"
         ];
@@ -300,7 +301,8 @@
             "July", "August", "September", "October", "November",
             "December"
         ];
-        var MONTHS_PT = ["Janeiro", "Febreiro", "Março", "Abril", "Maio",
+
+        var MONTHS_PT = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio",
             "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro",
             "Dezembro"
         ];
