@@ -21,7 +21,7 @@ ADD requirements.txt /
 ADD extra.txt /
 ADD src /src
 
-apk update && apk add libffi-dev openssl-dev
+RUN apk update && apk add libffi-dev openssl-dev
 RUN pip3 install -r /requirements.txt && pip3 install -r /extra.txt && pip3 install --upgrade netius
 
 CMD ["/usr/bin/python3", "/src/metrium/main.py"]
