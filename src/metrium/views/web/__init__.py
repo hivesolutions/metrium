@@ -53,3 +53,4 @@ from .event import base_events, video_event, do_video_event
 from .github import github_oauth
 from .log import list_logs, list_logs_json, new_log, create_log
 from .omni import omni_callback
+from .settings import settings, import_a, import_do, export_do, reset_do

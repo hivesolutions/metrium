@@ -42,6 +42,12 @@
                     <a href="{{ url_for('base_config') }}">config</a>
                 {% endif %}
                 //
+                {% if link == "settings" %}
+                    <a href="{{ url_for('settings') }}" class="active">settings</a>
+                {% else %}
+                    <a href="{{ url_for('settings') }}">settings</a>
+                {% endif %}
+                //
                 {% if link == "debug" %}
                     <a href="{{ url_for('list_debug') }}" class="active">debug</a>
                 {% else %}
