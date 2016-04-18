@@ -4,4 +4,5 @@
 *.shelve*
 
 /dist
+/build
 /src/metrium.egg-info
