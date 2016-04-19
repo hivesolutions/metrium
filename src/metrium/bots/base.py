@@ -87,3 +87,6 @@ class Bot(threading.Thread):
 
     def stop(self):
         self.active = False
+
+    def tick(self):
+        pass
