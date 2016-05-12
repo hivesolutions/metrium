@@ -55,7 +55,7 @@ class OmniBot(base.Bot):
         base.Bot.__init__(self, sleep_time, *args, **kwargs)
 
     def tick(self):
-        api = models.OmniConfig.get_api()
+        api = self.get_api()
 
         self.register_callback(api)
         sales_total = self.sales_total(api)
@@ -203,3 +203,8 @@ class OmniBot(base.Bot):
 
         top_employees.sort(reverse = True)
         return top_employees
+
+    def get_api(self):
+        if self.api: return self.api 
+        self.api = models.OmniConfig.get_api()
+        return self.api
