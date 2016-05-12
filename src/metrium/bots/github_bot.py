@@ -53,9 +53,10 @@ class GithubBot(base.Bot):
 
     def __init__(self, sleep_time = SLEEP_TIME, *args, **kwargs):
         base.Bot.__init__(self, sleep_time, *args, **kwargs)
+        self.api = None
 
     def tick(self):
-        api = models.GithubConfig.get_api()
+        api = self.get_api()
         config = models.GithubConfig.singleton()
 
         activity = self.activity(api, config)
@@ -193,3 +194,8 @@ class GithubBot(base.Bot):
         commits_users = list(commits_users)
         commits_users.sort(reverse = True)
         return commits_users
+
+    def get_api(self):
+        if self.api: return self.api
+        self.api = models.GithubConfig.get_api()
+        return self.api
