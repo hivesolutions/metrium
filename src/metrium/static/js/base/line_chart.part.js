@@ -15,6 +15,9 @@
                 return;
             }
 
+            var index = 0;
+            var value = null;
+
             var width = matchedObject.width();
             var height = matchedObject.height();
 
@@ -29,15 +32,16 @@
 
             var values = matchedObject.attr("data-values") || "";
             values = values.split(",");
-            for (var index = 0; index < values.length; index++) {
-                var value = values[index];
+
+            for (index = 0; index < values.length; index++) {
+                value = values[index];
                 values[index] = parseFloat(value);
             }
 
             var maxValue = 0;
 
-            for (var index = 0; index < values.length; index++) {
-                var value = values[index];
+            for (index = 0; index < values.length; index++) {
+                value = values[index];
                 maxValue = value > maxValue ? value : maxValue;
             }
 
