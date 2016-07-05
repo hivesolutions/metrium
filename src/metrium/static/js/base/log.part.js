@@ -21,7 +21,7 @@
 
             var context = jQuery(".context", matchedObject);
             var news = jQuery(".news", context);
-            if (news.length == 0) {
+            if (news.length === 0) {
                 return;
             }
 

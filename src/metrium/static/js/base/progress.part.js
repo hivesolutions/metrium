@@ -7,7 +7,7 @@
         };
 
         var _start = function() {
-            if (matchedObject.length == 0) {
+            if (matchedObject.length === 0) {
                 return;
             }
 

@@ -17,7 +17,7 @@
             var _pending = jQuery(".pending", matchedObject);
 
             var items = _pending.children();
-            items.remove()
+            items.remove();
 
             for (var index = 0; index < pendings.length; index++) {
                 var item = pendings[index];

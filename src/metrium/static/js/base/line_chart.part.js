@@ -11,7 +11,7 @@
         };
 
         var _start = function() {
-            if (matchedObject.length == 0) {
+            if (matchedObject.length === 0) {
                 return;
             }
 
@@ -55,7 +55,7 @@
                     var value = values[index];
                     var yPosition = height - (value * heightChart / maxValue);
 
-                    if (index != 0) {
+                    if (index !== 0) {
                         context.beginPath();
                         context.strokeStyle = "#ffffff";
                         context.moveTo(xPositionP, yPositionP);
@@ -73,7 +73,7 @@
                         context.fill();
                     }
 
-                    if (index != 0 && index != values.length - 1) {
+                    if (index !== 0 && index !== values.length - 1) {
                         context.beginPath();
                         context.strokeStyle = "rgba(255, 255, 255, 0.3)";
                         context.lineWidth = 2;

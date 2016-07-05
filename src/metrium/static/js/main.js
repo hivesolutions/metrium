@@ -621,7 +621,7 @@
                 var name = item[1];
                 var bubleContents = jQuery("<div class=\"bubble-contents\">" + "<div class=\"value\">" +
                     value + "</div>" + "<div class=\"title\">" + name + "</div>" + "</div>");
-                index != 0 && bubleContents.addClass("double");
+                index !== 0 && bubleContents.addClass("double");
                 bubleContent.append(bubleContents);
             }
         };
@@ -666,7 +666,7 @@
         };
 
         var _start = function() {
-            if (matchedObject.length == 0) {
+            if (matchedObject.length === 0) {
                 return;
             }
 
@@ -710,7 +710,7 @@
                     var value = values[index];
                     var yPosition = height - (value * heightChart / maxValue);
 
-                    if (index != 0) {
+                    if (index !== 0) {
                         context.beginPath();
                         context.strokeStyle = "#ffffff";
                         context.moveTo(xPositionP, yPositionP);
@@ -728,7 +728,7 @@
                         context.fill();
                     }
 
-                    if (index != 0 && index != values.length - 1) {
+                    if (index !== 0 && index !== values.length - 1) {
                         context.beginPath();
                         context.strokeStyle = "rgba(255, 255, 255, 0.3)";
                         context.lineWidth = 2;
@@ -784,7 +784,7 @@
 
             var context = jQuery(".context", matchedObject);
             var news = jQuery(".news", context);
-            if (news.length == 0) {
+            if (news.length === 0) {
                 return;
             }
 
@@ -845,7 +845,7 @@
             var _pending = jQuery(".pending", matchedObject);
 
             var items = _pending.children();
-            items.remove()
+            items.remove();
 
             for (var index = 0; index < pendings.length; index++) {
                 var item = pendings[index];
@@ -870,7 +870,7 @@
         };
 
         var _start = function() {
-            if (matchedObject.length == 0) {
+            if (matchedObject.length === 0) {
                 return;
             }
 

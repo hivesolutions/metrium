@@ -117,7 +117,7 @@
                 var name = item[1];
                 var bubleContents = jQuery("<div class=\"bubble-contents\">" + "<div class=\"value\">" +
                     value + "</div>" + "<div class=\"title\">" + name + "</div>" + "</div>");
-                index != 0 && bubleContents.addClass("double");
+                index !== 0 && bubleContents.addClass("double");
                 bubleContent.append(bubleContents);
             }
         };
