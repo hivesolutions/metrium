@@ -123,7 +123,7 @@ def export_do():
     return flask.Response(
         file.getvalue(),
         headers = {
-            "Content-Disposition" : "attachment; filename=%s" % file_name
+            "Content-Disposition" : "attachment; filename=\"%s\"" % file_name
         },
         mimetype = "application/octet-stream"
     )
