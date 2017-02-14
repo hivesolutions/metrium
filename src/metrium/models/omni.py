@@ -42,33 +42,27 @@ from . import base
 class Omni(base.Base):
 
     sales_total = dict(
-        type = list,
-        index = True
+        type = list
     )
 
     sales_data = dict(
-        type = list,
-        index = True
+        type = list
     )
 
     sales_stores = dict(
-        type = list,
-        index = True
+        type = list
     )
 
     entries_stores = dict(
-        type = list,
-        index = True
+        type = list
     )
 
     top_stores = dict(
-        type = list,
-        index = True
+        type = list
     )
 
     top_employees = dict(
-        type = list,
-        index = True
+        type = list
     )
 
     @classmethod

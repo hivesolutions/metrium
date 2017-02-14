@@ -42,23 +42,19 @@ from . import base
 class Github(base.Base):
 
     commits_total = dict(
-        type = list,
-        index = True
+        type = list
     )
 
     commits_data = dict(
-        type = list,
-        index = True
+        type = list
     )
 
     issues_users = dict(
-        type = list,
-        index = True
+        type = list
     )
 
     commits_users = dict(
-        type = list,
-        index = True
+        type = list
     )
 
     @classmethod
