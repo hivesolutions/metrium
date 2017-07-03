@@ -6,7 +6,7 @@
         <title>Metrium / {% block title %}{% endblock %}</title>
     {% endblock %}
 </head>
-<body class="ux fullscreen wait-load">
+<body class="ux flat fullscreen wait-load">
     {% include "partials/error.html.tpl" %}
     <div id="overlay" class="overlay"></div>
     <div id="content">{% block content %}{% endblock %}</div>
