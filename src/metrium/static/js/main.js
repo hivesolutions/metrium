@@ -230,7 +230,7 @@
         };
 
         var _showVideo = function(link) {
-            var isVisible = matchedObject.css("visibility") == "visible";
+            var isVisible = matchedObject.css("visibility") === "visible";
             if (!isVisible) {
                 return;
             }
@@ -247,7 +247,7 @@
         };
 
         var _showMessage = function(type, author, contents) {
-            var isVisible = matchedObject.css("visibility") == "visible";
+            var isVisible = matchedObject.css("visibility") === "visible";
             if (!isVisible) {
                 return;
             }
@@ -300,7 +300,7 @@
         };
 
         var _playSound = function(path) {
-            var isVisible = matchedObject.css("visibility") == "visible";
+            var isVisible = matchedObject.css("visibility") === "visible";
             if (!isVisible) {
                 return;
             }
