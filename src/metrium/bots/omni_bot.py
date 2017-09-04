@@ -102,8 +102,8 @@ class OmniBot(base.Bot):
         base url, but only in case the registration has not
         already been done (avoids extra calls).
 
-        @type api: Api
-        @param api: The client api reference to the omni api
+        :type api: Api
+        :param api: The client api reference to the omni api
         that is going to be used in the operation.
         """
 
