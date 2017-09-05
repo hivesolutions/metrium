@@ -74,7 +74,7 @@ class GithubConfig(base.Config):
     @classmethod
     def get_api(cls, scope = SCOPE):
         config = cls.singleton()
-        api = github.Api(scope = scope)
+        api = github.API(scope = scope)
         api.access_token = config and config.access_token
         return api
 

@@ -98,12 +98,12 @@ class OmniBot(base.Bot):
 
     def register_callback(self, api):
         """
-        Registers the callback url for the currently defined
-        base url, but only in case the registration has not
+        Registers the callback URL for the currently defined
+        base URL, but only in case the registration has not
         already been done (avoids extra calls).
 
-        :type api: Api
-        :param api: The client api reference to the omni api
+        :type api: API
+        :param api: The client API reference to the omni api
         that is going to be used in the operation.
         """
 
