@@ -39,7 +39,10 @@ body.fullscreen {
 
 body.fullscreen .window {
     box-shadow: none;
+    -o-box-shadow: none;
+    -ms-box-shadow: none;
     -moz-box-shadow: none;
+    -khtml-box-shadow: none;
     -webkit-box-shadow: none;
     color: #4d4d4d;
 }
@@ -47,6 +50,11 @@ body.fullscreen .window {
 body.fullscreen #overlay {
     background-color: #1d1d1d;
     opacity: 0.95;
+    -o-opacity: 0.95;
+    -ms-opacity: 0.95;
+    -moz-opacity: 0.95;
+    -khtml-opacity: 0.95;
+    -webkit-opacity: 0.95;
 }
 
 .error-panel {
@@ -495,6 +503,11 @@ body.romantic .dashboard .date .time {
 .dashboard .box .top-contents .picture > img {
     background-color: #f2f2f2;
     border-radius: 32px 32px 32px 32px;
+    -o-border-radius: 32px 32px 32px 32px;
+    -ms-border-radius: 32px 32px 32px 32px;
+    -moz-border-radius: 32px 32px 32px 32px;
+    -khtml-border-radius: 32px 32px 32px 32px;
+    -webkit-border-radius: 32px 32px 32px 32px;
 }
 
 .dashboard .box .top-contents .details {
