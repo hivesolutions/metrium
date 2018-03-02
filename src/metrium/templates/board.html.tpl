@@ -2,7 +2,7 @@
 {% block title %}Dashboard{% endblock %}
 {% block name %}Dashboard{% endblock %}
 {% block content %}
-	{% set logo_url = config.conf("METRIUM_LOGO_URL") %}
+    {% set logo_url = conf("METRIUM_LOGO_URL") %}
     <div class="dashboard {{ variant }}">
         <audio class="sound"></audio>
         <div class="video" data-width="1280" data-height="780" data-hd="1"

@@ -1,4 +1,4 @@
-{% set logo_url = config.conf("METRIUM_LOGO_URL") %}
+{% set logo_url = conf("METRIUM_LOGO_URL") %}
 <div class="error-panel">
     <div class="logo" style="{% if logo_url %}background-image: url({{ logo_url }});{% endif %}"></div>
     <h1>Oops!</h1>
