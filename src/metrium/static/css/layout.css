@@ -258,8 +258,40 @@ div.error,
     width: 1388px;
 }
 
+.dashboard .box.inline {
+    font-size: 0px;
+}
+
 .dashboard .box:last-child {
     margin-right: 0px;
+}
+
+.side {
+    display: inline-block;
+    font-size: inherit;
+    width: 50%;
+}
+
+.side > h3 {
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.side > ul {
+    font-size: 36px;
+    font-weight: normal;
+    padding: 6px 32px 6px 32px;
+}
+
+.side > ul li {
+    list-style: disc;
+    margin-left: 32px;
+}
+
+.side > ul li:hover {
+    background-color: transparent;
 }
 
 .dashboard .date {

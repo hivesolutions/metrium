@@ -18,6 +18,8 @@
                     <li>gravações</li>
                 {% elif variant == "commits" %}
                     <li class="active">global</li>
+                {% elif variant == "store" %}
+                    <li class="active">mensagens</li>
                 {% endif %}
             </ul>
         </div>
@@ -44,6 +46,8 @@
                     {% include "boards/sales/pending.html.tpl" %}
                 {% elif variant == "commits" %}
                     {% include "boards/commits/global.html.tpl" %}
+                {% elif variant == "store" %}
+                    {% include "boards/store/messages.html.tpl" %}
                 {% endif %}
             </div>
         </div>
