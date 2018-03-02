@@ -2,13 +2,14 @@
 {% block title %}Dashboard{% endblock %}
 {% block name %}Dashboard{% endblock %}
 {% block content %}
+	{% set logo_url = config.conf("METRIUM_LOGO_URL") %}
     <div class="dashboard {{ variant }}">
         <audio class="sound"></audio>
         <div class="video" data-width="1280" data-height="780" data-hd="1"
              data-chromeless="1" data-auto_play="1"></div>
         <div class="pusher" data-key="{{ conf('PUSHER_KEY') }}"></div>
         <div class="header">
-            <div class="logo"></div>
+            <div class="logo" style="{% if logo_url %}background-image: url({{ logo_url }});{% endif %}"></div>
             <ul class="sections">
                 {% if variant == "sales" %}
                     <li class="active">global</li>
