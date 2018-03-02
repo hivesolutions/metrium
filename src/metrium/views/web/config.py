@@ -116,6 +116,38 @@ def do_mail_config():
         flask.url_for("base_config")
     )
 
+@app.route("/config/messages", methods = ("GET",))
+@quorum.ensure("config.messages")
+def messages_config():
+    config = models.MessagesConfig.get(raise_e = False) or {}
+    return flask.render_template(
+        "config/messages.html.tpl",
+        link = "config",
+        sub_link = "messages",
+        config = config,
+        errors = {}
+    )
+
+@app.route("/config/messages", methods = ("POST",))
+@quorum.ensure("config.messages")
+def do_messages_config():
+    config = models.MessagesConfig.singleton()
+    try: config.save()
+    except quorum.ValidationError as error:
+        return flask.render_template(
+            "config/messages.html.tpl",
+            link = "config",
+            sub_link = "messages",
+            config = error.model,
+            errors = error.errors
+        )
+
+    # redirects the user to the overall configuration
+    # selection, as this is the default behavior
+    return flask.redirect(
+        flask.url_for("base_config")
+    )
+
 @app.route("/config/pending", methods = ("GET",))
 @quorum.ensure("config.pending")
 def pending_config():

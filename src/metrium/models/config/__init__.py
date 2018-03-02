@@ -38,6 +38,7 @@ from . import base
 from . import basic_c
 from . import github_c
 from . import mail_c
+from . import messages_c
 from . import omni_c
 from . import pending_c
 
@@ -45,5 +46,6 @@ from .base import Config
 from .basic_c import BasicConfig
 from .github_c import GithubConfig
 from .mail_c import MailConfig
+from .messages_c import MessagesConfig
 from .omni_c import OmniConfig
 from .pending_c import PendingConfig

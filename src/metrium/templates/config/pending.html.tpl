@@ -8,7 +8,7 @@
             <thead>
                 <tr>
                     <th class="longer-input" data-width="384">Folder</th>
-                    <th data-width="180">Severity</th>
+                    <th>Severity</th>
                 </tr>
             </thead>
             <tbody>

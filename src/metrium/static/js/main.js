@@ -208,6 +208,7 @@
             matchedObject.udate();
             matchedObject.ulog();
             matchedObject.uglobalsales();
+            matchedObject.umessages();
             matchedObject.upending();
             matchedObject.uglobalcommits();
         };
@@ -841,23 +842,28 @@
         var _start = function() {
             var global = matchedObject.data("global");
             global.bind("messages.update", function(data) {
-                _update(data.pendings);
+                _update(data.messages);
             });
         };
 
-        var _update = function(pendings) {
+        var _update = function(messages) {
             var _messages = jQuery(".messages", matchedObject);
 
             var items = _messages.children();
             items.remove();
 
-            /*for (var index = 0; index < pendings.length; index++) {
-                var item = pendings[index];
-                _pending.append("<li class=\"" + item.severity + "\">" + "<span class=\"pre\">" + item.pre +
-                    "</span>" + "<span class=\"description\">" + item.description + "</span>" +
-                    "<span class=\"author\">" + item.author + "</span>" +
-                    "<span class=\"marker\"></div>" + "</li>");
-            }*/
+            for (var index = 0; index < messages.length; index++) {
+                var message = messages[index];
+
+                var result = _messages.append("<div class=\"side\">" + "<h3>" + message.title + "</h3>" +
+                    "<ul></ul>" + "</div>");
+                _items = jQuery("> :last ul", result);
+
+                for (var _index = 0; _index < message.items.length; _index++) {
+                    var item = message.items[_index];
+                    _items.append("<li>" + item.message + "</li>");
+                }
+            }
         };
 
         initialize();

@@ -119,12 +119,14 @@ def state():
     omni_state = models.Omni.get_state()
     github_state = models.Github.get_state()
     pending_state = models.Pending.get_state()
+    messages_state = models.MessagesConfig.get_state()
 
     state = dict(
         log = log_state,
         omni = omni_state,
         github = github_state,
-        pending = pending_state
+        pending = pending_state,
+        messages = messages_state
     )
     return state
 
