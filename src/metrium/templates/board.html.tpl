@@ -15,8 +15,6 @@
                     <li class="active">global</li>
                     <li>vendas</li>
                     <li>pendentes</li>
-                    <li>encomendas</li>
-                    <li>gravações</li>
                 {% elif variant == "commits" %}
                     <li class="active">global</li>
                 {% elif variant == "store" %}
