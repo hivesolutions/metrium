@@ -1,6 +1,6 @@
 {% extends "partials/layout_config.html.tpl" %}
 {% block title %}Config{% endblock %}
-{% block name %}Config :: Pending{% endblock %}
+{% block name %}Config :: Messages{% endblock %}
 {% block content %}
     <form action="{{ url_for('do_messages_config') }}" method="post" class="form">
         <div class="label">
