@@ -9,7 +9,7 @@
 
 <!-- javascript inclusion -->
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="//js.pusher.com/2.0/pusher.min.js"></script>
+<script type="text/javascript" src="//js.pusher.com/4.1/pusher.min.js"></script>
 <script type="text/javascript" src="//libs.bemisc.com/uxf/js/ux-min.js"></script>
 <script type="text/javascript" src="//libs.bemisc.com/layout/js/layout-min.js"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/main.js') }}"></script>
