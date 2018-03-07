@@ -276,15 +276,17 @@ div.error,
 
 .side > h3 {
     color: #ffffff;
-    font-size: 40px;
+    font-size: 46px;
     font-weight: 600;
+    margin: 36px 0px 36px 0px;
     text-align: center;
 }
 
 .side > ul {
     font-size: 36px;
     font-weight: normal;
-    padding: 6px 32px 6px 32px;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 28px 0px 28px;
 }
 
 .side > ul li {
