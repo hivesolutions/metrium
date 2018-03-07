@@ -82,6 +82,11 @@
                     _playSound("/static/sounds/" + type + ".mp3");
                 });
 
+            matchedObject.bind("sound",
+                function(event, type, owner) {
+                    _playSound("/static/sounds/" + type + ".mp3");
+                });
+
             _window.keydown(function(event) {
                 var keyValue = event.keyCode ? event.keyCode : event.charCode ? event.charCode :
                     event.which;
@@ -864,6 +869,8 @@
                     _items.append("<li>" + item.message + "</li>");
                 }
             }
+
+            matchedObject.trigger("sound", ["info"]);
         };
 
         initialize();

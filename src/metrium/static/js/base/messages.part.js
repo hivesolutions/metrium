@@ -31,6 +31,8 @@
                     _items.append("<li>" + item.message + "</li>");
                 }
             }
+
+            matchedObject.trigger("sound", ["info"]);
         };
 
         initialize();
