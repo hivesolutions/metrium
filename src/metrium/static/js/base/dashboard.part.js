@@ -299,7 +299,7 @@
             "Friday", "Starturday"
         ];
 
-        var DAYS_PT = ["Domnigo", "Segunda-feira", "Terça-Feira",
+        var DAYS_PT = ["Domingo", "Segunda-feira", "Terça-Feira",
             "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"
         ];
 
