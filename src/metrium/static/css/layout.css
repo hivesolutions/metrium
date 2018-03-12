@@ -207,15 +207,24 @@ div.error,
 }
 
 .dashboard .frame {
+    font-size: 0px;
     height: 770px;
     margin: 79px 0px 80px 0px;
 }
 
+.dashboard .frame > * {
+    display: inline-block;
+    vertical-align: top;
+}
+
 .dashboard .frame .context {
     border-right: 1px solid rgba(255, 255, 255, 0.4);
-    float: left;
     height: 770px;
     width: 370px;
+}
+
+.dashboard .frame.full .context {
+    display: none;
 }
 
 .dashboard .frame .context .news {
@@ -223,8 +232,15 @@ div.error,
     overflow: hidden;
 }
 
+.dashboard .frame .boards {
+    width: 1549px;
+}
+
+.dashboard .frame.full .boards {
+    width: 100%;
+}
+
 .dashboard .frame .board {
-    float: left;
     height: 770px;
     margin: 0px 80px 0px 80px;
 }
@@ -256,7 +272,7 @@ div.error,
 
 .dashboard .box.full {
     height: 770px;
-    width: 1388px;
+    width: 100%;
 }
 
 .dashboard .box.inline {

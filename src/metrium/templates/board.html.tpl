@@ -28,7 +28,7 @@
             <span class="separator">-</span>
             <span class="contents"></span>
         </div>
-        <div class="frame">
+        <div class="frame {% if variant in ('store',) %}full{% endif %}">
             <div class="context">
                 <div class="date">
                     <div class="week-day"></div>
