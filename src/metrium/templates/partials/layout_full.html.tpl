@@ -1,5 +1,6 @@
 {% include "partials/doctype.html.tpl" %}
-{% set background_url = conf("METRIUM_BACKGROUND_URL") %}
+{% set background_url = request.args.background_url %}
+{% set background_url = conf("METRIUM_BACKGROUND_URL", background_url) %}
 <head>
     {% block head %}
         {% include "partials/content_type.html.tpl" %}
