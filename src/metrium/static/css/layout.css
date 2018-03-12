@@ -216,6 +216,7 @@ div.error,
 
 .dashboard .frame > * {
     display: inline-block;
+    font-size: 32px;
     vertical-align: top;
 }
 
@@ -580,7 +581,7 @@ body.romantic .dashboard .date .time {
     color: rgba(255, 255, 255, 0.8);
     display: inline;
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .dashboard .box .overview-contents {
