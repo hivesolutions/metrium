@@ -30,7 +30,7 @@ __license__   = Apache License, Version 2.0
 */
 
 body.fullscreen {
-    background: #000000 url(../images/background.png) no-repeat;
+    background: #000000 url(../images/background.png) repeat;
     color: #ffffff;
     margin: 0px 0px 0px 0px;
     padding: 0px 0px 0px 0px;
