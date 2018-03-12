@@ -28,6 +28,7 @@
             var global = pusher.subscribe("global");
             matchedObject.data("global", global);
             var video = jQuery(".video", matchedObject);
+            var sections = jQuery("ul.sections > li", matchedObject);
 
             matchedObject.bind("message",
                 function(event, type, owner, message) {
@@ -84,6 +85,12 @@
 
                 overlay.triggerHandler("hide", [250]);
                 element.fadeOut(250);
+            });
+
+            sections.click(function() {
+                var element = jQuery(this);
+                var index = element.index();
+                _showBoard(index);
             });
         };
 
