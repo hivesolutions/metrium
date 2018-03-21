@@ -189,6 +189,7 @@ div.error,
 }
 
 .dashboard ul.sections li {
+    border-bottom: 3px solid transparent;
     color: rgba(255, 255, 255, 0.4);
     cursor: pointer;
     display: inline;
@@ -196,10 +197,16 @@ div.error,
     margin: 0px 0px 0px 0px;
     margin-right: 98px;
     padding: 0px 0px 4px 0px;
+    transition: color 0.10s linear, border-color 0.10s linear;
+    -o-transition: color 0.10s linear, border-color 0.10s linear;
+    -ms-transition: color 0.10s linear, border-color 0.10s linear;
+    -moz-transition: color 0.10s linear, border-color 0.10s linear;
+    -khtml-transition: color 0.10s linear, border-color 0.10s linear;
+    -webkit-transition: color 0.10s linear, border-color 0.10s linear;
 }
 
 .dashboard ul.sections li.active {
-    border-bottom: 3px solid #ffffff;
+    border-bottom-color: #ffffff;
     color: #ffffff;
 }
 
