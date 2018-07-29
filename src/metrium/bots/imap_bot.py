@@ -55,7 +55,7 @@ a lot expensive and should be used with care """
 
 ATOM_SPECIALS = "(){ %*\""
 """ String sequence containing the complete set of
-characters considered to be special in the imap protocol,
+characters considered to be special in the IMAP protocol,
 this characters need to be escaped """
 
 class ImapBot(base.Bot):
