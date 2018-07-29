@@ -51,8 +51,9 @@ a lot expensive and should be used with care """
 
 class OmniBot(base.Bot):
 
-    def __init__(self, sleep_time = SLEEP_TIME, *args, **kwargs):
+    def __init__(self, sleep_time = SLEEP_TIME, top_limit = 10, *args, **kwargs):
         base.Bot.__init__(self, sleep_time, *args, **kwargs)
+        self.top_limit = top_limit
         self.api = None
 
     def tick(self):
@@ -90,10 +91,10 @@ class OmniBot(base.Bot):
             "entries_stores" : entries_stores
         })
         pusher.trigger("global", "omni.top_stores", {
-            "top_stores" : top_stores
+            "top_stores" : top_stores[:self.top_limit]
         })
         pusher.trigger("global", "omni.top_employees", {
-            "top_employees" : top_employees
+            "top_employees" : top_employees[:self.top_limit]
         })
 
     def register_callback(self, api):
