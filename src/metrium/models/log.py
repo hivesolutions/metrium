@@ -121,7 +121,7 @@ class Log(base.Base):
         base.Base.pre_create(self)
 
         try: username = flask.session.get("username", None)
-        except: username = None
+        except Exception: username = None
         self.owner = username
 
     def post_create(self):
