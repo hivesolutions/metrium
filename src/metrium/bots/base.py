@@ -66,7 +66,7 @@ class Bot(threading.Thread):
                 "Tick operation started in %s" % self.name
             )
             try: self.tick()
-            except BaseException as exception:
+            except Exception as exception:
                 lines = traceback.format_exc().splitlines()
                 models.Debug.log(
                     "Failed tick due to %s (%s) in %s" %
