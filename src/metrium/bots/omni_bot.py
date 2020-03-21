@@ -110,7 +110,7 @@ class OmniBot(base.Bot):
 
         # retrieves the references to both the basic config and
         # the omni config and uses them to construct the callback
-        # url that is going to be registered
+        # URL that is going to be registered
         config = models.BasicConfig.get()
         _config = models.OmniConfig.get()
         callback_url = config.url + "omni/callback"
@@ -122,7 +122,7 @@ class OmniBot(base.Bot):
         result = api.subscribe_web(callback_url)
 
         # populates the registered field of the omni config with
-        # the corresponding base url and callback url string and
+        # the corresponding base URL and callback URL string and
         # then saves the new instance value
         _config.registered = api.base_url + "$" + callback_url
         _config.save()
