@@ -169,7 +169,7 @@ class Account(base.Base):
                 code = 403
             )
 
-        # creates the sha1 hash value for the password and verifies that
+        # creates the SHA1 hash value for the password and verifies that
         # the provided password is the expected
         password_sha1 = cls._encrypt_g(value = password, salt = PASSWORD_SALT)
         _password = account.password
@@ -242,7 +242,7 @@ class Account(base.Base):
         base.Base.pre_create(self)
 
         # "encrypts" the password into the target format defined
-        # by the salt and the sha1 hash function and then creates
+        # by the salt and the SHA1 hash function and then creates
         # the API key for the current account
         self.password = self._encrypt(value = self.password, salt = PASSWORD_SALT)
         self.api_key = self._encrypt()
