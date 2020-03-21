@@ -243,7 +243,7 @@ class Account(base.Base):
 
         # "encrypts" the password into the target format defined
         # by the salt and the sha1 hash function and then creates
-        # the api key for the current account
+        # the API key for the current account
         self.password = self._encrypt(value = self.password, salt = PASSWORD_SALT)
         self.api_key = self._encrypt()
         self.confirmation = self._encrypt()
