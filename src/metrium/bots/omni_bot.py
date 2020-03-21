@@ -104,12 +104,12 @@ class OmniBot(base.Bot):
         already been done (avoids extra calls).
 
         :type api: API
-        :param api: The client API reference to the omni api
+        :param api: The client API reference to the Omni API
         that is going to be used in the operation.
         """
 
         # retrieves the references to both the basic config and
-        # the omni config and uses them to construct the callback
+        # the Omni config and uses them to construct the callback
         # URL that is going to be registered
         config = models.BasicConfig.get()
         _config = models.OmniConfig.get()
@@ -121,7 +121,7 @@ class OmniBot(base.Bot):
         if _config.is_registered(api, callback_url): return
         result = api.subscribe_web(callback_url)
 
-        # populates the registered field of the omni config with
+        # populates the registered field of the Omni config with
         # the corresponding base URL and callback URL string and
         # then saves the new instance value
         _config.registered = api.base_url + "$" + callback_url

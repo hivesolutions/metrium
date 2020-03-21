@@ -92,7 +92,7 @@ class OmniConfig(base.Config):
         if not hasattr(self, "registered"): return False
         if not self.registered: return False
 
-        # retrieves the base URL of the omni API from the API client
+        # retrieves the base URL of the Omni API from the API client
         # and then retrieves the (already) registered base URL and
         # callback URL values and compares them against the new ones
         # that are going to be used in case they are the same the
