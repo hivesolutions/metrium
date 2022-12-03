@@ -87,8 +87,8 @@ setuptools.setup(
         "pymongo",
         "redis",
         "pusher",
-        "omni_api",
-        "github_api_python"
+        "omni-api",
+        "github-api-python"
     ],
     classifiers = [
         "Development Status :: 3 - Alpha",
